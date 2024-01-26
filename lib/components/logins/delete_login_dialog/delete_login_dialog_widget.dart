@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
 import 'delete_login_dialog_model.dart';
+
 export 'delete_login_dialog_model.dart';
 
 class DeleteLoginDialogWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class DeleteLoginDialogWidget extends StatefulWidget {
     required this.login,
   });
 
-  final LoginsRow? login;
+  final LoginsRow login;
 
   @override
   State<DeleteLoginDialogWidget> createState() =>
@@ -74,8 +76,8 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      24.0, 16.0, 24.0, 16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +85,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login?.url}',
+                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login.url}',
                           width: 60.0,
                           height: 60.0,
                           fit: BoxFit.contain,
@@ -104,8 +106,8 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           'Are you sure you want to delete this login details? it is not reversible...',
                           style:
@@ -119,15 +121,15 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 12.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      24.0, 0.0, 24.0, 12.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -159,7 +161,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                           await LoginsTable().delete(
                             matchingRows: (rows) => rows.eq(
                               'id',
-                              widget.login?.id,
+                              widget.login.id,
                             ),
                           );
                           logFirebaseEvent(

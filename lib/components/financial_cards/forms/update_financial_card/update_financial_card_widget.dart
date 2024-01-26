@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -5,8 +7,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/material.dart';
 import 'update_financial_card_model.dart';
+
 export 'update_financial_card_model.dart';
 
 class UpdateFinancialCardWidget extends StatefulWidget {
@@ -15,7 +17,7 @@ class UpdateFinancialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinancialCardsRow? card;
+  final FinancialCardsRow card;
 
   @override
   State<UpdateFinancialCardWidget> createState() =>
@@ -37,37 +39,37 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
     _model = createModel(context, () => UpdateFinancialCardModel());
 
     _model.cardHolderNameFieldController ??=
-        TextEditingController(text: widget.card?.cardHolderName);
+        TextEditingController(text: widget.card.cardHolderName);
     _model.cardHolderNameFieldFocusNode ??= FocusNode();
 
     _model.nameFieldController ??=
-        TextEditingController(text: widget.card?.name);
+        TextEditingController(text: widget.card.name);
     _model.nameFieldFocusNode ??= FocusNode();
 
     _model.cardNumberFieldController ??=
-        TextEditingController(text: widget.card?.cardNumber);
+        TextEditingController(text: widget.card.cardNumber);
     _model.cardNumberFieldFocusNode ??= FocusNode();
 
     _model.cardProviderNameFieldController ??=
-        TextEditingController(text: widget.card?.cardProviderName);
+        TextEditingController(text: widget.card.cardProviderName);
     _model.cardProviderNameFieldFocusNode ??= FocusNode();
 
-    _model.pinFieldController ??= TextEditingController(text: widget.card?.pin);
+    _model.pinFieldController ??= TextEditingController(text: widget.card.pin);
     _model.pinFieldFocusNode ??= FocusNode();
 
-    _model.cvvFieldController ??= TextEditingController(text: widget.card?.cvv);
+    _model.cvvFieldController ??= TextEditingController(text: widget.card.cvv);
     _model.cvvFieldFocusNode ??= FocusNode();
 
     _model.issueDateFieldController ??=
-        TextEditingController(text: widget.card?.issueDate);
+        TextEditingController(text: widget.card.issueDate);
     _model.issueDateFieldFocusNode ??= FocusNode();
 
     _model.expireDateFieldController ??=
-        TextEditingController(text: widget.card?.expiryDate);
+        TextEditingController(text: widget.card.expiryDate);
     _model.expireDateFieldFocusNode ??= FocusNode();
 
     _model.noteFieldController ??=
-        TextEditingController(text: widget.card?.note);
+        TextEditingController(text: widget.card.note);
     _model.noteFieldFocusNode ??= FocusNode();
   }
 
@@ -131,8 +133,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'Update card',
                       style:
@@ -145,7 +147,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.cardHolderNameFieldController,
                   focusNode: _model.cardHolderNameFieldFocusNode,
@@ -191,7 +194,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -236,7 +240,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.cardNumberFieldController,
                   focusNode: _model.cardNumberFieldFocusNode,
@@ -284,7 +289,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.cardProviderNameFieldController,
                   focusNode: _model.cardProviderNameFieldFocusNode,
@@ -329,7 +335,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.pinFieldController,
                   focusNode: _model.pinFieldFocusNode,
@@ -390,7 +397,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.cvvFieldController,
                   focusNode: _model.cvvFieldFocusNode,
@@ -451,11 +459,12 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: FlutterFlowDropDown<String>(
                   controller: _model.cardTypeFieldValueController ??=
                       FormFieldController<String>(
-                    _model.cardTypeFieldValue ??= widget.card?.cardType,
+                    _model.cardTypeFieldValue ??= widget.card.cardType,
                   ),
                   options: List<String>.from(['CREDIT', 'DEBIT', 'OTHER']),
                   optionLabels: const ['CREDIT', 'DEBIT', 'OTHER'],
@@ -475,7 +484,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                   borderColor: FlutterFlowTheme.of(context).alternate,
                   borderWidth: 2.0,
                   borderRadius: 8.0,
-                  margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
+                  margin: const EdgeInsetsDirectional.fromSTEB(
+                      16.0, 4.0, 16.0, 4.0),
                   hidesUnderline: true,
                   isOverButton: true,
                   isSearchable: false,
@@ -483,7 +493,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.issueDateFieldController,
                   focusNode: _model.issueDateFieldFocusNode,
@@ -528,7 +539,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.expireDateFieldController,
                   focusNode: _model.expireDateFieldFocusNode,
@@ -573,7 +585,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -620,7 +633,8 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -646,7 +660,7 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                       },
                       matchingRows: (rows) => rows.eq(
                         'id',
-                        widget.card?.id,
+                        widget.card.id,
                       ),
                     );
                     logFirebaseEvent(
@@ -657,9 +671,10 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

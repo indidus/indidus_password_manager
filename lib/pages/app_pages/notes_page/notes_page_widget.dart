@@ -1,3 +1,9 @@
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/logout/logout_widget.dart';
@@ -7,11 +13,8 @@ import '/components/notes/notes_cards/notes_cards_widget.dart';
 import '/components/setting_button/setting_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'notes_page_model.dart';
+
 export 'notes_page_model.dart';
 
 class NotesPageWidget extends StatefulWidget {
@@ -231,7 +234,7 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                                     )
                                     .eq(
                                       'name',
-                                      _model.searchQuery,
+                                      _model.searchQuery!,
                                     )
                                     .order('created_at'),
                                 limit: 20,

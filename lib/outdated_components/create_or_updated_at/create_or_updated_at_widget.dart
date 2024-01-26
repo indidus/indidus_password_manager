@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'create_or_updated_at_model.dart';
+
 export 'create_or_updated_at_model.dart';
 
 class CreateOrUpdatedAtWidget extends StatefulWidget {
@@ -54,7 +56,8 @@ class _CreateOrUpdatedAtWidgetState extends State<CreateOrUpdatedAtWidget> {
               Align(
                 alignment: const AlignmentDirectional(1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Updated - ${dateTimeFormat(
                       'relative',
@@ -74,7 +77,8 @@ class _CreateOrUpdatedAtWidgetState extends State<CreateOrUpdatedAtWidget> {
               Align(
                 alignment: const AlignmentDirectional(1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Created - ${dateTimeFormat(
                       'relative',

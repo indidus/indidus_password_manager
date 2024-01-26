@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/components/notes/delete_note_dialog/delete_note_dialog_widget.dart';
 import '/components/notes/forms/update_note/update_note_widget.dart';
@@ -5,8 +7,8 @@ import '/components/notes/forms/view_note/view_note_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'notes_cards_model.dart';
+
 export 'notes_cards_model.dart';
 
 class NotesCardsWidget extends StatefulWidget {
@@ -126,7 +128,8 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                   child: Container(
                     decoration: const BoxDecoration(),
                     child: Row(
@@ -168,7 +171,8 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,

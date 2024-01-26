@@ -1,10 +1,12 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/components/financial_cards/financial_cards/financial_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
 import 'financial_cards_page_widget.dart' show FinancialCardsPageWidget;
-import 'package:flutter/material.dart';
 
 class FinancialCardsPageModel
     extends FlutterFlowModel<FinancialCardsPageWidget> {

@@ -1,3 +1,9 @@
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/identity_card/empty_identity_card_list/empty_identity_card_list_widget.dart';
@@ -6,11 +12,8 @@ import '/components/identity_card/identity_cards/identity_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'identity_cards_page_model.dart';
+
 export 'identity_cards_page_model.dart';
 
 class IdentityCardsPageWidget extends StatefulWidget {

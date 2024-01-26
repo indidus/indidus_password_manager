@@ -1,16 +1,19 @@
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/financial_cards/empty_financial_card_list/empty_financial_card_list_widget.dart';
-import '/components/financial_cards/financial_cards/financial_cards_widget.dart';
+import '/components/financial_cards/finantial_cards/finantial_cards_widget.dart';
 import '/components/financial_cards/forms/create_financial_card/create_financial_card_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'financial_cards_page_model.dart';
+
 export 'financial_cards_page_model.dart';
 
 class FinancialCardsPageWidget extends StatefulWidget {
@@ -289,7 +292,7 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                                     listViewIndex,
                                   ),
                                   updateCallback: () => setState(() {}),
-                                  child: FinancialCardsWidget(
+                                  child: FinantialCardsWidget(
                                     key: Key(
                                       'Keywzf_${listViewFinancialCardsRow.id.toString()}',
                                     ),

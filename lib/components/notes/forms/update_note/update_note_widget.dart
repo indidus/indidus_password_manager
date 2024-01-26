@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
 import 'update_note_model.dart';
+
 export 'update_note_model.dart';
 
 class UpdateNoteWidget extends StatefulWidget {
@@ -13,7 +15,7 @@ class UpdateNoteWidget extends StatefulWidget {
     required this.note,
   });
 
-  final NotesRow? note;
+  final NotesRow note;
 
   @override
   State<UpdateNoteWidget> createState() => _UpdateNoteWidgetState();
@@ -34,11 +36,11 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
     _model = createModel(context, () => UpdateNoteModel());
 
     _model.nameFieldController ??=
-        TextEditingController(text: widget.note?.name);
+        TextEditingController(text: widget.note.name);
     _model.nameFieldFocusNode ??= FocusNode();
 
     _model.noteFieldController ??=
-        TextEditingController(text: widget.note?.note);
+        TextEditingController(text: widget.note.note);
     _model.noteFieldFocusNode ??= FocusNode();
   }
 
@@ -101,8 +103,8 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'Update a note',
                       style:
@@ -124,7 +126,8 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -169,7 +172,8 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -225,7 +229,8 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -241,7 +246,7 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                       },
                       matchingRows: (rows) => rows.eq(
                         'id',
-                        widget.note?.id,
+                        widget.note.id,
                       ),
                     );
                     logFirebaseEvent('NoteUpdateButton_navigate_back');
@@ -251,9 +256,10 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

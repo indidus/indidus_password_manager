@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
 import 'update_login_model.dart';
+
 export 'update_login_model.dart';
 
 class UpdateLoginWidget extends StatefulWidget {
@@ -13,7 +15,7 @@ class UpdateLoginWidget extends StatefulWidget {
     required this.login,
   });
 
-  final LoginsRow? login;
+  final LoginsRow login;
 
   @override
   State<UpdateLoginWidget> createState() => _UpdateLoginWidgetState();
@@ -34,27 +36,26 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
     _model = createModel(context, () => UpdateLoginModel());
 
     _model.nameFieldController ??=
-        TextEditingController(text: widget.login?.name);
+        TextEditingController(text: widget.login.name);
     _model.nameFieldFocusNode ??= FocusNode();
 
     _model.usernameFieldController ??=
-        TextEditingController(text: widget.login?.username);
+        TextEditingController(text: widget.login.username);
     _model.usernameFieldFocusNode ??= FocusNode();
 
     _model.passwordFieldController ??=
-        TextEditingController(text: widget.login?.password);
+        TextEditingController(text: widget.login.password);
     _model.passwordFieldFocusNode ??= FocusNode();
 
-    _model.urlFieldController ??=
-        TextEditingController(text: widget.login?.url);
+    _model.urlFieldController ??= TextEditingController(text: widget.login.url);
     _model.urlFieldFocusNode ??= FocusNode();
 
     _model.passwordHintFieldController ??=
-        TextEditingController(text: widget.login?.passwordHint);
+        TextEditingController(text: widget.login.passwordHint);
     _model.passwordHintFieldFocusNode ??= FocusNode();
 
     _model.noteFieldController ??=
-        TextEditingController(text: widget.login?.note);
+        TextEditingController(text: widget.login.note);
     _model.noteFieldFocusNode ??= FocusNode();
   }
 
@@ -117,8 +118,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'Update login',
                       style:
@@ -131,7 +132,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -176,7 +178,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.usernameFieldController,
                   focusNode: _model.usernameFieldFocusNode,
@@ -222,7 +225,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.passwordFieldController,
                   focusNode: _model.passwordFieldFocusNode,
@@ -283,7 +287,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.urlFieldController,
                   focusNode: _model.urlFieldFocusNode,
@@ -329,7 +334,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.passwordHintFieldController,
                   focusNode: _model.passwordHintFieldFocusNode,
@@ -375,7 +381,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -422,7 +429,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('UPDATE_LOGIN_NoteUpdateButton_ON_TAP');
@@ -432,16 +440,16 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                         'updated_at':
                             supaSerialize<DateTime>(getCurrentTimestamp),
                         'updated_by': currentUserUid,
-                        'name': widget.login?.name,
-                        'note': widget.login?.note,
-                        'username': widget.login?.username,
-                        'url': widget.login?.url,
-                        'password': widget.login?.password,
-                        'password_hint': widget.login?.passwordHint,
+                        'name': widget.login.name,
+                        'note': widget.login.note,
+                        'username': widget.login.username,
+                        'url': widget.login.url,
+                        'password': widget.login.password,
+                        'password_hint': widget.login.passwordHint,
                       },
                       matchingRows: (rows) => rows.eq(
                         'id',
-                        widget.login?.id,
+                        widget.login.id,
                       ),
                     );
                     logFirebaseEvent(
@@ -452,9 +460,10 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

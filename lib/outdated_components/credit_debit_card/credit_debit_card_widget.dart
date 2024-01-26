@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'credit_debit_card_model.dart';
+
 export 'credit_debit_card_model.dart';
 
 class CreditDebitCardWidget extends StatefulWidget {
@@ -100,7 +102,8 @@ class _CreditDebitCardWidgetState extends State<CreditDebitCardWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 25.0, 0.0),
                   child: Text(
                     '3492 0892 8204 1832',
                     style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -127,7 +130,8 @@ class _CreditDebitCardWidgetState extends State<CreditDebitCardWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                   child: Text(
                     'PIN ****',
                     style: FlutterFlowTheme.of(context).titleSmall.override(
@@ -149,7 +153,8 @@ class _CreditDebitCardWidgetState extends State<CreditDebitCardWidget> {
                   size: 16.0,
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 8.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(32.0, 0.0, 8.0, 0.0),
                   child: Text(
                     'CVV ***',
                     style: FlutterFlowTheme.of(context).titleSmall.override(

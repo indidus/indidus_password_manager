@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'empty_note_list_model.dart';
+
 export 'empty_note_list_model.dart';
 
 class EmptyNoteListWidget extends StatefulWidget {
@@ -65,7 +67,8 @@ class _EmptyNoteListWidgetState extends State<EmptyNoteListWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: Text(
                   'No note are saved',
                   style: FlutterFlowTheme.of(context).labelLarge.override(

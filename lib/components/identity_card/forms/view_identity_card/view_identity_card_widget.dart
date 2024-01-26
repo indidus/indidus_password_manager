@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'view_identity_card_model.dart';
+
 export 'view_identity_card_model.dart';
 
 class ViewIdentityCardWidget extends StatefulWidget {
@@ -92,8 +94,8 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'View identity card',
                       style:

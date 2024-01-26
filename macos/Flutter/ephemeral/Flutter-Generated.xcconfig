@@ -1,0 +1,13 @@
+// This is a generated file; do not edit or check into version control.
+FLUTTER_ROOT=/Users/ashim/development/flutter
+FLUTTER_APPLICATION_PATH=/Users/ashim/Desktop/Repo/github.com/indidus/indidus_password_manager
+COCOAPODS_PARALLEL_CODE_SIGN=true
+FLUTTER_TARGET=/var/folders/9d/r1rx_4g578x0_822_97y3rp00000gn/T/flutter_tools.37SQQ6/flutter_test_listener.S2CXW3/listener.dart
+FLUTTER_BUILD_DIR=build
+FLUTTER_BUILD_NAME=0.1.3
+FLUTTER_BUILD_NUMBER=9
+DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,SU5URUdSQVRJT05fVEVTVF9TSE9VTERfUkVQT1JUX1JFU1VMVFNfVE9fTkFUSVZFPWZhbHNl
+DART_OBFUSCATION=false
+TRACK_WIDGET_CREATION=true
+TREE_SHAKE_ICONS=false
+PACKAGE_CONFIG=/Users/ashim/Desktop/Repo/github.com/indidus/indidus_password_manager/.dart_tool/package_config.json

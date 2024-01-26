@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
 import 'delete_identity_card_model.dart';
+
 export 'delete_identity_card_model.dart';
 
 class DeleteIdentityCardWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class DeleteIdentityCardWidget extends StatefulWidget {
     required this.idCard,
   });
 
-  final IdentityCardsRow? idCard;
+  final IdentityCardsRow idCard;
 
   @override
   State<DeleteIdentityCardWidget> createState() =>
@@ -74,8 +76,8 @@ class _DeleteIdentityCardWidgetState extends State<DeleteIdentityCardWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      24.0, 16.0, 24.0, 16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,8 +102,8 @@ class _DeleteIdentityCardWidgetState extends State<DeleteIdentityCardWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           'Are you sure you want to delete this identity card details? it is not reversible...',
                           style:
@@ -115,15 +117,15 @@ class _DeleteIdentityCardWidgetState extends State<DeleteIdentityCardWidget> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 12.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(
+                      24.0, 0.0, 24.0, 12.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -155,7 +157,7 @@ class _DeleteIdentityCardWidgetState extends State<DeleteIdentityCardWidget> {
                           await IdentityCardsTable().delete(
                             matchingRows: (rows) => rows.eq(
                               'id',
-                              widget.idCard?.id,
+                              widget.idCard.id,
                             ),
                           );
                           logFirebaseEvent(

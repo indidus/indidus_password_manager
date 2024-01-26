@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import '/backend/supabase/supabase.dart';
 import '/components/identity_card/delete_identity_card/delete_identity_card_widget.dart';
 import '/components/identity_card/forms/update_identity_card/update_identity_card_widget.dart';
@@ -5,8 +7,8 @@ import '/components/identity_card/forms/view_identity_card/view_identity_card_wi
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
 import 'identity_cards_model.dart';
+
 export 'identity_cards_model.dart';
 
 class IdentityCardsWidget extends StatefulWidget {
@@ -71,7 +73,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 8.0, 0.0),
                     child: Icon(
                       Icons.person,
                       color: FlutterFlowTheme.of(context).secondaryText,
@@ -135,7 +138,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                   child: Container(
                     decoration: const BoxDecoration(),
                     child: Row(
@@ -177,7 +181,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
