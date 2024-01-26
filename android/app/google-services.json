@@ -1,0 +1,70 @@
+{
+  "project_info": {
+    "project_number": "867001464038",
+    "project_id": "indidus-password-manager",
+    "storage_bucket": "indidus-password-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867001464038:android:e407a170f8f0aebb09b727",
+        "android_client_info": {
+          "package_name": "com.indidus.password"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867001464038-giq8lpa2p78q5btnsn4jbb90j7b60nsk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indidus.password",
+            "certificate_hash": "ac84c8cf3fef0916dd0c844601cd77593d9a62d8"
+          }
+        },
+        {
+          "client_id": "867001464038-iq9i6clocnedi39f2lmeg3bdc60ogfoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indidus.password",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "867001464038-on6e864f2jc6lfcc2npapkiukvg7hnvi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indidus.password",
+            "certificate_hash": "e66986c19db66e8c9eb84df14bb4ba8adc3787f9"
+          }
+        },
+        {
+          "client_id": "867001464038-pjkcbnhgn8l0c0nfogr1vtoe04n5inba.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbWIXm84GRI0lDUA6b3EiK3UaGVDC2N2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867001464038-pjkcbnhgn8l0c0nfogr1vtoe04n5inba.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "867001464038-e1sts25pvidvp2v1q0arb3r37cjs0eoj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.indidus.password.manager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
