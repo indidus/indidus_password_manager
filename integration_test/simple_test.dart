@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:indidus_password_manager/main.dart';
+import 'package:indidus_password_manager/main_old.dart';
 import 'package:indidus_password_manager/src/rust/frb_generated.dart';
 import 'package:integration_test/integration_test.dart';
 

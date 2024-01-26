@@ -1,6 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.indidus.password"
+    xmlns:tools="http://schemas.android.com/tools">
     <application
-        android:label="indidus_password_manager"
+        android:label="Indidus Password Manager"
+        tools:replace="android:label"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
