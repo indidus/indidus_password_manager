@@ -69,9 +69,9 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
             builder: (context) {
               return Padding(
                 padding: MediaQuery.viewInsetsOf(context),
-                child: const SizedBox(
-                  height: 60.0,
-                  child: CreateNoteWidget(),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.6,
+                  child: const CreateNoteWidget(),
                 ),
               );
             },
