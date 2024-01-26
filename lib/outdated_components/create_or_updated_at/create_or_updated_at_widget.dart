@@ -54,7 +54,8 @@ class _CreateOrUpdatedAtWidgetState extends State<CreateOrUpdatedAtWidget> {
               Align(
                 alignment: const AlignmentDirectional(1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Updated - ${dateTimeFormat(
                       'relative',
@@ -74,7 +75,8 @@ class _CreateOrUpdatedAtWidgetState extends State<CreateOrUpdatedAtWidget> {
               Align(
                 alignment: const AlignmentDirectional(1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
                   child: Text(
                     'Created - ${dateTimeFormat(
                       'relative',

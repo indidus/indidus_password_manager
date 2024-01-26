@@ -92,8 +92,8 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'View Note',
                       style:

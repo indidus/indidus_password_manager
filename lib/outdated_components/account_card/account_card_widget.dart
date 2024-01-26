@@ -66,8 +66,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                     Container(
                       decoration: const BoxDecoration(),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
                         child: ListView(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
@@ -89,8 +89,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 8.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 8.0, 0.0),
                                         child: Icon(
                                           Icons.business,
                                           color: FlutterFlowTheme.of(context)
@@ -121,8 +121,10 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                                       ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0.0, 4.0, 0.0, 0.0),
                                               child: Text(
                                                 'Satsang Nagar, Deoghar, Jharkhand 814112',
                                                 style:
@@ -159,8 +161,6 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       RichText(
-                                        textScaleFactor: MediaQuery.of(context)
-                                            .textScaleFactor,
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
@@ -187,7 +187,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                           ],
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
-                                        ),
+                                        ), textScaler: TextScaler.linear(MediaQuery.of(context)
+                                            .textScaleFactor),
                                       ),
                                       Icon(
                                         Icons.content_copy_rounded,
@@ -221,8 +222,6 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       RichText(
-                                        textScaleFactor: MediaQuery.of(context)
-                                            .textScaleFactor,
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
@@ -249,7 +248,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                                           ],
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium,
-                                        ),
+                                        ), textScaler: TextScaler.linear(MediaQuery.of(context)
+                                            .textScaleFactor),
                                       ),
                                       Icon(
                                         Icons.content_copy_rounded,
@@ -273,7 +273,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).primary,
                       borderRadius: 8.0,
@@ -291,7 +292,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,
@@ -308,7 +310,8 @@ class _AccountCardWidgetState extends State<AccountCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,
