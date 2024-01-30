@@ -112,8 +112,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ],
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
                 child: Text(
                   'Save indentity card details',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -123,8 +122,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -169,8 +167,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameOnCardFieldController,
                   focusNode: _model.nameOnCardFieldFocusNode,
@@ -215,8 +212,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.cardNumberFieldController,
                   focusNode: _model.cardNumberFieldFocusNode,
@@ -262,8 +258,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.countryFieldController,
                   focusNode: _model.countryFieldFocusNode,
@@ -309,8 +304,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.stateFieldController,
                   focusNode: _model.stateFieldFocusNode,
@@ -356,8 +350,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: FlutterFlowDropDown<String>(
                   controller: _model.cardTypeFieldValueController ??=
                       FormFieldController<String>(null),
@@ -395,8 +388,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                   borderColor: FlutterFlowTheme.of(context).alternate,
                   borderWidth: 2.0,
                   borderRadius: 8.0,
-                  margin: const EdgeInsetsDirectional.fromSTEB(
-                      16.0, 4.0, 16.0, 4.0),
+                  margin: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 16.0, 4.0),
                   hidesUnderline: true,
                   isOverButton: true,
                   isSearchable: false,
@@ -404,8 +396,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.issueDateFieldController,
                   focusNode: _model.issueDateFieldFocusNode,
@@ -452,8 +443,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.expireDateFieldController,
                   focusNode: _model.expireDateFieldFocusNode,
@@ -500,8 +490,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -548,8 +537,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -578,10 +566,9 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

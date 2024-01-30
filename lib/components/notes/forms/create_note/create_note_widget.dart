@@ -1,15 +1,11 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/src/rust/api/simple.dart';
-import '/src/rust/models/notes.dart';
+import 'dart:async';
+import 'package:flutter/material.dart';
 import 'create_note_model.dart';
-
 export 'create_note_model.dart';
 
 class CreateNoteWidget extends StatefulWidget {
@@ -95,8 +91,7 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                 ],
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
                 child: Text(
                   'Create a note',
                   style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -106,8 +101,7 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -152,8 +146,7 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -209,8 +202,7 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
@@ -218,13 +210,11 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                     logFirebaseEvent('NoteCreateButton_backend_call');
                     unawaited(
                       () async {
-                        await postNote(
-                          data: Note(
-                            name: _model.nameFieldController.text,
-                            createdBy: currentUserUid,
-                            note: _model.noteFieldController.text,
-                          ),
-                        );
+                        await NotesTable().insert({
+                          'created_by': currentUserUid,
+                          'name': _model.nameFieldController.text,
+                          'note': _model.noteFieldController.text,
+                        });
                       }(),
                     );
                     logFirebaseEvent('NoteCreateButton_navigate_back');
@@ -234,10 +224,9 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    iconPadding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

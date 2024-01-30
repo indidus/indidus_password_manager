@@ -1,12 +1,10 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-
+import '/backend/supabase/supabase.dart';
 import '/components/logout/logout_widget.dart';
 import '/components/setting_button/setting_button_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/notes.dart';
+import 'dart:async';
 import 'notes_page_widget.dart' show NotesPageWidget;
+import 'package:flutter/material.dart';
 
 class NotesPageModel extends FlutterFlowModel<NotesPageWidget> {
   ///  Local state fields for this page.
@@ -19,7 +17,7 @@ class NotesPageModel extends FlutterFlowModel<NotesPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  Completer<List<Note>>? requestCompleter;
+  Completer<List<NotesRow>>? requestCompleter;
   // Model for Logout component.
   late LogoutModel logoutModel;
   // Model for SettingButton component.

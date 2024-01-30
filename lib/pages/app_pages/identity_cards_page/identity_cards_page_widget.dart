@@ -225,83 +225,80 @@ class _IdentityCardsPageWidgetState extends State<IdentityCardsPageWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
-                      decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<IdentityCardsRow>>(
-                        future: (_model.requestCompleter ??=
-                                Completer<List<IdentityCardsRow>>()
-                                  ..complete(IdentityCardsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'created_by',
-                                          currentUserUid,
-                                        )
-                                        .order('created_at'),
-                                  )))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
+                    FutureBuilder<List<IdentityCardsRow>>(
+                      future: (_model.requestCompleter ??=
+                              Completer<List<IdentityCardsRow>>()
+                                ..complete(IdentityCardsTable().queryRows(
+                                  queryFn: (q) => q
+                                      .eq(
+                                        'created_by',
+                                        currentUserUid,
+                                      )
+                                      .order('created_at'),
+                                )))
+                          .future,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
                                 ),
                               ),
-                            );
-                          }
-                          List<IdentityCardsRow> listViewIdentityCardsRowList =
-                              snapshot.data!;
-                          if (listViewIdentityCardsRowList.isEmpty) {
-                            return Center(
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 128.0,
-                                child: const EmptyIdentityCardListWidget(),
-                              ),
-                            );
-                          }
-                          return RefreshIndicator(
-                            onRefresh: () async {
-                              logFirebaseEvent(
-                                  'IDENTITY_CARDS_ListView_dxlxnu2u_ON_PULL');
-                              logFirebaseEvent(
-                                  'ListView_refresh_database_request');
-                              setState(() => _model.requestCompleter = null);
-                              await _model.waitForRequestCompleted();
-                            },
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewIdentityCardsRowList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewIdentityCardsRow =
-                                    listViewIdentityCardsRowList[listViewIndex];
-                                return wrapWithModel(
-                                  model: _model.identityCardsModels.getModel(
-                                    listViewIdentityCardsRow.id.toString(),
-                                    listViewIndex,
-                                  ),
-                                  updateCallback: () => setState(() {}),
-                                  child: IdentityCardsWidget(
-                                    key: Key(
-                                      'Key46l_${listViewIdentityCardsRow.id.toString()}',
-                                    ),
-                                    identity: listViewIdentityCardsRow,
-                                    refreshListCallback: () async {},
-                                  ),
-                                );
-                              },
                             ),
                           );
-                        },
-                      ),
+                        }
+                        List<IdentityCardsRow> listViewIdentityCardsRowList =
+                            snapshot.data!;
+                        if (listViewIdentityCardsRowList.isEmpty) {
+                          return Center(
+                            child: SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.9,
+                              height: 128.0,
+                              child: const EmptyIdentityCardListWidget(),
+                            ),
+                          );
+                        }
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            logFirebaseEvent(
+                                'IDENTITY_CARDS_ListView_dxlxnu2u_ON_PULL');
+                            logFirebaseEvent(
+                                'ListView_refresh_database_request');
+                            setState(() => _model.requestCompleter = null);
+                            await _model.waitForRequestCompleted();
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewIdentityCardsRowList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewIdentityCardsRow =
+                                  listViewIdentityCardsRowList[listViewIndex];
+                              return wrapWithModel(
+                                model: _model.identityCardsModels.getModel(
+                                  listViewIdentityCardsRow.id.toString(),
+                                  listViewIndex,
+                                ),
+                                updateCallback: () => setState(() {}),
+                                child: IdentityCardsWidget(
+                                  key: Key(
+                                    'Key46l_${listViewIdentityCardsRow.id.toString()}',
+                                  ),
+                                  identity: listViewIdentityCardsRow,
+                                  refreshListCallback: () async {},
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

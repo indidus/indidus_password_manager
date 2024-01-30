@@ -65,8 +65,8 @@ class _GoogleOnlyLoginPageWidgetState extends State<GoogleOnlyLoginPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      0.0, 128.0, 0.0, 16.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 128.0, 0.0, 16.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
                     child: Image.asset(
@@ -90,8 +90,8 @@ class _GoogleOnlyLoginPageWidgetState extends State<GoogleOnlyLoginPageWidget> {
                   style: FlutterFlowTheme.of(context).labelMedium,
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      16.0, 64.0, 16.0, 16.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 64.0, 16.0, 16.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(

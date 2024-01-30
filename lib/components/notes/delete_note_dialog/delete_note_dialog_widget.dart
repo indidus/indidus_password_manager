@@ -1,13 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:indidus_password_manager/src/rust/api/simple.dart';
-
-// import '/backend/supabase/supabase.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/src/rust/models/notes.dart';
+import 'package:flutter/material.dart';
 import 'delete_note_dialog_model.dart';
-
 export 'delete_note_dialog_model.dart';
 
 class DeleteNoteDialogWidget extends StatefulWidget {
@@ -16,7 +12,7 @@ class DeleteNoteDialogWidget extends StatefulWidget {
     required this.note,
   });
 
-  final Note note;
+  final NotesRow? note;
 
   @override
   State<DeleteNoteDialogWidget> createState() => _DeleteNoteDialogWidgetState();
@@ -77,8 +73,8 @@ class _DeleteNoteDialogWidgetState extends State<DeleteNoteDialogWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      24.0, 16.0, 24.0, 16.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,8 +106,8 @@ class _DeleteNoteDialogWidgetState extends State<DeleteNoteDialogWidget> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 12.0, 0.0, 0.0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           'Are you sure you want to delete this note? it is not reversible...',
                           style:
@@ -125,15 +121,15 @@ class _DeleteNoteDialogWidgetState extends State<DeleteNoteDialogWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(
-                      24.0, 0.0, 24.0, 12.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 12.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            0.0, 0.0, 12.0, 0.0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -162,7 +158,12 @@ class _DeleteNoteDialogWidgetState extends State<DeleteNoteDialogWidget> {
                           logFirebaseEvent(
                               'DELETE_NOTE_DIALOG_DeleteButton_ON_TAP');
                           logFirebaseEvent('DeleteButton_backend_call');
-                          await deleteNote(id: widget.note.id!);
+                          await NotesTable().delete(
+                            matchingRows: (rows) => rows.eq(
+                              'id',
+                              widget.note?.id,
+                            ),
+                          );
                           logFirebaseEvent(
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);

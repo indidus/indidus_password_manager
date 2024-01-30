@@ -69,8 +69,7 @@ class _ContinueWithGoogleWidgetState extends State<ContinueWithGoogleWidget> {
           ),
           Expanded(
             child: Padding(
-              padding:
-                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   logFirebaseEvent('CONTINUE_WITH_GOOGLE_CONTINUE_WITH_GOOGL');
@@ -87,8 +86,7 @@ class _ContinueWithGoogleWidgetState extends State<ContinueWithGoogleWidget> {
                 options: FFButtonOptions(
                   width: 143.0,
                   height: 40.0,
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   color: FlutterFlowTheme.of(context).secondaryBackground,

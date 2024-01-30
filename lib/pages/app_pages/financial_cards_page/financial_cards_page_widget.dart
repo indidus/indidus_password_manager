@@ -224,84 +224,80 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
-                      decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<FinancialCardsRow>>(
-                        future: (_model.requestCompleter ??=
-                                Completer<List<FinancialCardsRow>>()
-                                  ..complete(FinancialCardsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'created_by',
-                                          currentUserUid,
-                                        )
-                                        .order('created_at'),
-                                  )))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
+                    FutureBuilder<List<FinancialCardsRow>>(
+                      future: (_model.requestCompleter ??=
+                              Completer<List<FinancialCardsRow>>()
+                                ..complete(FinancialCardsTable().queryRows(
+                                  queryFn: (q) => q
+                                      .eq(
+                                        'created_by',
+                                        currentUserUid,
+                                      )
+                                      .order('created_at'),
+                                )))
+                          .future,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
                                 ),
                               ),
-                            );
-                          }
-                          List<FinancialCardsRow>
-                              listViewFinancialCardsRowList = snapshot.data!;
-                          if (listViewFinancialCardsRowList.isEmpty) {
-                            return Center(
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 128.0,
-                                child: const EmptyFinancialCardListWidget(),
-                              ),
-                            );
-                          }
-                          return RefreshIndicator(
-                            onRefresh: () async {
-                              logFirebaseEvent(
-                                  'FINANCIAL_CARDS_ListView_f0k41zum_ON_PUL');
-                              logFirebaseEvent(
-                                  'ListView_refresh_database_request');
-                              setState(() => _model.requestCompleter = null);
-                              await _model.waitForRequestCompleted();
-                            },
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewFinancialCardsRowList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewFinancialCardsRow =
-                                    listViewFinancialCardsRowList[
-                                        listViewIndex];
-                                return wrapWithModel(
-                                  model: _model.financialCardsModels.getModel(
-                                    listViewFinancialCardsRow.id.toString(),
-                                    listViewIndex,
-                                  ),
-                                  updateCallback: () => setState(() {}),
-                                  child: FinancialCardsWidget(
-                                    key: Key(
-                                      'Keywzf_${listViewFinancialCardsRow.id.toString()}',
-                                    ),
-                                    card: listViewFinancialCardsRow,
-                                    refreshListCallback: () async {},
-                                  ),
-                                );
-                              },
                             ),
                           );
-                        },
-                      ),
+                        }
+                        List<FinancialCardsRow> listViewFinancialCardsRowList =
+                            snapshot.data!;
+                        if (listViewFinancialCardsRowList.isEmpty) {
+                          return Center(
+                            child: SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.9,
+                              height: 128.0,
+                              child: const EmptyFinancialCardListWidget(),
+                            ),
+                          );
+                        }
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            logFirebaseEvent(
+                                'FINANCIAL_CARDS_ListView_f0k41zum_ON_PUL');
+                            logFirebaseEvent(
+                                'ListView_refresh_database_request');
+                            setState(() => _model.requestCompleter = null);
+                            await _model.waitForRequestCompleted();
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewFinancialCardsRowList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewFinancialCardsRow =
+                                  listViewFinancialCardsRowList[listViewIndex];
+                              return wrapWithModel(
+                                model: _model.financialCardsModels.getModel(
+                                  listViewFinancialCardsRow.id.toString(),
+                                  listViewIndex,
+                                ),
+                                updateCallback: () => setState(() {}),
+                                child: FinancialCardsWidget(
+                                  key: Key(
+                                    'Keywzf_${listViewFinancialCardsRow.id.toString()}',
+                                  ),
+                                  card: listViewFinancialCardsRow,
+                                  refreshListCallback: () async {},
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
