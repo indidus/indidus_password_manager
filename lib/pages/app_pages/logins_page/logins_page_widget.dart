@@ -232,91 +232,87 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
-                      decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<LoginsRow>>(
-                        future: (_model.requestCompleter ??=
-                                Completer<List<LoginsRow>>()
-                                  ..complete(LoginsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'created_by',
-                                          currentUserUid,
-                                        )
-                                        .order('created_at'),
-                                  )))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
+                    FutureBuilder<List<LoginsRow>>(
+                      future: (_model.requestCompleter ??=
+                              Completer<List<LoginsRow>>()
+                                ..complete(LoginsTable().queryRows(
+                                  queryFn: (q) => q
+                                      .eq(
+                                        'created_by',
+                                        currentUserUid,
+                                      )
+                                      .order('created_at'),
+                                )))
+                          .future,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  FlutterFlowTheme.of(context).primary,
                                 ),
                               ),
-                            );
-                          }
-                          List<LoginsRow> listViewLoginsRowList =
-                              snapshot.data!;
-                          if (listViewLoginsRowList.isEmpty) {
-                            return Center(
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 128.0,
-                                child: const EmptyLoginListWidget(),
-                              ),
-                            );
-                          }
-                          return RefreshIndicator(
-                            onRefresh: () async {
-                              logFirebaseEvent(
-                                  'LOGINS_ListView_b8tupkag_ON_PULL_TO_REFR');
-                              logFirebaseEvent(
-                                  'ListView_refresh_database_request');
-                              setState(() => _model.requestCompleter = null);
-                              await _model.waitForRequestCompleted();
-                            },
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewLoginsRowList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewLoginsRow =
-                                    listViewLoginsRowList[listViewIndex];
-                                return wrapWithModel(
-                                  model: _model.loginCardsModels.getModel(
-                                    listViewLoginsRow.id.toString(),
-                                    listViewIndex,
-                                  ),
-                                  updateCallback: () => setState(() {}),
-                                  child: LoginCardsWidget(
-                                    key: Key(
-                                      'Key51j_${listViewLoginsRow.id.toString()}',
-                                    ),
-                                    login: listViewLoginsRow,
-                                    refreshListCallback: () async {
-                                      logFirebaseEvent(
-                                          'LOGINS_Container_51jrxfha_CALLBACK');
-                                      logFirebaseEvent(
-                                          'LoginCards_refresh_database_request');
-                                      setState(
-                                          () => _model.requestCompleter = null);
-                                      await _model.waitForRequestCompleted();
-                                    },
-                                  ),
-                                );
-                              },
                             ),
                           );
-                        },
-                      ),
+                        }
+                        List<LoginsRow> listViewLoginsRowList = snapshot.data!;
+                        if (listViewLoginsRowList.isEmpty) {
+                          return Center(
+                            child: SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.9,
+                              height: 128.0,
+                              child: const EmptyLoginListWidget(),
+                            ),
+                          );
+                        }
+                        return RefreshIndicator(
+                          onRefresh: () async {
+                            logFirebaseEvent(
+                                'LOGINS_ListView_b8tupkag_ON_PULL_TO_REFR');
+                            logFirebaseEvent(
+                                'ListView_refresh_database_request');
+                            setState(() => _model.requestCompleter = null);
+                            await _model.waitForRequestCompleted();
+                          },
+                          child: ListView.builder(
+                            padding: EdgeInsets.zero,
+                            primary: false,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: listViewLoginsRowList.length,
+                            itemBuilder: (context, listViewIndex) {
+                              final listViewLoginsRow =
+                                  listViewLoginsRowList[listViewIndex];
+                              return wrapWithModel(
+                                model: _model.loginCardsModels.getModel(
+                                  listViewLoginsRow.id.toString(),
+                                  listViewIndex,
+                                ),
+                                updateCallback: () => setState(() {}),
+                                child: LoginCardsWidget(
+                                  key: Key(
+                                    'Key51j_${listViewLoginsRow.id.toString()}',
+                                  ),
+                                  login: listViewLoginsRow,
+                                  refreshListCallback: () async {
+                                    logFirebaseEvent(
+                                        'LOGINS_Container_51jrxfha_CALLBACK');
+                                    logFirebaseEvent(
+                                        'LoginCards_refresh_database_request');
+                                    setState(
+                                        () => _model.requestCompleter = null);
+                                    await _model.waitForRequestCompleted();
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),
