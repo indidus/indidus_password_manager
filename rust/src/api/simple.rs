@@ -1,6 +1,9 @@
-use structs::HttpQuery;
+// use structs::HttpQuery;
 
 use crate::models::{FinantialCard, IdentityCard, Login, Note};
+
+// export HttpQuery struct from this package
+pub use structs::HttpQuery;
 
 #[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
 pub fn greet(name: String) -> String {
@@ -46,7 +49,7 @@ pub async fn delete_login(id: String) -> anyhow::Result<Login> {
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_login(query: HttpQuery) -> anyhow::Result<Vec<Login>> {
+pub async fn list_login(query: structs::HttpQuery) -> anyhow::Result<Vec<Login>> {
     // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let logins = Login::get_list(query).await.unwrap();
     Ok(logins)
@@ -77,7 +80,7 @@ pub async fn delete_financial_card(id: String) -> anyhow::Result<FinantialCard> 
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_financial_card(query: HttpQuery) -> anyhow::Result<Vec<FinantialCard>> {
+pub async fn list_financial_card(query: structs::HttpQuery) -> anyhow::Result<Vec<FinantialCard>> {
     // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let cards = FinantialCard::get_list(query).await.unwrap();
     Ok(cards)
@@ -164,7 +167,7 @@ pub async fn delete_note(id: String) -> anyhow::Result<Note> {
 /// }
 /// ```
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_note(query: HttpQuery) -> anyhow::Result<Vec<IdentityCard>> {
+pub async fn list_note(query: structs::HttpQuery) -> anyhow::Result<Vec<IdentityCard>> {
     // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let notes = IdentityCard::get_list(query).await.unwrap();
     Ok(notes)

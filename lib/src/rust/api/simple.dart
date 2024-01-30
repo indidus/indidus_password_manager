@@ -4,7 +4,130 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
+import '../models/finantial_cards.dart';
+import '../models/identity_cards.dart';
+import '../models/logins.dart';
+import '../models/notes.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 String greet({required String name, dynamic hint}) =>
     RustLib.instance.api.greet(name: name, hint: hint);
+
+Future<bool> init({required String dbPath, dynamic hint}) =>
+    RustLib.instance.api.init(dbPath: dbPath, hint: hint);
+
+Future<Login> getLogin({required String id, dynamic hint}) =>
+    RustLib.instance.api.getLogin(id: id, hint: hint);
+
+Future<Login> postLogin({required Login data, dynamic hint}) =>
+    RustLib.instance.api.postLogin(data: data, hint: hint);
+
+Future<Login> putLogin(
+        {required String id, required Login data, dynamic hint}) =>
+    RustLib.instance.api.putLogin(id: id, data: data, hint: hint);
+
+Future<Login> deleteLogin({required String id, dynamic hint}) =>
+    RustLib.instance.api.deleteLogin(id: id, hint: hint);
+
+Future<List<Login>> listLogin(
+        {required StructsHttpQuery query, dynamic hint}) =>
+    RustLib.instance.api.listLogin(query: query, hint: hint);
+
+Future<FinantialCard> getFinancialCard({required String id, dynamic hint}) =>
+    RustLib.instance.api.getFinancialCard(id: id, hint: hint);
+
+Future<FinantialCard> postFinancialCard(
+        {required FinantialCard data, dynamic hint}) =>
+    RustLib.instance.api.postFinancialCard(data: data, hint: hint);
+
+Future<FinantialCard> putFinancialCard(
+        {required String id, required FinantialCard data, dynamic hint}) =>
+    RustLib.instance.api.putFinancialCard(id: id, data: data, hint: hint);
+
+Future<FinantialCard> deleteFinancialCard({required String id, dynamic hint}) =>
+    RustLib.instance.api.deleteFinancialCard(id: id, hint: hint);
+
+Future<List<FinantialCard>> listFinancialCard(
+        {required StructsHttpQuery query, dynamic hint}) =>
+    RustLib.instance.api.listFinancialCard(query: query, hint: hint);
+
+Future<IdentityCard> getIdentityCard({required String id, dynamic hint}) =>
+    RustLib.instance.api.getIdentityCard(id: id, hint: hint);
+
+Future<IdentityCard> postIdentityCard(
+        {required IdentityCard data, dynamic hint}) =>
+    RustLib.instance.api.postIdentityCard(data: data, hint: hint);
+
+Future<IdentityCard> putIdentityCard(
+        {required String id, required IdentityCard data, dynamic hint}) =>
+    RustLib.instance.api.putIdentityCard(id: id, data: data, hint: hint);
+
+Future<IdentityCard> deleteIdentityCard({required String id, dynamic hint}) =>
+    RustLib.instance.api.deleteIdentityCard(id: id, hint: hint);
+
+Future<Note> getNote({required String id, dynamic hint}) =>
+    RustLib.instance.api.getNote(id: id, hint: hint);
+
+Future<Note> postNote({required Note data, dynamic hint}) =>
+    RustLib.instance.api.postNote(data: data, hint: hint);
+
+Future<Note> putNote({required String id, required Note data, dynamic hint}) =>
+    RustLib.instance.api.putNote(id: id, data: data, hint: hint);
+
+Future<Note> deleteNote({required String id, dynamic hint}) =>
+    RustLib.instance.api.deleteNote(id: id, hint: hint);
+
+/// Returns a list of notes based on the given query.
+///
+/// # Parameters
+///
+/// * `query`: The query to filter notes by.
+///
+/// # Returns
+///
+/// A vector of notes that match the given query.
+///
+/// # Examples
+///
+/// ```
+/// use my_app::structs::HttpQuery;
+///
+/// let query = r#"
+///     {
+///         "filter": {
+///             "name": {
+///                 "eq": "John"
+///             }
+///         }
+///     }
+/// "#;
+/// let query = serde_json::from_str::<HttpQuery>(query).unwrap();
+///
+/// let notes = my_app::list_note(query).await.unwrap();
+///
+/// for note in notes {
+///     println!("Note: {}", note.name);
+/// }
+/// ```
+Future<List<IdentityCard>> listNote(
+        {required StructsHttpQuery query, dynamic hint}) =>
+    RustLib.instance.api.listNote(query: query, hint: hint);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<structs :: HttpQuery>>
+@sealed
+class StructsHttpQuery extends RustOpaque {
+  StructsHttpQuery.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  StructsHttpQuery.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_StructsHttpQuery,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_StructsHttpQuery,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance.api.rust_arc_decrement_strong_count_StructsHttpQueryPtr,
+  );
+}
