@@ -1,0 +1,13 @@
+[package]
+name = "sqlite_wrapper"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde_json = "1.0.112"
+structs = { version = "0.1.0", path = "../structs" }
+tokio = { version = "1.35.1", features = ["macros", "rt-multi-thread", "parking_lot"] }
+sqlx = {version = "0.7.3", features = ["runtime-tokio-rustls", "sqlite", "uuid", "macros", "chrono", "migrate"]}
+

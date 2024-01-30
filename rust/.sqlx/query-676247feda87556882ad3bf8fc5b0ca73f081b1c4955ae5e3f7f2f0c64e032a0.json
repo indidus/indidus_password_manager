@@ -1,0 +1,80 @@
+{
+  "db_name": "SQLite",
+  "query": "select id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", name as \"name!\", note as \"note?\", username as \"username!\", url as \"url?\", password as \"password?\", password_hint as \"password_hint?\" from logins where id = ?",
+  "describe": {
+    "columns": [
+      {
+        "name": "id?",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at?",
+        "ordinal": 1,
+        "type_info": "Datetime"
+      },
+      {
+        "name": "created_by?",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at?",
+        "ordinal": 3,
+        "type_info": "Datetime"
+      },
+      {
+        "name": "updated_by?",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "name!",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "note?",
+        "ordinal": 6,
+        "type_info": "Text"
+      },
+      {
+        "name": "username!",
+        "ordinal": 7,
+        "type_info": "Text"
+      },
+      {
+        "name": "url?",
+        "ordinal": 8,
+        "type_info": "Text"
+      },
+      {
+        "name": "password?",
+        "ordinal": 9,
+        "type_info": "Text"
+      },
+      {
+        "name": "password_hint?",
+        "ordinal": 10,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      true,
+      true,
+      false,
+      true,
+      false,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "676247feda87556882ad3bf8fc5b0ca73f081b1c4955ae5e3f7f2f0c64e032a0"
+}
