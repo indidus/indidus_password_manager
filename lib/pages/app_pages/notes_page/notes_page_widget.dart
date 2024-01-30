@@ -217,78 +217,75 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                     ),
                   ),
                 ),
-                Container(
-                  height: MediaQuery.sizeOf(context).height * 0.75,
-                  decoration: const BoxDecoration(),
-                  child: FutureBuilder<List<NotesRow>>(
-                    future:
-                        (_model.requestCompleter ??= Completer<List<NotesRow>>()
-                              ..complete(NotesTable().queryRows(
-                                queryFn: (q) => q
-                                    .eq(
-                                      'created_by',
-                                      currentUserUid,
-                                    )
-                                    .eq(
-                                      'name',
-                                      _model.searchQuery,
-                                    )
-                                    .order('created_at'),
-                                limit: 20,
-                              )))
-                            .future,
-                    builder: (context, snapshot) {
-                      // Customize what your widget looks like when it's loading.
-                      if (!snapshot.hasData) {
-                        return Center(
-                          child: SizedBox(
-                            width: 40.0,
-                            height: 40.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
+                FutureBuilder<List<NotesRow>>(
+                  future:
+                      (_model.requestCompleter ??= Completer<List<NotesRow>>()
+                            ..complete(NotesTable().queryRows(
+                              queryFn: (q) => q
+                                  .eq(
+                                    'created_by',
+                                    currentUserUid,
+                                  )
+                                  .eq(
+                                    'name',
+                                    _model.searchQuery,
+                                  )
+                                  .order('created_at'),
+                              limit: 20,
+                            )))
+                          .future,
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 40.0,
+                          height: 40.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
                           ),
-                        );
-                      }
-                      List<NotesRow> listViewNotesRowList = snapshot.data!;
-                      if (listViewNotesRowList.isEmpty) {
-                        return Center(
-                          child: SizedBox(
-                            width: MediaQuery.sizeOf(context).width * 0.9,
-                            height: 128.0,
-                            child: const EmptyNoteListWidget(),
-                          ),
-                        );
-                      }
-                      return RefreshIndicator(
-                        onRefresh: () async {
-                          logFirebaseEvent(
-                              'NOTES_ListView_27ifpm0h_ON_PULL_TO_REFRE');
-                          logFirebaseEvent('ListView_refresh_database_request');
-                          setState(() => _model.requestCompleter = null);
-                          await _model.waitForRequestCompleted();
-                        },
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          primary: false,
-                          scrollDirection: Axis.vertical,
-                          itemCount: listViewNotesRowList.length,
-                          itemBuilder: (context, listViewIndex) {
-                            final listViewNotesRow =
-                                listViewNotesRowList[listViewIndex];
-                            return NotesCardsWidget(
-                              key: Key(
-                                  'Keynos_${listViewIndex}_of_${listViewNotesRowList.length}'),
-                              note: listViewNotesRow,
-                              refreshListCallback: () async {},
-                            );
-                          },
                         ),
                       );
-                    },
-                  ),
+                    }
+                    List<NotesRow> listViewNotesRowList = snapshot.data!;
+                    if (listViewNotesRowList.isEmpty) {
+                      return Center(
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width * 0.9,
+                          height: 128.0,
+                          child: const EmptyNoteListWidget(),
+                        ),
+                      );
+                    }
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        logFirebaseEvent(
+                            'NOTES_ListView_27ifpm0h_ON_PULL_TO_REFRE');
+                        logFirebaseEvent('ListView_refresh_database_request');
+                        setState(() => _model.requestCompleter = null);
+                        await _model.waitForRequestCompleted();
+                      },
+                      child: ListView.builder(
+                        padding: EdgeInsets.zero,
+                        primary: false,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: listViewNotesRowList.length,
+                        itemBuilder: (context, listViewIndex) {
+                          final listViewNotesRow =
+                              listViewNotesRowList[listViewIndex];
+                          return NotesCardsWidget(
+                            key: Key(
+                                'Keynos_${listViewIndex}_of_${listViewNotesRowList.length}'),
+                            note: listViewNotesRow,
+                            refreshListCallback: () async {},
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             );
