@@ -1,24 +1,31 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'auth/firebase_auth/firebase_user_provider.dart';
-import 'auth/firebase_auth/auth_util.dart';
+import 'package:indidus_password_manager/src/rust/frb_generated.dart';
+import 'package:sqflite/sqflite.dart';
 
 import '/backend/supabase/supabase.dart';
+import 'auth/firebase_auth/auth_util.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:flutter/foundation.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
+import 'src/rust/api/simple.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
   await initFirebase();
+
+  await RustLib.init();
+
+  final String databasesPath = await getDatabasesPath();
+  await init(dbPath: '$databasesPath/password.db');
 
   await SupaFlow.initialize();
 
@@ -193,3 +200,30 @@ class _NavBarPageState extends State<NavBarPage> {
     );
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:indidus_password_manager/src/rust/api/simple.dart';
+// import 'package:indidus_password_manager/src/rust/frb_generated.dart';
+
+// Future<void> main() async {
+//   await RustLib.init();
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(title: const Text('flutter_rust_bridge quickstart')),
+//         body: Center(
+//           child: Text(
+//               'Action: Call Rust `greet("Tom")`\nResult: `${greet(name: "Tom")}`'),
+//         ),
+//       ),
+//     );
+//   }
+// }

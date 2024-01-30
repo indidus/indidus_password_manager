@@ -67,7 +67,8 @@ class _EmptyFinancialCardListWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: Text(
                   'No credit/debit cards are saved',
                   style: FlutterFlowTheme.of(context).labelLarge.override(

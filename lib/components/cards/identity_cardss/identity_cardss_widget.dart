@@ -59,7 +59,8 @@ class _IdentityCardssWidgetState extends State<IdentityCardssWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 8.0, 0.0),
                     child: Icon(
                       Icons.person,
                       color: FlutterFlowTheme.of(context).secondaryText,

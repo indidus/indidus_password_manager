@@ -1,9 +1,11 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/notes.dart';
 import 'view_note_model.dart';
+
 export 'view_note_model.dart';
 
 class ViewNoteWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class ViewNoteWidget extends StatefulWidget {
     required this.note,
   });
 
-  final NotesRow? note;
+  final Note note;
 
   @override
   State<ViewNoteWidget> createState() => _ViewNoteWidgetState();
@@ -92,8 +94,8 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'View Note',
                       style:
@@ -115,7 +117,7 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Name',
-                  fieldValue: widget.note!.name,
+                  fieldValue: widget.note.name,
                 ),
               ),
               wrapWithModel(
@@ -123,7 +125,7 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Note',
-                  fieldValue: widget.note!.note,
+                  fieldValue: widget.note.note,
                 ),
               ),
             ],

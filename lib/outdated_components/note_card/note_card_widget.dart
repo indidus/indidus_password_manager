@@ -106,8 +106,9 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
                                         ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 0.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 4.0, 0.0, 0.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         widget.note?.note,
@@ -135,7 +136,8 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).primary,
                       borderRadius: 8.0,
@@ -153,7 +155,8 @@ class _NoteCardWidgetState extends State<NoteCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,

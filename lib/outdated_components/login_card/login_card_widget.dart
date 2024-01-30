@@ -66,8 +66,8 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                     Container(
                       decoration: const BoxDecoration(),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -87,8 +87,8 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 12.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 12.0, 0.0),
                                         child: Container(
                                           width: 32.0,
                                           height: 32.0,
@@ -121,8 +121,10 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                                                       ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0.0, 4.0, 0.0, 0.0),
                                               child: Text(
                                                 'https//www.gmail.com',
                                                 style:
@@ -250,7 +252,8 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).primary,
                       borderRadius: 8.0,
@@ -268,7 +271,8 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,
@@ -285,7 +289,8 @@ class _LoginCardWidgetState extends State<LoginCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,

@@ -67,7 +67,8 @@ class _EmptyIdentityCardListWidgetState
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: Text(
                   'No identity cards are saved',
                   style: FlutterFlowTheme.of(context).labelLarge.override(

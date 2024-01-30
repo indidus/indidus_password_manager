@@ -117,8 +117,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'Update login',
                       style:
@@ -131,7 +131,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.nameFieldController,
                   focusNode: _model.nameFieldFocusNode,
@@ -176,7 +177,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.usernameFieldController,
                   focusNode: _model.usernameFieldFocusNode,
@@ -222,7 +224,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.passwordFieldController,
                   focusNode: _model.passwordFieldFocusNode,
@@ -283,7 +286,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.urlFieldController,
                   focusNode: _model.urlFieldFocusNode,
@@ -329,7 +333,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.passwordHintFieldController,
                   focusNode: _model.passwordHintFieldFocusNode,
@@ -375,7 +380,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
                 child: TextFormField(
                   controller: _model.noteFieldController,
                   focusNode: _model.noteFieldFocusNode,
@@ -422,7 +428,8 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 44.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(
+                    16.0, 16.0, 16.0, 44.0),
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent('UPDATE_LOGIN_NoteUpdateButton_ON_TAP');
@@ -452,9 +459,10 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    iconPadding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
+                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                           fontFamily: 'Inter',

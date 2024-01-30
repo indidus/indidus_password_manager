@@ -66,8 +66,8 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                     Container(
                       decoration: const BoxDecoration(),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 12.0, 0.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -87,8 +87,8 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 8.0, 0.0),
+                                        padding: const EdgeInsetsDirectional
+                                            .fromSTEB(0.0, 0.0, 8.0, 0.0),
                                         child: Icon(
                                           Icons.credit_card,
                                           color: FlutterFlowTheme.of(context)
@@ -115,8 +115,10 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                                                       ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                      0.0, 4.0, 0.0, 0.0),
                                               child: Text(
                                                 'Ashim Kumar Saha',
                                                 style:
@@ -246,7 +248,8 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).primary,
                       borderRadius: 8.0,
@@ -264,7 +267,8 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,
@@ -281,7 +285,8 @@ class _FinantialCardWidgetState extends State<FinantialCardWidget> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 0.0, 8.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).alternate,
                       borderRadius: 8.0,

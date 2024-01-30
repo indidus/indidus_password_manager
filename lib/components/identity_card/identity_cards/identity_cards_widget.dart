@@ -71,7 +71,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 8.0, 0.0),
                     child: Icon(
                       Icons.person,
                       color: FlutterFlowTheme.of(context).secondaryText,
@@ -135,7 +136,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
                   child: Container(
                     decoration: const BoxDecoration(),
                     child: Row(
@@ -177,7 +179,8 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,

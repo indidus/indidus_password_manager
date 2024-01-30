@@ -76,7 +76,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/Animation_-_1696420811471.json',
                     width: 150.0,
@@ -330,8 +331,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 16.0, 0.0, 0.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 16.0, 0.0, 0.0),
                                     child: Text(
                                       'Password do not match',
                                       style: FlutterFlowTheme.of(context)
@@ -409,8 +411,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
@@ -443,8 +446,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   context.pushNamed('LoginPage');
                                 },
                                 child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -472,7 +473,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     ],
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
+                                  ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                                 ),
                               ),
                             ),

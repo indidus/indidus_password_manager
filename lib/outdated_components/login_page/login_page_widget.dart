@@ -72,7 +72,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
                   child: Lottie.asset(
                     'assets/lottie_animations/Animation_-_1696420811471.json',
                     width: 150.0,
@@ -291,8 +292,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   height: 40.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
@@ -325,8 +327,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   context.pushNamed('CreateAccountPage');
                                 },
                                 child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -354,7 +354,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ],
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,
-                                  ),
+                                  ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                                 ),
                               ),
                             ),
@@ -404,8 +404,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   height: 44.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                   textStyle: FlutterFlowTheme.of(context)

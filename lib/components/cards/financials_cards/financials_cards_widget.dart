@@ -60,7 +60,8 @@ class _FinancialsCardsWidgetState extends State<FinancialsCardsWidget> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        0.0, 0.0, 8.0, 0.0),
                     child: Icon(
                       Icons.credit_card,
                       color: FlutterFlowTheme.of(context).secondaryText,
