@@ -1,12 +1,14 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/notes/delete_note_dialog/delete_note_dialog_widget.dart';
 import '/components/notes/forms/update_note/update_note_widget.dart';
 import '/components/notes/forms/view_note/view_note_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/notes.dart';
 import 'notes_cards_model.dart';
+
 export 'notes_cards_model.dart';
 
 class NotesCardsWidget extends StatefulWidget {
@@ -16,7 +18,7 @@ class NotesCardsWidget extends StatefulWidget {
     required this.refreshListCallback,
   });
 
-  final NotesRow? note;
+  final Note note;
   final Future Function()? refreshListCallback;
 
   @override
@@ -85,7 +87,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.note?.name,
+                            widget.note.name,
                             '-',
                           ),
                           textAlign: TextAlign.start,
@@ -100,7 +102,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                               0.0, 4.0, 0.0, 0.0),
                           child: Text(
                             valueOrDefault<String>(
-                              widget.note?.note,
+                              widget.note.note,
                               '-',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -133,11 +135,11 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        if (widget.note?.updatedAt == null)
+                        if (widget.note.updatedAt == null)
                           Text(
                             'Created  ${dateTimeFormat(
                               'relative',
-                              widget.note?.createdAt,
+                              widget.note.createdAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -147,11 +149,11 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                                   fontWeight: FontWeight.w300,
                                 ),
                           ),
-                        if (widget.note?.updatedAt != null)
+                        if (widget.note.updatedAt != null)
                           Text(
                             'Updated ${dateTimeFormat(
                               'relative',
-                              widget.note?.updatedAt,
+                              widget.note.updatedAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -202,7 +204,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.6,
                                     child: ViewNoteWidget(
-                                      note: widget.note!,
+                                      note: widget.note,
                                     ),
                                   ),
                                 );
@@ -232,7 +234,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: UpdateNoteWidget(
-                                    note: widget.note!,
+                                    note: widget.note,
                                   ),
                                 );
                               },
@@ -267,7 +269,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.3,
                                     child: DeleteNoteDialogWidget(
-                                      note: widget.note!,
+                                      note: widget.note,
                                     ),
                                   ),
                                 );

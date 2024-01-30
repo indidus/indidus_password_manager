@@ -1,5 +1,10 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/components/logout/logout_widget.dart';
 import '/components/notes/empty_note_list/empty_note_list_widget.dart';
 import '/components/notes/forms/create_note/create_note_widget.dart';
@@ -7,11 +12,9 @@ import '/components/notes/notes_cards/notes_cards_widget.dart';
 import '/components/setting_button/setting_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '/src/rust/models/notes.dart';
 import 'notes_page_model.dart';
+
 export 'notes_page_model.dart';
 
 class NotesPageWidget extends StatefulWidget {
@@ -220,23 +223,10 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                 Container(
                   height: MediaQuery.sizeOf(context).height * 0.75,
                   decoration: const BoxDecoration(),
-                  child: FutureBuilder<List<NotesRow>>(
-                    future:
-                        (_model.requestCompleter ??= Completer<List<NotesRow>>()
-                              ..complete(NotesTable().queryRows(
-                                queryFn: (q) => q
-                                    .eq(
-                                      'created_by',
-                                      currentUserUid,
-                                    )
-                                    .eq(
-                                      'name',
-                                      _model.searchQuery,
-                                    )
-                                    .order('created_at'),
-                                limit: 20,
-                              )))
-                            .future,
+                  child: FutureBuilder<List<Note>>(
+                    future: (_model.requestCompleter ??= Completer<List<Note>>()
+                          ..complete(listNote(query: "{}")))
+                        .future,
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -252,7 +242,7 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                           ),
                         );
                       }
-                      List<NotesRow> listViewNotesRowList = snapshot.data!;
+                      List<Note> listViewNotesRowList = snapshot.data!;
                       if (listViewNotesRowList.isEmpty) {
                         return Center(
                           child: SizedBox(

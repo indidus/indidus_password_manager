@@ -112,13 +112,15 @@ pub async fn get_note(id: String) -> anyhow::Result<Note> {
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn post_note(data: Note) -> anyhow::Result<Note> {
+pub async fn post_note(mut data: Note) -> anyhow::Result<Note> {
+    data.created_at = Some(chrono::Utc::now().naive_utc());
     let note = Note::insert(data).await.unwrap();
     Ok(note)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn put_note(id: String, data: Note) -> anyhow::Result<Note> {
+pub async fn put_note(id: String, mut data: Note) -> anyhow::Result<Note> {
+    data.updated_at = Some(chrono::Utc::now().naive_utc());
     let note = Note::update(id, data).await.unwrap();
     Ok(note)
 }

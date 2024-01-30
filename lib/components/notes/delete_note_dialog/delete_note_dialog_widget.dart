@@ -1,9 +1,13 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
+// import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/notes.dart';
 import 'delete_note_dialog_model.dart';
+
 export 'delete_note_dialog_model.dart';
 
 class DeleteNoteDialogWidget extends StatefulWidget {
@@ -12,7 +16,7 @@ class DeleteNoteDialogWidget extends StatefulWidget {
     required this.note,
   });
 
-  final NotesRow? note;
+  final Note note;
 
   @override
   State<DeleteNoteDialogWidget> createState() => _DeleteNoteDialogWidgetState();
@@ -158,12 +162,7 @@ class _DeleteNoteDialogWidgetState extends State<DeleteNoteDialogWidget> {
                           logFirebaseEvent(
                               'DELETE_NOTE_DIALOG_DeleteButton_ON_TAP');
                           logFirebaseEvent('DeleteButton_backend_call');
-                          await NotesTable().delete(
-                            matchingRows: (rows) => rows.eq(
-                              'id',
-                              widget.note?.id,
-                            ),
-                          );
+                          await deleteNote(id: widget.note.id!);
                           logFirebaseEvent(
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);

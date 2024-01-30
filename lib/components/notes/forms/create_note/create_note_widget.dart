@@ -1,11 +1,15 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:async';
-import 'package:flutter/material.dart';
+import '/src/rust/api/simple.dart';
+import '/src/rust/models/notes.dart';
 import 'create_note_model.dart';
+
 export 'create_note_model.dart';
 
 class CreateNoteWidget extends StatefulWidget {
@@ -214,11 +218,13 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                     logFirebaseEvent('NoteCreateButton_backend_call');
                     unawaited(
                       () async {
-                        await NotesTable().insert({
-                          'created_by': currentUserUid,
-                          'name': _model.nameFieldController.text,
-                          'note': _model.noteFieldController.text,
-                        });
+                        await postNote(
+                          data: Note(
+                            name: _model.nameFieldController.text,
+                            createdBy: currentUserUid,
+                            note: _model.noteFieldController.text,
+                          ),
+                        );
                       }(),
                     );
                     logFirebaseEvent('NoteCreateButton_navigate_back');
