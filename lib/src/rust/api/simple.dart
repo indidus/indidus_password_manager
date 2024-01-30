@@ -29,8 +29,7 @@ Future<Login> putLogin(
 Future<Login> deleteLogin({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteLogin(id: id, hint: hint);
 
-Future<List<Login>> listLogin(
-        {required StructsHttpQuery query, dynamic hint}) =>
+Future<List<Login>> listLogin({required String query, dynamic hint}) =>
     RustLib.instance.api.listLogin(query: query, hint: hint);
 
 Future<FinantialCard> getFinancialCard({required String id, dynamic hint}) =>
@@ -48,7 +47,7 @@ Future<FinantialCard> deleteFinancialCard({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteFinancialCard(id: id, hint: hint);
 
 Future<List<FinantialCard>> listFinancialCard(
-        {required StructsHttpQuery query, dynamic hint}) =>
+        {required String query, dynamic hint}) =>
     RustLib.instance.api.listFinancialCard(query: query, hint: hint);
 
 Future<IdentityCard> getIdentityCard({required String id, dynamic hint}) =>
@@ -77,57 +76,5 @@ Future<Note> putNote({required String id, required Note data, dynamic hint}) =>
 Future<Note> deleteNote({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteNote(id: id, hint: hint);
 
-/// Returns a list of notes based on the given query.
-///
-/// # Parameters
-///
-/// * `query`: The query to filter notes by.
-///
-/// # Returns
-///
-/// A vector of notes that match the given query.
-///
-/// # Examples
-///
-/// ```
-/// use my_app::structs::HttpQuery;
-///
-/// let query = r#"
-///     {
-///         "filter": {
-///             "name": {
-///                 "eq": "John"
-///             }
-///         }
-///     }
-/// "#;
-/// let query = serde_json::from_str::<HttpQuery>(query).unwrap();
-///
-/// let notes = my_app::list_note(query).await.unwrap();
-///
-/// for note in notes {
-///     println!("Note: {}", note.name);
-/// }
-/// ```
-Future<List<IdentityCard>> listNote(
-        {required StructsHttpQuery query, dynamic hint}) =>
+Future<List<IdentityCard>> listNote({required String query, dynamic hint}) =>
     RustLib.instance.api.listNote(query: query, hint: hint);
-
-// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<structs :: HttpQuery>>
-@sealed
-class StructsHttpQuery extends RustOpaque {
-  StructsHttpQuery.dcoDecode(List<dynamic> wire)
-      : super.dcoDecode(wire, _kStaticData);
-
-  StructsHttpQuery.sseDecode(int ptr, int externalSizeOnNative)
-      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
-
-  static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount:
-        RustLib.instance.api.rust_arc_increment_strong_count_StructsHttpQuery,
-    rustArcDecrementStrongCount:
-        RustLib.instance.api.rust_arc_decrement_strong_count_StructsHttpQuery,
-    rustArcDecrementStrongCountPtr: RustLib
-        .instance.api.rust_arc_decrement_strong_count_StructsHttpQueryPtr,
-  );
-}

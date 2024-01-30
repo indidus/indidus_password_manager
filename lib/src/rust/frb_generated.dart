@@ -91,13 +91,11 @@ abstract class RustLibApi extends BaseApi {
   Future<void> initApp({dynamic hint});
 
   Future<List<FinantialCard>> listFinancialCard(
-      {required StructsHttpQuery query, dynamic hint});
+      {required String query, dynamic hint});
 
-  Future<List<Login>> listLogin(
-      {required StructsHttpQuery query, dynamic hint});
+  Future<List<Login>> listLogin({required String query, dynamic hint});
 
-  Future<List<IdentityCard>> listNote(
-      {required StructsHttpQuery query, dynamic hint});
+  Future<List<IdentityCard>> listNote({required String query, dynamic hint});
 
   Future<FinantialCard> postFinancialCard(
       {required FinantialCard data, dynamic hint});
@@ -119,15 +117,6 @@ abstract class RustLibApi extends BaseApi {
       {required String id, required Login data, dynamic hint});
 
   Future<Note> putNote({required String id, required Note data, dynamic hint});
-
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_StructsHttpQuery;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_StructsHttpQuery;
-
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_StructsHttpQueryPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -414,12 +403,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @override
   Future<List<FinantialCard>> listFinancialCard(
-      {required StructsHttpQuery query, dynamic hint}) {
+      {required String query, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-            query, serializer);
+        sse_encode_String(query, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 13, port: port_);
       },
@@ -440,13 +428,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<List<Login>> listLogin(
-      {required StructsHttpQuery query, dynamic hint}) {
+  Future<List<Login>> listLogin({required String query, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-            query, serializer);
+        sse_encode_String(query, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 8, port: port_);
       },
@@ -467,13 +453,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<List<IdentityCard>> listNote(
-      {required StructsHttpQuery query, dynamic hint}) {
+  Future<List<IdentityCard>> listNote({required String query, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-            query, serializer);
+        sse_encode_String(query, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 22, port: port_);
       },
@@ -702,14 +686,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         argNames: ["id", "data"],
       );
 
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_StructsHttpQuery => wire
-          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery;
-
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_StructsHttpQuery => wire
-          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery;
-
   @protected
   AnyhowException dco_decode_AnyhowException(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -717,25 +693,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StructsHttpQuery
-      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return StructsHttpQuery.dcoDecode(raw as List<dynamic>);
-  }
-
-  @protected
   DateTime dco_decode_Chrono_Naive(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dcoDecodeTimestamp(ts: dco_decode_i_64(raw).toInt(), isUtc: true);
-  }
-
-  @protected
-  StructsHttpQuery
-      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return StructsHttpQuery.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -922,12 +882,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int dco_decode_usize(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dcoDecodeI64OrU64(raw);
-  }
-
-  @protected
   AnyhowException sse_decode_AnyhowException(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_String(deserializer);
@@ -935,28 +889,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  StructsHttpQuery
-      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return StructsHttpQuery.sseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
-  }
-
-  @protected
   DateTime sse_decode_Chrono_Naive(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var inner = sse_decode_i_64(deserializer);
     return DateTime.fromMicrosecondsSinceEpoch(inner, isUtc: true);
-  }
-
-  @protected
-  StructsHttpQuery
-      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return StructsHttpQuery.sseDecode(
-        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
@@ -1208,12 +1144,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  int sse_decode_usize(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint64();
-  }
-
-  @protected
   int sse_decode_i_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getInt32();
@@ -1227,25 +1157,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          StructsHttpQuery self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(self.sseEncode(move: true), serializer);
-  }
-
-  @protected
   void sse_encode_Chrono_Naive(DateTime self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_64(self.microsecondsSinceEpoch, serializer);
-  }
-
-  @protected
-  void
-      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockstructsHttpQuery(
-          StructsHttpQuery self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_usize(self.sseEncode(move: null), serializer);
   }
 
   @protected
@@ -1433,12 +1347,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_unit(void self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-  }
-
-  @protected
-  void sse_encode_usize(int self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint64(self);
   }
 
   @protected

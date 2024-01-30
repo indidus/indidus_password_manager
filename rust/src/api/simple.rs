@@ -1,9 +1,4 @@
-// use structs::HttpQuery;
-
 use crate::models::{FinantialCard, IdentityCard, Login, Note};
-
-// export HttpQuery struct from this package
-pub use structs::HttpQuery;
 
 #[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
 pub fn greet(name: String) -> String {
@@ -49,8 +44,8 @@ pub async fn delete_login(id: String) -> anyhow::Result<Login> {
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_login(query: structs::HttpQuery) -> anyhow::Result<Vec<Login>> {
-    // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
+pub async fn list_login(query: String) -> anyhow::Result<Vec<Login>> {
+    let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let logins = Login::get_list(query).await.unwrap();
     Ok(logins)
 }
@@ -80,8 +75,8 @@ pub async fn delete_financial_card(id: String) -> anyhow::Result<FinantialCard> 
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_financial_card(query: structs::HttpQuery) -> anyhow::Result<Vec<FinantialCard>> {
-    // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
+pub async fn list_financial_card(query: String) -> anyhow::Result<Vec<FinantialCard>> {
+    let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let cards = FinantialCard::get_list(query).await.unwrap();
     Ok(cards)
 }
@@ -134,41 +129,9 @@ pub async fn delete_note(id: String) -> anyhow::Result<Note> {
     Ok(note)
 }
 
-/// Returns a list of notes based on the given query.
-///
-/// # Parameters
-///
-/// * `query`: The query to filter notes by.
-///
-/// # Returns
-///
-/// A vector of notes that match the given query.
-///
-/// # Examples
-///
-/// ```
-/// use my_app::structs::HttpQuery;
-///
-/// let query = r#"
-///     {
-///         "filter": {
-///             "name": {
-///                 "eq": "John"
-///             }
-///         }
-///     }
-/// "#;
-/// let query = serde_json::from_str::<HttpQuery>(query).unwrap();
-///
-/// let notes = my_app::list_note(query).await.unwrap();
-///
-/// for note in notes {
-///     println!("Note: {}", note.name);
-/// }
-/// ```
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_note(query: structs::HttpQuery) -> anyhow::Result<Vec<IdentityCard>> {
-    // let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
+pub async fn list_note(query: String) -> anyhow::Result<Vec<IdentityCard>> {
+    let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
     let notes = IdentityCard::get_list(query).await.unwrap();
     Ok(notes)
 }
