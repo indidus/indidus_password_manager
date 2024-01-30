@@ -13,7 +13,7 @@ pub fn init_app() {
 
 #[tokio::main(flavor = "current_thread")]
 pub async fn init(db_path: String) -> bool {
-    println!("Hello from native!");
+    // println!("Hello from rust!");
     sqlite_wrapper::initiate_sqlite_db_path(db_path.clone()).await;
     let _ = sqlite_wrapper::migrate_sqlite(db_path.as_str()).await;
     true
@@ -130,9 +130,9 @@ pub async fn delete_note(id: String) -> anyhow::Result<Note> {
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_note(query: String) -> anyhow::Result<Vec<IdentityCard>> {
+pub async fn list_note(query: String) -> anyhow::Result<Vec<Note>> {
     let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
-    let notes = IdentityCard::get_list(query).await.unwrap();
+    let notes = Note::get_list(query).await.unwrap();
     Ok(notes)
 }
 

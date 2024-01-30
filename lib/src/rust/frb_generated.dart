@@ -95,7 +95,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<List<Login>> listLogin({required String query, dynamic hint});
 
-  Future<List<IdentityCard>> listNote({required String query, dynamic hint});
+  Future<List<Note>> listNote({required String query, dynamic hint});
 
   Future<FinantialCard> postFinancialCard(
       {required FinantialCard data, dynamic hint});
@@ -453,7 +453,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<List<IdentityCard>> listNote({required String query, dynamic hint}) {
+  Future<List<Note>> listNote({required String query, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
@@ -462,7 +462,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             funcId: 22, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_list_identity_card,
+        decodeSuccessData: sse_decode_list_note,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kListNoteConstMeta,
@@ -802,15 +802,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<IdentityCard> dco_decode_list_identity_card(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_identity_card).toList();
-  }
-
-  @protected
   List<Login> dco_decode_list_login(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_login).toList();
+  }
+
+  @protected
+  List<Note> dco_decode_list_note(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_note).toList();
   }
 
   @protected
@@ -1030,19 +1030,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<IdentityCard> sse_decode_list_identity_card(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <IdentityCard>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_identity_card(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
   List<Login> sse_decode_list_login(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -1050,6 +1037,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var ans_ = <Login>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
       ans_.add(sse_decode_login(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  List<Note> sse_decode_list_note(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <Note>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_note(deserializer));
     }
     return ans_;
   }
@@ -1263,21 +1262,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_identity_card(
-      List<IdentityCard> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_identity_card(item, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_list_login(List<Login> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
       sse_encode_login(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_note(List<Note> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_note(item, serializer);
     }
   }
 

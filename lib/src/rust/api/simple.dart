@@ -76,5 +76,5 @@ Future<Note> putNote({required String id, required Note data, dynamic hint}) =>
 Future<Note> deleteNote({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteNote(id: id, hint: hint);
 
-Future<List<IdentityCard>> listNote({required String query, dynamic hint}) =>
+Future<List<Note>> listNote({required String query, dynamic hint}) =>
     RustLib.instance.api.listNote(query: query, hint: hint);

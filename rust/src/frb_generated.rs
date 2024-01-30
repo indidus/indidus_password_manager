@@ -788,20 +788,6 @@ impl SseDecode for Vec<crate::models::finantial_cards::FinantialCard> {
     }
 }
 
-impl SseDecode for Vec<crate::models::identity_cards::IdentityCard> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        let mut len_ = <i32>::sse_decode(deserializer);
-        let mut ans_ = vec![];
-        for idx_ in 0..len_ {
-            ans_.push(<crate::models::identity_cards::IdentityCard>::sse_decode(
-                deserializer,
-            ));
-        }
-        return ans_;
-    }
-}
-
 impl SseDecode for Vec<crate::models::logins::Login> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -809,6 +795,18 @@ impl SseDecode for Vec<crate::models::logins::Login> {
         let mut ans_ = vec![];
         for idx_ in 0..len_ {
             ans_.push(<crate::models::logins::Login>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::models::notes::Note> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::models::notes::Note>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -1170,22 +1168,22 @@ impl SseEncode for Vec<crate::models::finantial_cards::FinantialCard> {
     }
 }
 
-impl SseEncode for Vec<crate::models::identity_cards::IdentityCard> {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <i32>::sse_encode(self.len() as _, serializer);
-        for item in self {
-            <crate::models::identity_cards::IdentityCard>::sse_encode(item, serializer);
-        }
-    }
-}
-
 impl SseEncode for Vec<crate::models::logins::Login> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::models::logins::Login>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::models::notes::Note> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::models::notes::Note>::sse_encode(item, serializer);
         }
     }
 }

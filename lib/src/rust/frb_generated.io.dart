@@ -62,10 +62,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<FinantialCard> dco_decode_list_finantial_card(dynamic raw);
 
   @protected
-  List<IdentityCard> dco_decode_list_identity_card(dynamic raw);
+  List<Login> dco_decode_list_login(dynamic raw);
 
   @protected
-  List<Login> dco_decode_list_login(dynamic raw);
+  List<Note> dco_decode_list_note(dynamic raw);
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
@@ -131,11 +131,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       SseDeserializer deserializer);
 
   @protected
-  List<IdentityCard> sse_decode_list_identity_card(
-      SseDeserializer deserializer);
+  List<Login> sse_decode_list_login(SseDeserializer deserializer);
 
   @protected
-  List<Login> sse_decode_list_login(SseDeserializer deserializer);
+  List<Note> sse_decode_list_note(SseDeserializer deserializer);
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
@@ -207,11 +206,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       List<FinantialCard> self, SseSerializer serializer);
 
   @protected
-  void sse_encode_list_identity_card(
-      List<IdentityCard> self, SseSerializer serializer);
+  void sse_encode_list_login(List<Login> self, SseSerializer serializer);
 
   @protected
-  void sse_encode_list_login(List<Login> self, SseSerializer serializer);
+  void sse_encode_list_note(List<Note> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_strict(
