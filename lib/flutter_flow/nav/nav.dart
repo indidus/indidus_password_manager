@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
-
-import '/index.dart';
-import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
+import '/main.dart';
 
 export 'package:go_router/go_router.dart';
+
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
@@ -90,16 +90,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => params.isEmpty
               ? const NavBarPage(initialPage: 'LoginsPage')
               : const LoginsPageWidget(),
-        ),
-        FFRoute(
-          name: 'LoginPage',
-          path: '/loginPage',
-          builder: (context, params) => const LoginPageWidget(),
-        ),
-        FFRoute(
-          name: 'CreateAccountPage',
-          path: '/createAccountPage',
-          builder: (context, params) => const CreateAccountPageWidget(),
         ),
         FFRoute(
           name: 'FinancialCardsPage',
