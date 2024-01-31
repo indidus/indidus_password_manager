@@ -64,6 +64,10 @@ Future<IdentityCard> putIdentityCard(
 Future<IdentityCard> deleteIdentityCard({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteIdentityCard(id: id, hint: hint);
 
+Future<List<IdentityCard>> listIdentityCard(
+        {required String query, dynamic hint}) =>
+    RustLib.instance.api.listIdentityCard(query: query, hint: hint);
+
 Future<Note> getNote({required String id, dynamic hint}) =>
     RustLib.instance.api.getNote(id: id, hint: hint);
 

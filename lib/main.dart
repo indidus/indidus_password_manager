@@ -6,7 +6,6 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:indidus_password_manager/src/rust/frb_generated.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '/backend/supabase/supabase.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
@@ -26,8 +25,6 @@ void main() async {
 
   final String databasesPath = await getDatabasesPath();
   await init(dbPath: '$databasesPath/password.db');
-
-  await SupaFlow.initialize();
 
   if (!kIsWeb) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;

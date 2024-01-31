@@ -1,22 +1,24 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/logins/delete_login_dialog/delete_login_dialog_widget.dart';
 import '/components/logins/forms/update_login/update_login_widget.dart';
 import '/components/logins/forms/view_login/view_login_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/logins.dart';
 import 'login_cards_model.dart';
+
 export 'login_cards_model.dart';
 
 class LoginCardsWidget extends StatefulWidget {
   const LoginCardsWidget({
     super.key,
-    this.login,
+    required this.login,
     required this.refreshListCallback,
   });
 
-  final LoginsRow? login;
+  final Login login;
   final Future Function()? refreshListCallback;
 
   @override
@@ -83,16 +85,16 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                       onTap: () async {
                         logFirebaseEvent(
                             'LOGIN_CARDS_COMP_Image_cxoxncct_ON_TAP');
-                        if (widget.login?.url != null &&
-                            widget.login?.url != '') {
+                        if (widget.login.url != null &&
+                            widget.login.url != '') {
                           logFirebaseEvent('Image_launch_u_r_l');
-                          await launchURL(widget.login!.url!);
+                          await launchURL(widget.login.url!);
                         }
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login?.url}',
+                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login.url}',
                           width: 64.0,
                           height: 64.0,
                           fit: BoxFit.cover,
@@ -108,7 +110,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.login?.name,
+                            widget.login.name,
                             '-',
                           ),
                           textAlign: TextAlign.start,
@@ -129,15 +131,15 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'LOGIN_CARDS_COMP_Text_6ovnqf75_ON_TAP');
-                              if (widget.login?.url != null &&
-                                  widget.login?.url != '') {
+                              if (widget.login.url != null &&
+                                  widget.login.url != '') {
                                 logFirebaseEvent('Text_launch_u_r_l');
-                                await launchURL(widget.login!.url!);
+                                await launchURL(widget.login.url!);
                               }
                             },
                             child: Text(
                               valueOrDefault<String>(
-                                widget.login?.url,
+                                widget.login.url,
                                 '-',
                               ),
                               style: FlutterFlowTheme.of(context)
@@ -150,7 +152,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                           ),
                         ),
                         Text(
-                          'Username : ${widget.login?.username}',
+                          'Username : ${widget.login.username}',
                           style:
                               FlutterFlowTheme.of(context).labelSmall.override(
                                     fontFamily: 'Inter',
@@ -178,11 +180,11 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        if (widget.login?.updatedAt == null)
+                        if (widget.login.updatedAt == null)
                           Text(
                             'Created  ${dateTimeFormat(
                               'relative',
-                              widget.login?.createdAt,
+                              widget.login.createdAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -192,11 +194,11 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                   fontWeight: FontWeight.w300,
                                 ),
                           ),
-                        if (widget.login?.updatedAt != null)
+                        if (widget.login.updatedAt != null)
                           Text(
                             'Updated ${dateTimeFormat(
                               'relative',
-                              widget.login?.updatedAt,
+                              widget.login.updatedAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -247,7 +249,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.8,
                                     child: ViewLoginWidget(
-                                      login: widget.login!,
+                                      login: widget.login,
                                     ),
                                   ),
                                 );
@@ -280,7 +282,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.8,
                                     child: UpdateLoginWidget(
-                                      login: widget.login!,
+                                      login: widget.login,
                                     ),
                                   ),
                                 );
@@ -316,7 +318,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.3,
                                     child: DeleteLoginDialogWidget(
-                                      login: widget.login!,
+                                      login: widget.login,
                                     ),
                                   ),
                                 );

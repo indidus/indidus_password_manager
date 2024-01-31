@@ -1,10 +1,12 @@
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
 import '/components/logins/login_cards/login_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
+import '/src/rust/models/logins.dart';
 import 'logins_page_widget.dart' show LoginsPageWidget;
-import 'package:flutter/material.dart';
 
 class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
   ///  Local state fields for this page.
@@ -18,7 +20,7 @@ class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  Completer<List<LoginsRow>>? requestCompleter;
+  Completer<List<Login>>? requestCompleter;
   // Models for LoginCards dynamic component.
   late FlutterFlowDynamicModels<LoginCardsModel> loginCardsModels;
   // Model for Logout component.

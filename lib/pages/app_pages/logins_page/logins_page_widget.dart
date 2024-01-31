@@ -1,16 +1,19 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/components/logins/empty_login_list/empty_login_list_widget.dart';
 import '/components/logins/forms/create_login/create_login_widget.dart';
 import '/components/logins/login_cards/login_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '/src/rust/models/logins.dart';
 import 'logins_page_model.dart';
+
 export 'logins_page_model.dart';
 
 class LoginsPageWidget extends StatefulWidget {
@@ -232,18 +235,11 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                         ),
                       ),
                     ),
-                    FutureBuilder<List<LoginsRow>>(
-                      future: (_model.requestCompleter ??=
-                              Completer<List<LoginsRow>>()
-                                ..complete(LoginsTable().queryRows(
-                                  queryFn: (q) => q
-                                      .eq(
-                                        'created_by',
-                                        currentUserUid,
-                                      )
-                                      .order('created_at'),
-                                )))
-                          .future,
+                    FutureBuilder<List<Login>>(
+                      future:
+                          (_model.requestCompleter ??= Completer<List<Login>>()
+                                ..complete(listLogin(query: "{}")))
+                              .future,
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -259,7 +255,7 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                             ),
                           );
                         }
-                        List<LoginsRow> listViewLoginsRowList = snapshot.data!;
+                        List<Login> listViewLoginsRowList = snapshot.data!;
                         if (listViewLoginsRowList.isEmpty) {
                           return Center(
                             child: SizedBox(

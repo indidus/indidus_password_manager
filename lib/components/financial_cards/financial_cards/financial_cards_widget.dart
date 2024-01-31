@@ -1,12 +1,14 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/financial_cards/delete_financial_card/delete_financial_card_widget.dart';
 import '/components/financial_cards/forms/update_financial_card/update_financial_card_widget.dart';
 import '/components/financial_cards/forms/view_fianacial_card/view_fianacial_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'financial_cards_model.dart';
+
 export 'financial_cards_model.dart';
 
 class FinancialCardsWidget extends StatefulWidget {
@@ -16,7 +18,7 @@ class FinancialCardsWidget extends StatefulWidget {
     required this.refreshListCallback,
   });
 
-  final FinancialCardsRow? card;
+  final FinantialCard card;
   final Future Function()? refreshListCallback;
 
   @override
@@ -88,7 +90,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.card?.name,
+                            widget.card.name,
                             '-',
                           ),
                           textAlign: TextAlign.start,
@@ -103,7 +105,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                               0.0, 4.0, 0.0, 0.0),
                           child: Text(
                             valueOrDefault<String>(
-                              widget.card?.cardHolderName,
+                              widget.card.cardHolderName,
                               '-',
                             ),
                             style: FlutterFlowTheme.of(context)
@@ -119,7 +121,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                               0.0, 4.0, 0.0, 0.0),
                           child: Text(
                             'XXXX XXXX XXXX ${valueOrDefault<String>(
-                              widget.card!.cardNumber.substring(14),
+                              widget.card.cardNumber.substring(14),
                               'XXXX',
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -151,11 +153,11 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        if (widget.card?.updatedAt == null)
+                        if (widget.card.updatedAt == null)
                           Text(
                             'Created  ${dateTimeFormat(
                               'relative',
-                              widget.card?.createdAt,
+                              widget.card.createdAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -165,11 +167,11 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                                   fontWeight: FontWeight.w300,
                                 ),
                           ),
-                        if (widget.card?.updatedAt != null)
+                        if (widget.card.updatedAt != null)
                           Text(
                             'Updated ${dateTimeFormat(
                               'relative',
-                              widget.card?.updatedAt,
+                              widget.card.updatedAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -220,7 +222,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.6,
                                     child: ViewFianacialCardWidget(
-                                      card: widget.card!,
+                                      card: widget.card,
                                     ),
                                   ),
                                 );
@@ -253,7 +255,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.6,
                                     child: UpdateFinancialCardWidget(
-                                      card: widget.card!,
+                                      card: widget.card,
                                     ),
                                   ),
                                 );
@@ -289,7 +291,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.3,
                                     child: DeleteFinancialCardWidget(
-                                      card: widget.card!,
+                                      card: widget.card,
                                     ),
                                   ),
                                 );

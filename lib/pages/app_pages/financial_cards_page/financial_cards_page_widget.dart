@@ -1,16 +1,19 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/components/financial_cards/empty_financial_card_list/empty_financial_card_list_widget.dart';
 import '/components/financial_cards/financial_cards/financial_cards_widget.dart';
 import '/components/financial_cards/forms/create_financial_card/create_financial_card_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'financial_cards_page_model.dart';
+
 export 'financial_cards_page_model.dart';
 
 class FinancialCardsPageWidget extends StatefulWidget {
@@ -227,17 +230,10 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                     Container(
                       height: MediaQuery.sizeOf(context).height * 0.75,
                       decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<FinancialCardsRow>>(
+                      child: FutureBuilder<List<FinantialCard>>(
                         future: (_model.requestCompleter ??=
-                                Completer<List<FinancialCardsRow>>()
-                                  ..complete(FinancialCardsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'created_by',
-                                          currentUserUid,
-                                        )
-                                        .order('created_at'),
-                                  )))
+                                Completer<List<FinantialCard>>()
+                                  ..complete(listFinancialCard(query: "{}")))
                             .future,
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -254,8 +250,8 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                               ),
                             );
                           }
-                          List<FinancialCardsRow>
-                              listViewFinancialCardsRowList = snapshot.data!;
+                          List<FinantialCard> listViewFinancialCardsRowList =
+                              snapshot.data!;
                           if (listViewFinancialCardsRowList.isEmpty) {
                             return Center(
                               child: SizedBox(

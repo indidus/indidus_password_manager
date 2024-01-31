@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'create_financial_card_model.dart';
+
 export 'create_financial_card_model.dart';
 
 class CreateFinancialCardWidget extends StatefulWidget {
@@ -619,23 +622,24 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                     logFirebaseEvent(
                         'CREATE_FINANCIAL_CARD_FinancialCardCreat');
                     logFirebaseEvent('FinancialCardCreateButton_backend_call');
-                    await FinancialCardsTable().insert({
-                      'created_at':
-                          supaSerialize<DateTime>(getCurrentTimestamp),
-                      'created_by': currentUserUid,
-                      'card_holder_name':
-                          _model.cardHolderNameFieldController.text,
-                      'card_number': _model.cardNumberFieldController.text,
-                      'card_provider_name':
-                          _model.cardProviderNameFieldController.text,
-                      'card_type': _model.cardTypeFieldValue,
-                      'cvv': _model.cvvFieldController.text,
-                      'expiry_date': _model.expireDateFieldController.text,
-                      'issue_date': _model.issueDateFieldController.text,
-                      'name': _model.nameFieldController.text,
-                      'note': _model.noteFieldController.text,
-                      'pin': _model.pinFieldController.text,
-                    });
+                    await postFinancialCard(
+                      data: FinantialCard(
+                        createdAt: getCurrentTimestamp,
+                        createdBy: currentUserUid,
+                        cardHolderName:
+                            _model.cardHolderNameFieldController.text,
+                        cardNumber: _model.cardNumberFieldController.text,
+                        cardProviderName:
+                            _model.cardProviderNameFieldController.text,
+                        cardType: _model.cardTypeFieldValue,
+                        cvv: _model.cvvFieldController.text,
+                        expiryDate: _model.expireDateFieldController.text,
+                        issueDate: _model.issueDateFieldController.text,
+                        name: _model.nameFieldController.text,
+                        note: _model.noteFieldController.text,
+                        pin: _model.pinFieldController.text,
+                      ),
+                    );
                     logFirebaseEvent(
                         'FinancialCardCreateButton_close_dialog,_');
                     Navigator.pop(context);

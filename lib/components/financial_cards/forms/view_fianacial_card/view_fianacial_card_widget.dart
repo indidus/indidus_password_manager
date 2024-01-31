@@ -1,9 +1,11 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'view_fianacial_card_model.dart';
+
 export 'view_fianacial_card_model.dart';
 
 class ViewFianacialCardWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class ViewFianacialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinancialCardsRow? card;
+  final FinantialCard card;
 
   @override
   State<ViewFianacialCardWidget> createState() =>
@@ -111,7 +113,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Name',
-                  fieldValue: widget.card!.name,
+                  fieldValue: widget.card.name,
                 ),
               ),
               wrapWithModel(
@@ -119,7 +121,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card holder name',
-                  fieldValue: widget.card!.cardHolderName,
+                  fieldValue: widget.card.cardHolderName,
                 ),
               ),
               wrapWithModel(
@@ -127,7 +129,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card number',
-                  fieldValue: widget.card!.cardNumber,
+                  fieldValue: widget.card.cardNumber,
                 ),
               ),
               wrapWithModel(
@@ -135,7 +137,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Cvv',
-                  fieldValue: widget.card!.cvv!,
+                  fieldValue: widget.card.cvv!,
                 ),
               ),
               wrapWithModel(
@@ -143,7 +145,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Pin',
-                  fieldValue: widget.card!.pin!,
+                  fieldValue: widget.card.pin!,
                 ),
               ),
               wrapWithModel(
@@ -151,7 +153,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Expire at',
-                  fieldValue: widget.card!.expiryDate!,
+                  fieldValue: widget.card.expiryDate!,
                 ),
               ),
               wrapWithModel(
@@ -159,7 +161,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card type',
-                  fieldValue: widget.card!.cardType!,
+                  fieldValue: widget.card.cardType!,
                 ),
               ),
               wrapWithModel(
@@ -167,7 +169,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card provider name',
-                  fieldValue: widget.card!.cardProviderName!,
+                  fieldValue: widget.card.cardProviderName!,
                 ),
               ),
               wrapWithModel(
@@ -175,7 +177,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Issued at',
-                  fieldValue: widget.card!.issueDate!,
+                  fieldValue: widget.card.issueDate!,
                 ),
               ),
               wrapWithModel(
@@ -183,7 +185,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Note',
-                  fieldValue: widget.card!.note!,
+                  fieldValue: widget.card.note!,
                 ),
               ),
             ],

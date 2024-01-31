@@ -106,6 +106,13 @@ pub async fn delete_identity_card(id: String) -> anyhow::Result<IdentityCard> {
 }
 
 #[tokio::main(flavor = "current_thread")]
+pub async fn list_identity_card(query: String) -> anyhow::Result<Vec<IdentityCard>> {
+    let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
+    let notes = IdentityCard::get_list(query).await.unwrap();
+    Ok(notes)
+}
+
+#[tokio::main(flavor = "current_thread")]
 pub async fn get_note(id: String) -> anyhow::Result<Note> {
     let note = Note::get(id).await.unwrap();
     Ok(note)

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 // import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/src/rust/api/simple.dart';
 import '/src/rust/models/notes.dart';
 import 'delete_note_dialog_model.dart';
 

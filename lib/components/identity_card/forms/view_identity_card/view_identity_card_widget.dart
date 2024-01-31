@@ -1,9 +1,11 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'view_identity_card_model.dart';
+
 export 'view_identity_card_model.dart';
 
 class ViewIdentityCardWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class ViewIdentityCardWidget extends StatefulWidget {
     required this.idCard,
   });
 
-  final IdentityCardsRow? idCard;
+  final IdentityCard idCard;
 
   @override
   State<ViewIdentityCardWidget> createState() => _ViewIdentityCardWidgetState();
@@ -110,7 +112,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Name',
-                  fieldValue: widget.idCard!.name,
+                  fieldValue: widget.idCard.name,
                 ),
               ),
               wrapWithModel(
@@ -118,7 +120,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Name on card',
-                  fieldValue: widget.idCard!.nameOnCard,
+                  fieldValue: widget.idCard.nameOnCard,
                 ),
               ),
               wrapWithModel(
@@ -126,7 +128,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card number',
-                  fieldValue: widget.idCard!.identityCardNumber,
+                  fieldValue: widget.idCard.identityCardNumber,
                 ),
               ),
               wrapWithModel(
@@ -134,7 +136,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Country',
-                  fieldValue: widget.idCard!.country!,
+                  fieldValue: widget.idCard.country!,
                 ),
               ),
               wrapWithModel(
@@ -142,7 +144,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'State / Provision',
-                  fieldValue: widget.idCard!.state!,
+                  fieldValue: widget.idCard.state!,
                 ),
               ),
               wrapWithModel(
@@ -150,7 +152,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Card type',
-                  fieldValue: widget.idCard!.identityCardType!,
+                  fieldValue: widget.idCard.identityCardType!,
                 ),
               ),
               wrapWithModel(
@@ -158,7 +160,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Issued at',
-                  fieldValue: widget.idCard!.issueDate!,
+                  fieldValue: widget.idCard.issueDate!,
                 ),
               ),
               wrapWithModel(
@@ -166,7 +168,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Expire at',
-                  fieldValue: widget.idCard!.expiryDate!,
+                  fieldValue: widget.idCard.expiryDate!,
                 ),
               ),
               wrapWithModel(
@@ -174,7 +176,7 @@ class _ViewIdentityCardWidgetState extends State<ViewIdentityCardWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Note',
-                  fieldValue: widget.idCard!.note!,
+                  fieldValue: widget.idCard.note!,
                 ),
               ),
             ],

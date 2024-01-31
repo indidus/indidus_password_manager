@@ -1,16 +1,19 @@
-import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/components/identity_card/empty_identity_card_list/empty_identity_card_list_widget.dart';
 import '/components/identity_card/forms/create_identity_card/create_identity_card_widget.dart';
 import '/components/identity_card/identity_cards/identity_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
-import 'package:easy_debounce/easy_debounce.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import '/src/rust/api/simple.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'identity_cards_page_model.dart';
+
 export 'identity_cards_page_model.dart';
 
 class IdentityCardsPageWidget extends StatefulWidget {
@@ -228,17 +231,10 @@ class _IdentityCardsPageWidgetState extends State<IdentityCardsPageWidget> {
                     Container(
                       height: MediaQuery.sizeOf(context).height * 0.75,
                       decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<IdentityCardsRow>>(
+                      child: FutureBuilder<List<IdentityCard>>(
                         future: (_model.requestCompleter ??=
-                                Completer<List<IdentityCardsRow>>()
-                                  ..complete(IdentityCardsTable().queryRows(
-                                    queryFn: (q) => q
-                                        .eq(
-                                          'created_by',
-                                          currentUserUid,
-                                        )
-                                        .order('created_at'),
-                                  )))
+                                Completer<List<IdentityCard>>()
+                                  ..complete(listIdentityCard(query: "{}")))
                             .future,
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
@@ -255,7 +251,7 @@ class _IdentityCardsPageWidgetState extends State<IdentityCardsPageWidget> {
                               ),
                             );
                           }
-                          List<IdentityCardsRow> listViewIdentityCardsRowList =
+                          List<IdentityCard> listViewIdentityCardsRowList =
                               snapshot.data!;
                           if (listViewIdentityCardsRowList.isEmpty) {
                             return Center(

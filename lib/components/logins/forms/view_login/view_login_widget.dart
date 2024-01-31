@@ -1,9 +1,11 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/logins.dart';
 import 'view_login_model.dart';
+
 export 'view_login_model.dart';
 
 class ViewLoginWidget extends StatefulWidget {
@@ -12,7 +14,7 @@ class ViewLoginWidget extends StatefulWidget {
     required this.login,
   });
 
-  final LoginsRow? login;
+  final Login login;
 
   @override
   State<ViewLoginWidget> createState() => _ViewLoginWidgetState();
@@ -115,7 +117,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Name',
-                  fieldValue: widget.login!.name,
+                  fieldValue: widget.login.name,
                 ),
               ),
               wrapWithModel(
@@ -123,7 +125,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Url',
-                  fieldValue: widget.login!.url!,
+                  fieldValue: widget.login.url!,
                 ),
               ),
               wrapWithModel(
@@ -131,7 +133,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Username',
-                  fieldValue: widget.login!.username,
+                  fieldValue: widget.login.username,
                 ),
               ),
               wrapWithModel(
@@ -139,7 +141,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Password',
-                  fieldValue: widget.login!.password!,
+                  fieldValue: widget.login.password!,
                 ),
               ),
               wrapWithModel(
@@ -147,7 +149,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Password Hint',
-                  fieldValue: widget.login!.passwordHint!,
+                  fieldValue: widget.login.passwordHint!,
                 ),
               ),
               wrapWithModel(
@@ -155,7 +157,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                 updateCallback: () => setState(() {}),
                 child: TextFieldWidget(
                   fieldName: 'Note',
-                  fieldValue: widget.login!.note!,
+                  fieldValue: widget.login.note!,
                 ),
               ),
             ],

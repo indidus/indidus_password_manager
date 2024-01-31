@@ -1,9 +1,12 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'delete_identity_card_model.dart';
+
 export 'delete_identity_card_model.dart';
 
 class DeleteIdentityCardWidget extends StatefulWidget {
@@ -12,7 +15,7 @@ class DeleteIdentityCardWidget extends StatefulWidget {
     required this.idCard,
   });
 
-  final IdentityCardsRow? idCard;
+  final IdentityCard idCard;
 
   @override
   State<DeleteIdentityCardWidget> createState() =>
@@ -152,12 +155,7 @@ class _DeleteIdentityCardWidgetState extends State<DeleteIdentityCardWidget> {
                           logFirebaseEvent(
                               'DELETE_IDENTITY_CARD_DeleteButton_ON_TAP');
                           logFirebaseEvent('DeleteButton_backend_call');
-                          await IdentityCardsTable().delete(
-                            matchingRows: (rows) => rows.eq(
-                              'id',
-                              widget.idCard?.id,
-                            ),
-                          );
+                          deleteIdentityCard(id: widget.idCard.id!);
                           logFirebaseEvent(
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);

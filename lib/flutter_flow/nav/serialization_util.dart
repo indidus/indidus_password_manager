@@ -2,12 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 
-import '/backend/backend.dart';
-
-import '/backend/supabase/supabase.dart';
-
 import '../../flutter_flow/place.dart';
 import '../../flutter_flow/uploaded_file.dart';
+import '/backend/backend.dart';
 
 /// SERIALIZATION HELPERS
 
@@ -89,8 +86,8 @@ String? serializeParam(
         final reference = (param as FirestoreRecord).reference;
         return _serializeDocumentReference(reference);
 
-      case ParamType.SupabaseRow:
-        return json.encode((param as SupabaseDataRow).data);
+      // case ParamType.SupabaseRow:
+      //   return json.encode((param as SupabaseDataRow).data);
 
       default:
         return null;
@@ -239,14 +236,14 @@ dynamic deserializeParam<T>(
       case ParamType.SupabaseRow:
         final data = json.decode(param) as Map<String, dynamic>;
         switch (T) {
-          case IdentityCardsRow:
-            return IdentityCardsRow(data);
-          case LoginsRow:
-            return LoginsRow(data);
-          case FinancialCardsRow:
-            return FinancialCardsRow(data);
-          case NotesRow:
-            return NotesRow(data);
+          // case IdentityCardsRow:
+          //   return IdentityCardsRow(data);
+          // case LoginsRow:
+          //   return LoginsRow(data);
+          // case FinancialCardsRow:
+          //   return FinancialCardsRow(data);
+          // case NotesRow:
+          //   return NotesRow(data);
           default:
             return null;
         }

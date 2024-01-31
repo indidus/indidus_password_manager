@@ -379,6 +379,36 @@ fn wire_list_financial_card_impl(
         },
     )
 }
+fn wire_list_identity_card_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "list_identity_card",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_query = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse((move || crate::api::simple::list_identity_card(api_query))())
+            }
+        },
+    )
+}
 fn wire_list_login_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -788,6 +818,20 @@ impl SseDecode for Vec<crate::models::finantial_cards::FinantialCard> {
     }
 }
 
+impl SseDecode for Vec<crate::models::identity_cards::IdentityCard> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::models::identity_cards::IdentityCard>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<crate::models::logins::Login> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -929,24 +973,25 @@ fn pde_ffi_dispatcher_primary_impl(
         12 => wire_delete_financial_card_impl(port, ptr, rust_vec_len, data_len),
         17 => wire_delete_identity_card_impl(port, ptr, rust_vec_len, data_len),
         7 => wire_delete_login_impl(port, ptr, rust_vec_len, data_len),
-        21 => wire_delete_note_impl(port, ptr, rust_vec_len, data_len),
+        22 => wire_delete_note_impl(port, ptr, rust_vec_len, data_len),
         9 => wire_get_financial_card_impl(port, ptr, rust_vec_len, data_len),
         14 => wire_get_identity_card_impl(port, ptr, rust_vec_len, data_len),
         4 => wire_get_login_impl(port, ptr, rust_vec_len, data_len),
-        18 => wire_get_note_impl(port, ptr, rust_vec_len, data_len),
+        19 => wire_get_note_impl(port, ptr, rust_vec_len, data_len),
         3 => wire_init_impl(port, ptr, rust_vec_len, data_len),
         2 => wire_init_app_impl(port, ptr, rust_vec_len, data_len),
         13 => wire_list_financial_card_impl(port, ptr, rust_vec_len, data_len),
+        18 => wire_list_identity_card_impl(port, ptr, rust_vec_len, data_len),
         8 => wire_list_login_impl(port, ptr, rust_vec_len, data_len),
-        22 => wire_list_note_impl(port, ptr, rust_vec_len, data_len),
+        23 => wire_list_note_impl(port, ptr, rust_vec_len, data_len),
         10 => wire_post_financial_card_impl(port, ptr, rust_vec_len, data_len),
         15 => wire_post_identity_card_impl(port, ptr, rust_vec_len, data_len),
         5 => wire_post_login_impl(port, ptr, rust_vec_len, data_len),
-        19 => wire_post_note_impl(port, ptr, rust_vec_len, data_len),
+        20 => wire_post_note_impl(port, ptr, rust_vec_len, data_len),
         11 => wire_put_financial_card_impl(port, ptr, rust_vec_len, data_len),
         16 => wire_put_identity_card_impl(port, ptr, rust_vec_len, data_len),
         6 => wire_put_login_impl(port, ptr, rust_vec_len, data_len),
-        20 => wire_put_note_impl(port, ptr, rust_vec_len, data_len),
+        21 => wire_put_note_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -1164,6 +1209,16 @@ impl SseEncode for Vec<crate::models::finantial_cards::FinantialCard> {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::models::finantial_cards::FinantialCard>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::models::identity_cards::IdentityCard> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::models::identity_cards::IdentityCard>::sse_encode(item, serializer);
         }
     }
 }

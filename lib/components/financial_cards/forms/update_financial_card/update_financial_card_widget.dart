@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'update_financial_card_model.dart';
+
 export 'update_financial_card_model.dart';
 
 class UpdateFinancialCardWidget extends StatefulWidget {
@@ -15,7 +18,7 @@ class UpdateFinancialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinancialCardsRow? card;
+  final FinantialCard card;
 
   @override
   State<UpdateFinancialCardWidget> createState() =>
@@ -37,37 +40,37 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
     _model = createModel(context, () => UpdateFinancialCardModel());
 
     _model.cardHolderNameFieldController ??=
-        TextEditingController(text: widget.card?.cardHolderName);
+        TextEditingController(text: widget.card.cardHolderName);
     _model.cardHolderNameFieldFocusNode ??= FocusNode();
 
     _model.nameFieldController ??=
-        TextEditingController(text: widget.card?.name);
+        TextEditingController(text: widget.card.name);
     _model.nameFieldFocusNode ??= FocusNode();
 
     _model.cardNumberFieldController ??=
-        TextEditingController(text: widget.card?.cardNumber);
+        TextEditingController(text: widget.card.cardNumber);
     _model.cardNumberFieldFocusNode ??= FocusNode();
 
     _model.cardProviderNameFieldController ??=
-        TextEditingController(text: widget.card?.cardProviderName);
+        TextEditingController(text: widget.card.cardProviderName);
     _model.cardProviderNameFieldFocusNode ??= FocusNode();
 
-    _model.pinFieldController ??= TextEditingController(text: widget.card?.pin);
+    _model.pinFieldController ??= TextEditingController(text: widget.card.pin);
     _model.pinFieldFocusNode ??= FocusNode();
 
-    _model.cvvFieldController ??= TextEditingController(text: widget.card?.cvv);
+    _model.cvvFieldController ??= TextEditingController(text: widget.card.cvv);
     _model.cvvFieldFocusNode ??= FocusNode();
 
     _model.issueDateFieldController ??=
-        TextEditingController(text: widget.card?.issueDate);
+        TextEditingController(text: widget.card.issueDate);
     _model.issueDateFieldFocusNode ??= FocusNode();
 
     _model.expireDateFieldController ??=
-        TextEditingController(text: widget.card?.expiryDate);
+        TextEditingController(text: widget.card.expiryDate);
     _model.expireDateFieldFocusNode ??= FocusNode();
 
     _model.noteFieldController ??=
-        TextEditingController(text: widget.card?.note);
+        TextEditingController(text: widget.card.note);
     _model.noteFieldFocusNode ??= FocusNode();
   }
 
@@ -462,7 +465,7 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                 child: FlutterFlowDropDown<String>(
                   controller: _model.cardTypeFieldValueController ??=
                       FormFieldController<String>(
-                    _model.cardTypeFieldValue ??= widget.card?.cardType,
+                    _model.cardTypeFieldValue ??= widget.card.cardType,
                   ),
                   options: List<String>.from(['CREDIT', 'DEBIT', 'OTHER']),
                   optionLabels: const ['CREDIT', 'DEBIT', 'OTHER'],
@@ -638,27 +641,25 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                     logFirebaseEvent(
                         'UPDATE_FINANCIAL_CARD_FinantcialCardCrea');
                     logFirebaseEvent('FinantcialCardCreateButton_backend_call');
-                    await FinancialCardsTable().update(
-                      data: {
-                        'updated_at':
-                            supaSerialize<DateTime>(getCurrentTimestamp),
-                        'updated_by': currentUserUid,
-                        'card_holder_name':
+                    await putFinancialCard(
+                      id: widget.card.id!,
+                      data: FinantialCard(
+                        createdAt: widget.card.createdAt,
+                        createdBy: widget.card.createdBy,
+                        updatedAt: getCurrentTimestamp,
+                        updatedBy: currentUserUid,
+                        cardHolderName:
                             _model.cardHolderNameFieldController.text,
-                        'card_number': _model.cardNumberFieldController.text,
-                        'card_provider_name':
+                        cardNumber: _model.cardNumberFieldController.text,
+                        cardProviderName:
                             _model.cardProviderNameFieldController.text,
-                        'card_type': _model.cardTypeFieldValue,
-                        'cvv': _model.cvvFieldController.text,
-                        'expiry_date': _model.expireDateFieldController.text,
-                        'issue_date': _model.issueDateFieldController.text,
-                        'name': _model.nameFieldController.text,
-                        'note': _model.noteFieldController.text,
-                        'pin': _model.pinFieldController.text,
-                      },
-                      matchingRows: (rows) => rows.eq(
-                        'id',
-                        widget.card?.id,
+                        cardType: _model.cardTypeFieldValue,
+                        cvv: _model.cvvFieldController.text,
+                        expiryDate: _model.expireDateFieldController.text,
+                        issueDate: _model.issueDateFieldController.text,
+                        name: _model.nameFieldController.text,
+                        note: _model.noteFieldController.text,
+                        pin: _model.pinFieldController.text,
                       ),
                     );
                     logFirebaseEvent(

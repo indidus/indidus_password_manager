@@ -1,9 +1,12 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/finantial_cards.dart';
 import 'delete_financial_card_model.dart';
+
 export 'delete_financial_card_model.dart';
 
 class DeleteFinancialCardWidget extends StatefulWidget {
@@ -12,7 +15,7 @@ class DeleteFinancialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinancialCardsRow? card;
+  final FinantialCard card;
 
   @override
   State<DeleteFinancialCardWidget> createState() =>
@@ -152,12 +155,7 @@ class _DeleteFinancialCardWidgetState extends State<DeleteFinancialCardWidget> {
                           logFirebaseEvent(
                               'DELETE_FINANCIAL_CARD_DeleteButton_ON_TA');
                           logFirebaseEvent('DeleteButton_backend_call');
-                          await FinancialCardsTable().delete(
-                            matchingRows: (rows) => rows.eq(
-                              'id',
-                              widget.card?.id,
-                            ),
-                          );
+                          await deleteFinancialCard(id: widget.card.id!);
                           logFirebaseEvent(
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);

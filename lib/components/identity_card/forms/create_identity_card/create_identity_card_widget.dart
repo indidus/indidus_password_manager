@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'create_identity_card_model.dart';
+
 export 'create_identity_card_model.dart';
 
 class CreateIdentityCardWidget extends StatefulWidget {
@@ -555,21 +558,23 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                     logFirebaseEvent(
                         'CREATE_IDENTITY_CARD_IdentityCardCreateB');
                     logFirebaseEvent('IdentityCardCreateButton_backend_call');
-                    await IdentityCardsTable().insert({
-                      'created_at':
-                          supaSerialize<DateTime>(getCurrentTimestamp),
-                      'created_by': currentUserUid,
-                      'name': _model.nameFieldController.text,
-                      'note': _model.noteFieldController.text,
-                      'country': _model.countryFieldController.text,
-                      'expiry_date': _model.expireDateFieldController.text,
-                      'identity_card_number':
-                          _model.cardNumberFieldController.text,
-                      'identity_card_type': _model.cardTypeFieldValue,
-                      'issue_date': _model.issueDateFieldController.text,
-                      'name_on_card': _model.nameOnCardFieldController.text,
-                      'state': _model.stateFieldController.text,
-                    });
+
+                    await postIdentityCard(
+                      data: IdentityCard(
+                        createdAt: getCurrentTimestamp,
+                        createdBy: currentUserUid,
+                        name: _model.nameFieldController.text,
+                        note: _model.noteFieldController.text,
+                        country: _model.countryFieldController.text,
+                        expiryDate: _model.expireDateFieldController.text,
+                        identityCardNumber:
+                            _model.cardNumberFieldController.text,
+                        identityCardType: _model.cardTypeFieldValue,
+                        issueDate: _model.issueDateFieldController.text,
+                        nameOnCard: _model.nameOnCardFieldController.text,
+                        state: _model.stateFieldController.text,
+                      ),
+                    );
                     logFirebaseEvent(
                         'IdentityCardCreateButton_close_dialog,_d');
                     Navigator.pop(context);

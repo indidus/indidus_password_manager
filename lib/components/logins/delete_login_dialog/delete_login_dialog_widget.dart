@@ -1,9 +1,12 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/api/simple.dart';
+import '/src/rust/models/logins.dart';
 import 'delete_login_dialog_model.dart';
+
 export 'delete_login_dialog_model.dart';
 
 class DeleteLoginDialogWidget extends StatefulWidget {
@@ -12,7 +15,7 @@ class DeleteLoginDialogWidget extends StatefulWidget {
     required this.login,
   });
 
-  final LoginsRow? login;
+  final Login login;
 
   @override
   State<DeleteLoginDialogWidget> createState() =>
@@ -83,7 +86,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.network(
-                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login?.url}',
+                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login.url}',
                           width: 60.0,
                           height: 60.0,
                           fit: BoxFit.contain,
@@ -156,12 +159,8 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                           logFirebaseEvent(
                               'DELETE_LOGIN_DIALOG_DeleteButton_ON_TAP');
                           logFirebaseEvent('DeleteButton_backend_call');
-                          await LoginsTable().delete(
-                            matchingRows: (rows) => rows.eq(
-                              'id',
-                              widget.login?.id,
-                            ),
-                          );
+
+                          await deleteLogin(id: widget.login.id!);
                           logFirebaseEvent(
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);

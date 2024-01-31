@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/api/simple.dart';
+import '/src/rust/models/logins.dart';
 import 'create_login_model.dart';
+
 export 'create_login_model.dart';
 
 class CreateLoginWidget extends StatefulWidget {
@@ -421,17 +424,19 @@ class _CreateLoginWidgetState extends State<CreateLoginWidget> {
                   onPressed: () async {
                     logFirebaseEvent('CREATE_LOGIN_LoginCreateButton_ON_TAP');
                     logFirebaseEvent('LoginCreateButton_backend_call');
-                    await LoginsTable().insert({
-                      'created_at':
-                          supaSerialize<DateTime>(getCurrentTimestamp),
-                      'created_by': currentUserUid,
-                      'name': _model.nameFieldController.text,
-                      'note': _model.noteFieldController.text,
-                      'username': _model.usernameFieldController.text,
-                      'url': _model.urlFieldController.text,
-                      'password': _model.passwordFieldController.text,
-                      'password_hint': _model.passwordHintFieldController.text,
-                    });
+
+                    postLogin(
+                      data: Login(
+                        createdAt: getCurrentTimestamp,
+                        createdBy: currentUserUid,
+                        name: _model.nameFieldController.text,
+                        note: _model.noteFieldController.text,
+                        username: _model.usernameFieldController.text,
+                        url: _model.urlFieldController.text,
+                        password: _model.passwordFieldController.text,
+                        passwordHint: _model.passwordHintFieldController.text,
+                      ),
+                    );
                     logFirebaseEvent(
                         'LoginCreateButton_close_dialog,_drawer,_');
                     Navigator.pop(context);

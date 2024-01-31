@@ -1,10 +1,12 @@
-import '/backend/supabase/supabase.dart';
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+
 import '/components/identity_card/identity_cards/identity_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dart:async';
+import '/src/rust/models/identity_cards.dart';
 import 'identity_cards_page_widget.dart' show IdentityCardsPageWidget;
-import 'package:flutter/material.dart';
 
 class IdentityCardsPageModel extends FlutterFlowModel<IdentityCardsPageWidget> {
   ///  Local state fields for this page.
@@ -18,7 +20,7 @@ class IdentityCardsPageModel extends FlutterFlowModel<IdentityCardsPageWidget> {
   FocusNode? textFieldFocusNode;
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  Completer<List<IdentityCardsRow>>? requestCompleter;
+  Completer<List<IdentityCard>>? requestCompleter;
   // Models for IdentityCards dynamic component.
   late FlutterFlowDynamicModels<IdentityCardsModel> identityCardsModels;
   // Model for Logout component.

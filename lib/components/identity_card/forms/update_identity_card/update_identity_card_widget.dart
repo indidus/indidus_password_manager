@@ -1,12 +1,15 @@
+import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/rust/api/simple.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'update_identity_card_model.dart';
+
 export 'update_identity_card_model.dart';
 
 class UpdateIdentityCardWidget extends StatefulWidget {
@@ -15,7 +18,7 @@ class UpdateIdentityCardWidget extends StatefulWidget {
     required this.idCard,
   });
 
-  final IdentityCardsRow? idCard;
+  final IdentityCard idCard;
 
   @override
   State<UpdateIdentityCardWidget> createState() =>
@@ -37,35 +40,35 @@ class _UpdateIdentityCardWidgetState extends State<UpdateIdentityCardWidget> {
     _model = createModel(context, () => UpdateIdentityCardModel());
 
     _model.nameFieldController ??=
-        TextEditingController(text: widget.idCard?.name);
+        TextEditingController(text: widget.idCard.name);
     _model.nameFieldFocusNode ??= FocusNode();
 
     _model.nameOnCardFieldController ??=
-        TextEditingController(text: widget.idCard?.nameOnCard);
+        TextEditingController(text: widget.idCard.nameOnCard);
     _model.nameOnCardFieldFocusNode ??= FocusNode();
 
     _model.cardNumberFieldController ??=
-        TextEditingController(text: widget.idCard?.identityCardNumber);
+        TextEditingController(text: widget.idCard.identityCardNumber);
     _model.cardNumberFieldFocusNode ??= FocusNode();
 
     _model.countryFieldController ??=
-        TextEditingController(text: widget.idCard?.country);
+        TextEditingController(text: widget.idCard.country);
     _model.countryFieldFocusNode ??= FocusNode();
 
     _model.stateFieldController ??=
-        TextEditingController(text: widget.idCard?.state);
+        TextEditingController(text: widget.idCard.state);
     _model.stateFieldFocusNode ??= FocusNode();
 
     _model.issueDateFieldController ??=
-        TextEditingController(text: widget.idCard?.issueDate);
+        TextEditingController(text: widget.idCard.issueDate);
     _model.issueDateFieldFocusNode ??= FocusNode();
 
     _model.expireDateFieldController ??=
-        TextEditingController(text: widget.idCard?.expiryDate);
+        TextEditingController(text: widget.idCard.expiryDate);
     _model.expireDateFieldFocusNode ??= FocusNode();
 
     _model.noteFieldController ??=
-        TextEditingController(text: widget.idCard?.note);
+        TextEditingController(text: widget.idCard.note);
     _model.noteFieldFocusNode ??= FocusNode();
   }
 
@@ -382,7 +385,7 @@ class _UpdateIdentityCardWidgetState extends State<UpdateIdentityCardWidget> {
                   controller: _model.cardTypeFieldValueController ??=
                       FormFieldController<String>(
                     _model.cardTypeFieldValue ??=
-                        widget.idCard?.identityCardType,
+                        widget.idCard.identityCardType,
                   ),
                   options: List<String>.from([
                     'PASSPORT',
@@ -578,23 +581,24 @@ class _UpdateIdentityCardWidgetState extends State<UpdateIdentityCardWidget> {
                     logFirebaseEvent(
                         'UPDATE_IDENTITY_CARD_IdentityCardCreateB');
                     logFirebaseEvent('IdentityCardCreateButton_backend_call');
-                    await IdentityCardsTable().update(
-                      data: {
-                        'updated_at':
-                            supaSerialize<DateTime>(getCurrentTimestamp),
-                        'updated_by': currentUserUid,
-                        'name': _model.nameFieldController.text,
-                        'note': _model.noteFieldController.text,
-                        'country': _model.countryFieldController.text,
-                        'expiry_date': _model.expireDateFieldController.text,
-                        'identity_card_number':
+                    await putIdentityCard(
+                      id: widget.idCard.id!,
+                      data: IdentityCard(
+                        createdAt: widget.idCard.createdAt,
+                        createdBy: widget.idCard.createdBy,
+                        updatedAt: getCurrentTimestamp,
+                        updatedBy: currentUserUid,
+                        name: _model.nameFieldController.text,
+                        note: _model.noteFieldController.text,
+                        country: _model.countryFieldController.text,
+                        expiryDate: _model.expireDateFieldController.text,
+                        identityCardNumber:
                             _model.cardNumberFieldController.text,
-                        'identity_card_type': _model.cardTypeFieldValue,
-                        'issue_date': _model.issueDateFieldController.text,
-                        'name_on_card': _model.nameOnCardFieldController.text,
-                        'state': _model.stateFieldController.text,
-                      },
-                      matchingRows: (rows) => rows,
+                        identityCardType: _model.cardTypeFieldValue,
+                        issueDate: _model.issueDateFieldController.text,
+                        nameOnCard: _model.nameOnCardFieldController.text,
+                        state: _model.stateFieldController.text,
+                      ),
                     );
                     logFirebaseEvent(
                         'IdentityCardCreateButton_close_dialog,_d');

@@ -1,12 +1,14 @@
-import '/backend/supabase/supabase.dart';
+import 'package:flutter/material.dart';
+
 import '/components/identity_card/delete_identity_card/delete_identity_card_widget.dart';
 import '/components/identity_card/forms/update_identity_card/update_identity_card_widget.dart';
 import '/components/identity_card/forms/view_identity_card/view_identity_card_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/material.dart';
+import '/src/rust/models/identity_cards.dart';
 import 'identity_cards_model.dart';
+
 export 'identity_cards_model.dart';
 
 class IdentityCardsWidget extends StatefulWidget {
@@ -16,7 +18,7 @@ class IdentityCardsWidget extends StatefulWidget {
     required this.refreshListCallback,
   });
 
-  final IdentityCardsRow? identity;
+  final IdentityCard identity;
   final Future Function()? refreshListCallback;
 
   @override
@@ -87,7 +89,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                       children: [
                         Text(
                           valueOrDefault<String>(
-                            widget.identity?.name,
+                            widget.identity.name,
                             '-',
                           ),
                           textAlign: TextAlign.start,
@@ -99,7 +101,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                         ),
                         Text(
                           valueOrDefault<String>(
-                            widget.identity?.nameOnCard,
+                            widget.identity.nameOnCard,
                             '-',
                           ),
                           style:
@@ -110,10 +112,10 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                         ),
                         Text(
                           '${valueOrDefault<String>(
-                            widget.identity?.identityCardType,
+                            widget.identity.identityCardType,
                             'OTHER Card',
                           )} - ${valueOrDefault<String>(
-                            widget.identity?.identityCardNumber,
+                            widget.identity.identityCardNumber,
                             '-',
                           )}',
                           style:
@@ -143,11 +145,11 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        if (widget.identity?.updatedAt == null)
+                        if (widget.identity.updatedAt == null)
                           Text(
                             'Created  ${dateTimeFormat(
                               'relative',
-                              widget.identity?.createdAt,
+                              widget.identity.createdAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -157,11 +159,11 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                                   fontWeight: FontWeight.w300,
                                 ),
                           ),
-                        if (widget.identity?.updatedAt != null)
+                        if (widget.identity.updatedAt != null)
                           Text(
                             'Updated ${dateTimeFormat(
                               'relative',
-                              widget.identity?.updatedAt,
+                              widget.identity.updatedAt,
                               locale: FFLocalizations.of(context).languageCode,
                             )}',
                             style: FlutterFlowTheme.of(context)
@@ -212,7 +214,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.6,
                                     child: ViewIdentityCardWidget(
-                                      idCard: widget.identity!,
+                                      idCard: widget.identity,
                                     ),
                                   ),
                                 );
@@ -245,7 +247,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.6,
                                     child: UpdateIdentityCardWidget(
-                                      idCard: widget.identity!,
+                                      idCard: widget.identity,
                                     ),
                                   ),
                                 );
@@ -281,7 +283,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.3,
                                     child: DeleteIdentityCardWidget(
-                                      idCard: widget.identity!,
+                                      idCard: widget.identity,
                                     ),
                                   ),
                                 );

@@ -61,6 +61,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   List<FinantialCard> dco_decode_list_finantial_card(dynamic raw);
 
   @protected
+  List<IdentityCard> dco_decode_list_identity_card(dynamic raw);
+
+  @protected
   List<Login> dco_decode_list_login(dynamic raw);
 
   @protected
@@ -127,6 +130,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   List<FinantialCard> sse_decode_list_finantial_card(
+      SseDeserializer deserializer);
+
+  @protected
+  List<IdentityCard> sse_decode_list_identity_card(
       SseDeserializer deserializer);
 
   @protected
@@ -203,6 +210,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   @protected
   void sse_encode_list_finantial_card(
       List<FinantialCard> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_identity_card(
+      List<IdentityCard> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_login(List<Login> self, SseSerializer serializer);
