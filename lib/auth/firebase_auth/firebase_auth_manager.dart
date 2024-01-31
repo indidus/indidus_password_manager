@@ -1,19 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import '../auth_manager.dart';
-import '../../flutter_flow/flutter_flow_util.dart';
 
+import '../../flutter_flow/flutter_flow_util.dart';
+import '../auth_manager.dart';
 import '/backend/backend.dart';
 import 'anonymous_auth.dart';
 import 'apple_auth.dart';
 import 'email_auth.dart';
 import 'firebase_user_provider.dart';
+import 'github_auth.dart';
 import 'google_auth.dart';
 import 'jwt_token_auth.dart';
-import 'github_auth.dart';
 
 export '../base_auth_user_provider.dart';
 
@@ -50,9 +50,9 @@ class FirebaseAuthManager extends AuthManager
         GithubSignInManager,
         PhoneSignInManager {
   // Set when using phone verification (after phone number is provided).
-  String? _phoneAuthVerificationCode;
+  // String? _phoneAuthVerificationCode;
   // Set when using phone sign in in web mode (ignored otherwise).
-  ConfirmationResult? _webPhoneAuthConfirmationResult;
+  // ConfirmationResult? _webPhoneAuthConfirmationResult;
   FirebasePhoneAuthManager phoneAuthManager = FirebasePhoneAuthManager();
 
   @override

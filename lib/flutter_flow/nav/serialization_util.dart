@@ -233,20 +233,20 @@ dynamic deserializeParam<T>(
       case ParamType.DocumentReference:
         return _deserializeDocumentReference(param, collectionNamePath ?? []);
 
-      case ParamType.SupabaseRow:
-        final data = json.decode(param) as Map<String, dynamic>;
-        switch (T) {
-          // case IdentityCardsRow:
-          //   return IdentityCardsRow(data);
-          // case LoginsRow:
-          //   return LoginsRow(data);
-          // case FinancialCardsRow:
-          //   return FinancialCardsRow(data);
-          // case NotesRow:
-          //   return NotesRow(data);
-          default:
-            return null;
-        }
+      // case ParamType.SupabaseRow:
+      //   final data = json.decode(param) as Map<String, dynamic>;
+      //   switch (T) {
+      //     case IdentityCardsRow:
+      //       return IdentityCardsRow(data);
+      //     case LoginsRow:
+      //       return LoginsRow(data);
+      //     case FinancialCardsRow:
+      //       return FinancialCardsRow(data);
+      //     case NotesRow:
+      //       return NotesRow(data);
+      //     default:
+      //       return null;
+      //   }
 
       default:
         return null;
