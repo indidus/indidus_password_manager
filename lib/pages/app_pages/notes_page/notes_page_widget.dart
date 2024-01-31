@@ -1,7 +1,6 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/logout/logout_widget.dart';
-import '/components/notes/empty_note_list/empty_note_list_widget.dart';
 import '/components/notes/forms/create_note/create_note_widget.dart';
 import '/components/notes/notes_cards/notes_cards_widget.dart';
 import '/components/setting_button/setting_button_widget.dart';
@@ -250,15 +249,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                       );
                     }
                     List<NotesRow> listViewNotesRowList = snapshot.data!;
-                    if (listViewNotesRowList.isEmpty) {
-                      return Center(
-                        child: SizedBox(
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: 128.0,
-                          child: const EmptyNoteListWidget(),
-                        ),
-                      );
-                    }
                     return RefreshIndicator(
                       onRefresh: () async {
                         logFirebaseEvent(
