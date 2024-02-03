@@ -668,6 +668,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.1"
+  key_store_plugin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: "v1.0.0"
+      resolved-ref: "9e0a39e0bf99fcb30483a281a20cc211557e1081"
+      url: "https://github.com/indidus/key_store_plugin.git"
+    source: git
+    version: "1.0.0"
   lints:
     dependency: "direct dev"
     description:
@@ -1401,5 +1410,5 @@ packages:
     source: hosted
     version: "1.1.1"
 sdks:
-  dart: ">=3.2.0 <4.0.0"
+  dart: ">=3.2.2 <4.0.0"
   flutter: ">=3.13.0"
