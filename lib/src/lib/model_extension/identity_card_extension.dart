@@ -32,7 +32,7 @@ extension IdentityCardJson on IdentityCard {
       'name': name,
       'note': note,
       'country': country,
-      'expiryDate': expiryDate,
+      'expiry_date': expiryDate,
       'identity_card_number': identityCardNumber,
       'identity_card_type': identityCardType,
       'issue_date': issueDate,

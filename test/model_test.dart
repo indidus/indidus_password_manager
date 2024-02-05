@@ -138,6 +138,8 @@ void main() {
 
       final jsonModel = Models.fromJson(json);
 
+      expect(model == jsonModel, true);
+
       // Match the original model with the jsonModel
       expect(jsonModel.cards, isA<List<FinantialCard>>());
       expect(jsonModel.cards.length, model.cards.length);

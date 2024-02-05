@@ -54,4 +54,25 @@ class Models {
           : [],
     );
   }
+
+  // Write deep equality for the model
+  @override
+  bool operator ==(Object other) {
+    if (other.runtimeType != runtimeType) return false;
+    (other as Models);
+    return identical(this, other) ||
+        runtimeType == other.runtimeType &&
+            cards.length == other.cards.length &&
+            cards.every((e) => other.cards.contains(e)) &&
+            notes.length == other.notes.length &&
+            notes.every((e) => other.notes.contains(e)) &&
+            logins.length == other.logins.length &&
+            logins.every((e) => other.logins.contains(e)) &&
+            ids.length == other.ids.length &&
+            ids.every((e) => other.ids.contains(e));
+  }
+
+  @override
+  int get hashCode =>
+      cards.hashCode ^ notes.hashCode ^ logins.hashCode ^ ids.hashCode;
 }
