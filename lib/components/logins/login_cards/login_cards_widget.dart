@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/storage.dart';
 
 import '/components/logins/delete_login_dialog/delete_login_dialog_widget.dart';
 import '/components/logins/forms/update_login/update_login_widget.dart';
@@ -237,6 +238,24 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                             logFirebaseEvent(
                                 'LOGIN_CARDS_COMP_visibility_ICN_ON_TAP');
                             logFirebaseEvent('IconButton_bottom_sheet');
+                            var login = Login(
+                              id: widget.login.id,
+                              createdAt: widget.login.createdAt,
+                              createdBy: widget.login.createdBy,
+                              updatedAt: widget.login.updatedAt,
+                              updatedBy: widget.login.updatedBy,
+                              name: widget.login.name,
+                              note: widget.login.note,
+                              username: widget.login.username,
+                              url: widget.login.url,
+                              password: widget.login.password != null
+                                  ? await SecureStorage.decrypt(
+                                      widget.login.password!,
+                                    )
+                                  : null,
+                              passwordHint: widget.login.passwordHint,
+                            );
+                            // ignore: use_build_context_synchronously
                             await showModalBottomSheet(
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
@@ -249,7 +268,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.8,
                                     child: ViewLoginWidget(
-                                      login: widget.login,
+                                      login: login,
                                     ),
                                   ),
                                 );
@@ -270,6 +289,24 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                             logFirebaseEvent(
                                 'LOGIN_CARDS_COMP_edit_ICN_ON_TAP');
                             logFirebaseEvent('IconButton_bottom_sheet');
+                            var login = Login(
+                              id: widget.login.id,
+                              createdAt: widget.login.createdAt,
+                              createdBy: widget.login.createdBy,
+                              updatedAt: widget.login.updatedAt,
+                              updatedBy: widget.login.updatedBy,
+                              name: widget.login.name,
+                              note: widget.login.note,
+                              username: widget.login.username,
+                              url: widget.login.url,
+                              password: widget.login.password != null
+                                  ? await SecureStorage.decrypt(
+                                      widget.login.password!,
+                                    )
+                                  : null,
+                              passwordHint: widget.login.passwordHint,
+                            );
+                            // ignore: use_build_context_synchronously
                             await showModalBottomSheet(
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
@@ -282,7 +319,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.8,
                                     child: UpdateLoginWidget(
-                                      login: widget.login,
+                                      login: login,
                                     ),
                                   ),
                                 );
@@ -306,6 +343,24 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                             logFirebaseEvent(
                                 'LOGIN_CARDS_COMP_delete_ICN_ON_TAP');
                             logFirebaseEvent('IconButton_bottom_sheet');
+                            var login = Login(
+                              id: widget.login.id,
+                              createdAt: widget.login.createdAt,
+                              createdBy: widget.login.createdBy,
+                              updatedAt: widget.login.updatedAt,
+                              updatedBy: widget.login.updatedBy,
+                              name: widget.login.name,
+                              note: widget.login.note,
+                              username: widget.login.username,
+                              url: widget.login.url,
+                              password: widget.login.password != null
+                                  ? await SecureStorage.decrypt(
+                                      widget.login.password!,
+                                    )
+                                  : null,
+                              passwordHint: widget.login.passwordHint,
+                            );
+                            // ignore: use_build_context_synchronously
                             await showModalBottomSheet(
                               isScrollControlled: true,
                               backgroundColor: Colors.transparent,
@@ -318,7 +373,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                     height:
                                         MediaQuery.sizeOf(context).height * 0.3,
                                     child: DeleteLoginDialogWidget(
-                                      login: widget.login,
+                                      login: login,
                                     ),
                                   ),
                                 );

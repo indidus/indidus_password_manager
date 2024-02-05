@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/storage.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -433,7 +434,9 @@ class _CreateLoginWidgetState extends State<CreateLoginWidget> {
                         note: _model.noteFieldController.text,
                         username: _model.usernameFieldController.text,
                         url: _model.urlFieldController.text,
-                        password: _model.passwordFieldController.text,
+                        password: await SecureStorage.encrypt(
+                          _model.passwordFieldController.text,
+                        ),
                         passwordHint: _model.passwordHintFieldController.text,
                       ),
                     );
