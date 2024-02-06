@@ -90,7 +90,7 @@ impl SqlQueryBuilder {
         match filter.operator {
             structs::FilterOperator::Like => {
                 self.params.push(Value::String(format!(
-                    "%{}%",
+                    "\"%{}%\"",
                     filter.value.unwrap().clone()
                 )));
             }

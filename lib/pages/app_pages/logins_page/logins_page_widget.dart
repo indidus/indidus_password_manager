@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/components/logins/login_search_delegate/login_search_delegate_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 import '/components/logins/empty_login_list/empty_login_list_widget.dart';
@@ -109,35 +110,51 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
         body: NestedScrollView(
           floatHeaderSlivers: true,
           headerSliverBuilder: (context, _) => [
-            SliverAppBar(
+            SliverAppBar.large(
               pinned: true,
               floating: false,
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
-              title: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Logins',
-                      style: FlutterFlowTheme.of(context)
-                          .headlineMedium
-                          .override(
-                            fontFamily: 'Readex Pro',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w300,
-                          ),
-                    ),
+              title: const Text('Logins'),
+              actions: [
+                wrapWithModel(
+                  model: _model.logoutModel,
+                  updateCallback: () => setState(() {}),
+                  child: const LogoutWidget(),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    logFirebaseEvent('LOGINS_IconButton_2r7a8tks_ON_');
+                    logFirebaseEvent('IconButton_search_button');
+                    var logins = await listLogin(query: "{}");
+                    // ignore: use_build_context_synchronously
+                    showSearch(
+                      context: context,
+                      delegate: LoginSearchDelegate(
+                        logins: logins,
+                        refreshList: () {
+                          logFirebaseEvent(
+                              'LOGINS_Container_2r7a8tks_CALLBACK');
+                          logFirebaseEvent(
+                              'LoginSearchDelegate_refresh_database_request');
+                          setState(() => _model.requestCompleter = null);
+                          return _model.waitForRequestCompleted();
+                        },
+                      ),
+                    ).then((value) {
+                      logFirebaseEvent(
+                        'LoginSearchDelegate_refresh_database_re',
+                      );
+                      _model.searchQuery = value;
+                      setState(() => _model.requestCompleter = null);
+                      return _model.waitForRequestCompleted();
+                    });
+                  },
+                  icon: const Icon(
+                    Icons.search,
                   ),
-                  wrapWithModel(
-                    model: _model.logoutModel,
-                    updateCallback: () => setState(() {}),
-                    child: const LogoutWidget(),
-                  ),
-                ],
-              ),
-              actions: const [],
+                )
+              ],
               centerTitle: false,
               elevation: 0.0,
             )
@@ -147,98 +164,38 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
               return SafeArea(
                 top: false,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      width: double.infinity,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            '_model.textController',
-                            const Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          onFieldSubmitted: (_) async {
-                            logFirebaseEvent(
-                                'LOGINS_TextField_f5vk6e4x_ON_TEXTFIELD_S');
-                            logFirebaseEvent('TextField_update_page_state');
-                            setState(() {
-                              _model.searchQuery = _model.textController.text;
-                            });
-                            logFirebaseEvent(
-                                'TextField_refresh_database_request');
-                            setState(() => _model.requestCompleter = null);
-                            await _model.waitForRequestCompleted();
-                          },
-                          textInputAction: TextInputAction.search,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintText: 'Search',
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.search,
-                            ),
-                            suffixIcon: _model.textController!.text.isNotEmpty
-                                ? InkWell(
-                                    onTap: () async {
-                                      _model.textController?.clear();
-                                      setState(() {});
-                                    },
-                                    child: const Icon(
-                                      Icons.clear,
-                                      size: 24.0,
-                                    ),
-                                  )
-                                : null,
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          maxLines: null,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        child: sanitizeString(_model.searchQuery) != null
+                            ? RawChip(
+                                label: Text(
+                                  'Name: ${sanitizeString(_model.searchQuery)}',
+                                ),
+                                onDeleted: () {
+                                  safeSetState(() {
+                                    _model.searchQuery = null;
+                                    _model.requestCompleter = null;
+                                  });
+                                },
+                              )
+                            : Container(),
                       ),
                     ),
                     FutureBuilder<List<Login>>(
                       future:
                           (_model.requestCompleter ??= Completer<List<Login>>()
-                                ..complete(listLogin(query: "{}")))
+                                ..complete(
+                                  listLogin(
+                                    query: getSearchQuery(
+                                      _model.searchQuery,
+                                      null,
+                                    ),
+                                  ),
+                                ))
                               .future,
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
