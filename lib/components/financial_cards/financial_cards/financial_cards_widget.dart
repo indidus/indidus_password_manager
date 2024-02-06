@@ -288,8 +288,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
+                                    height: 300,
                                     child: DeleteFinancialCardWidget(
                                       card: widget.card,
                                     ),

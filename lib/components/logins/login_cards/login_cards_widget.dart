@@ -370,8 +370,7 @@ class _LoginCardsWidgetState extends State<LoginCardsWidget> {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
+                                    height: 300,
                                     child: DeleteLoginDialogWidget(
                                       login: login,
                                     ),

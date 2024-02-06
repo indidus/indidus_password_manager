@@ -266,8 +266,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
+                                    height: 300,
                                     child: DeleteNoteDialogWidget(
                                       note: widget.note,
                                     ),

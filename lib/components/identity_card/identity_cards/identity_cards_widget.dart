@@ -280,8 +280,7 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
                                 return Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
                                   child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
+                                    height: 300,
                                     child: DeleteIdentityCardWidget(
                                       idCard: widget.identity,
                                     ),
