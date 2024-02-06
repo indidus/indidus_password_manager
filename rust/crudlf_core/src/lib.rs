@@ -62,8 +62,12 @@ pub fn crudlf_insert(input: TokenStream) -> TokenStream {
                 let txn: sqlx::Pool<sqlx::Sqlite> = sqlite_wrapper::get_sqlite_pool().await;
                 let mut txn = txn.begin().await.unwrap();
 
-                let id = utils::get_ulid();
-                data.id = Some(id);
+                // Check if the id is already set in data or not
+                // It will give user a chance to set the id manually before inserting
+                if data.id.is_none() {
+                    let id = utils::get_ulid();
+                    data.id = Some(id);
+                }
 
                 let data = data.sqlite_insert(&mut txn).await.unwrap();
 
