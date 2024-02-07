@@ -119,12 +119,13 @@ dependencies:
   permission_handler: ^11.2.0
   file_picker: ^6.1.1
   path: ^1.8.3
+  flutter_slidable: ^3.0.1
 
 dependency_overrides:
+  flutter_launcher_icons: ^0.13.1
   rxdart: 0.27.7
 
 dev_dependencies:
-  flutter_launcher_icons: 0.13.1
   flutter_lints: 3.0.0
   image: 4.0.17
   lints: 3.0.0
@@ -133,6 +134,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
+  build_runner: ^2.4.8
 
 
 flutter_launcher_icons:
@@ -141,7 +143,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   web:
     generate: true
-  image_path: 'assets/images/app_launcher_icon.png'
+  image_path: 'assets/images/play_store_512.png'
 
 
 # For information on the generic Dart part of this file, see the
