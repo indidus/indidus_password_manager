@@ -53,16 +53,16 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
           minHeight: MediaQuery.sizeOf(context).height * 0.6,
           maxHeight: MediaQuery.sizeOf(context).height * 0.6,
         ),
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: const [
+        decoration: const BoxDecoration(
+          // color: FlutterFlowTheme.of(context).secondaryBackground,
+          boxShadow: [
             BoxShadow(
               blurRadius: 7.0,
               color: Color(0x33000000),
               offset: Offset(0.0, -2.0),
             )
           ],
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(0.0),
             bottomRight: Radius.circular(0.0),
             topLeft: Radius.circular(16.0),
@@ -98,16 +98,7 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                         16.0, 4.0, 0.0, 0.0),
                     child: Text(
                       'View Note',
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Readex Pro',
-                                fontWeight: FontWeight.w300,
-                              ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ),
                 ],

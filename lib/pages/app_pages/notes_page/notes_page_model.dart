@@ -11,7 +11,7 @@ import 'notes_page_widget.dart' show NotesPageWidget;
 class NotesPageModel extends FlutterFlowModel<NotesPageWidget> {
   ///  Local state fields for this page.
 
-  String? searchQuery = '';
+  String? searchQuery = 'Moemen';
 
   ///  State fields for stateful widgets in this page.
 

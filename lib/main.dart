@@ -10,7 +10,6 @@ import 'package:sqflite/sqflite.dart';
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'backend/firebase/firebase_config.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
@@ -102,6 +101,12 @@ class _MyAppState extends State<MyApp> {
       ],
       theme: ThemeData(
         brightness: Brightness.light,
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          // seedColor: Colors.blue,
+          seedColor: Colors.lightGreenAccent,
+          // seedColor: const Color.fromARGB(100, 38, 50, 87),
+        ),
         scrollbarTheme: ScrollbarThemeData(
           thumbVisibility: MaterialStateProperty.all(false),
           trackVisibility: MaterialStateProperty.all(false),
@@ -154,44 +159,48 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        backgroundColor: Colors.white,
-        selectedItemColor: FlutterFlowTheme.of(context).primary,
-        unselectedItemColor: const Color(0x8A000000),
+        // backgroundColor: Colors.white,
+        // selectedItemColor: FlutterFlowTheme.of(context).primary,
+        // unselectedItemColor: const Color(0x8A000000),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.outgoing_mail,
+              Icons.mail_outlined,
               size: 24.0,
             ),
             label: 'Logins',
             tooltip: '',
+            activeIcon: Icon(Icons.mail),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.credit_card_outlined,
+              Icons.account_balance_outlined,
               size: 24.0,
             ),
             label: 'Cards',
             tooltip: '',
+            activeIcon: Icon(Icons.account_balance),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.perm_identity,
+              Icons.person_outline,
               size: 24.0,
             ),
             label: 'Identity',
             tooltip: '',
+            activeIcon: Icon(Icons.person),
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.note_alt,
+              Icons.note_alt_outlined,
               size: 24.0,
             ),
             label: 'Notes',
             tooltip: '',
+            activeIcon: Icon(Icons.note_alt),
           )
         ],
       ),

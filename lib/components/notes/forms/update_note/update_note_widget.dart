@@ -100,32 +100,13 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                   ),
                 ],
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        16.0, 4.0, 0.0, 0.0),
-                    child: Text(
-                      'Update a note',
-                      style:
-                          FlutterFlowTheme.of(context).headlineSmall.override(
-                                fontFamily: 'Readex Pro',
-                                fontWeight: FontWeight.w300,
-                              ),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: const Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
-                    ),
-                  ),
-                ],
+              Padding(
+                padding:
+                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
+                child: Text(
+                  'Update a note',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
               ),
               Padding(
                 padding:
@@ -137,35 +118,24 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Name of the note',
-                    labelStyle: FlutterFlowTheme.of(context).bodyMedium,
-                    hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
+                    enabledBorder: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                        width: 2.0,
+                        color: Theme.of(context).primaryColor,
+                        width: 1.5,
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     errorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
+                        color: Theme.of(context).colorScheme.error,
                         width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
+                        color: Theme.of(context).colorScheme.error,
                         width: 2.0,
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium,
