@@ -62,7 +62,7 @@ class LoginPage extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 20),
-            ContinueWIthGoogle(),
+            const ContinueWIthGoogle(),
             const SizedBox(height: 20),
             Text(
               "Connect with us",
@@ -79,21 +79,21 @@ class LoginPage extends StatelessWidget {
 }
 
 class ContinueWIthGoogle extends StatefulWidget {
-  bool isLoading = false;
-  ContinueWIthGoogle({super.key, this.isLoading = false});
+  const ContinueWIthGoogle({super.key});
 
   @override
   State<ContinueWIthGoogle> createState() => _ContinueWIthGoogle();
 }
 
 class _ContinueWIthGoogle extends State<ContinueWIthGoogle> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: widget.isLoading
+      onPressed: isLoading
           ? null
           : () async {
-              setState(() => widget.isLoading = true);
+              setState(() => isLoading = true);
               logFirebaseEvent('CONTINUE_WITH_GOOGLE_CONTINUE_WITH_GOOGL');
               logFirebaseEvent('Button_auth');
               GoRouter.of(context).prepareAuthEvent();
@@ -104,19 +104,25 @@ class _ContinueWIthGoogle extends State<ContinueWIthGoogle> {
 
               context.goNamedAuth('LoginsPage', context.mounted);
 
-              setState(() => widget.isLoading = false);
+              setState(() => isLoading = false);
             },
-      icon: widget.isLoading
-          ? const CircularProgressIndicator()
+      icon: isLoading
+          ? const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(),
+            )
           : SvgPicture.asset(
               'assets/images/google.svg',
               width: 24,
               height: 24,
             ),
-      label: const Text(
-        'Continue with Google',
-        style: TextStyle(fontSize: 16),
-      ),
+      label: isLoading
+          ? const Text("Loading...")
+          : const Text(
+              'Continue with Google',
+              style: TextStyle(fontSize: 16),
+            ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
