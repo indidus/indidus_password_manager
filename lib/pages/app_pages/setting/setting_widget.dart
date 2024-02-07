@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/settings/forms/supprot/supprot_widget.dart';
 import '/components/settings/forms/update_profile/update_profile_widget.dart';
@@ -5,9 +8,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'setting_model.dart';
+
 export 'setting_model.dart';
 
 class SettingWidget extends StatefulWidget {
@@ -407,7 +409,9 @@ class _SettingWidgetState extends State<SettingWidget> {
                       GoRouter.of(context).clearRedirectLocation();
 
                       context.goNamedAuth(
-                          'GoogleOnlyLoginPage', context.mounted);
+                        'GoogleOnlyLoginPage',
+                        context.mounted,
+                      );
                     },
                     text: 'Log Out',
                     options: FFButtonOptions(
