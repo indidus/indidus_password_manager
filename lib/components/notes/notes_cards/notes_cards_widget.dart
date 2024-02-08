@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:indidus_password_manager/components/notes/delete_note_dialog/delete_note_dialog_widget.dart';
 import 'package:indidus_password_manager/components/notes/forms/update_note/update_note_widget.dart';
 import 'package:indidus_password_manager/components/notes/forms/view_note/view_note_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import '/src/rust/models/notes.dart';
@@ -153,49 +154,6 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
               updatedAt: widget.note.updatedAt,
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class ListMetadataChip extends StatelessWidget {
-  final DateTime? updatedAt;
-  final DateTime createdAt;
-  const ListMetadataChip({
-    super.key,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-        child: Text(
-          updatedAt == null
-              ? 'Created  ${dateTimeFormat(
-                  'relative',
-                  createdAt,
-                  locale: FFLocalizations.of(context).languageCode,
-                )}'
-              : 'Updated ${dateTimeFormat(
-                  'relative',
-                  updatedAt,
-                  locale: FFLocalizations.of(context).languageCode,
-                )}',
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.onSecondary,
-                fontSize: 10.0,
-                fontWeight: FontWeight.w300,
-              ),
-          textAlign: TextAlign.start,
-          overflow: TextOverflow.ellipsis,
         ),
       ),
     );

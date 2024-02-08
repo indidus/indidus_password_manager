@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:indidus_password_manager/auth/firebase_auth/auth_util.dart';
+import 'package:indidus_password_manager/flutter_flow/flutter_flow_util.dart';
 
 String getSearchQuery(String? inputQuery, String? fieldName) {
   if (inputQuery == null || inputQuery.isEmpty || inputQuery.trim().isEmpty) {
@@ -17,6 +18,49 @@ String? sanitizeString(String? query) {
     return null;
   }
   return query.trim();
+}
+
+class ListMetadataChip extends StatelessWidget {
+  final DateTime? updatedAt;
+  final DateTime createdAt;
+  const ListMetadataChip({
+    super.key,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary,
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+        child: Text(
+          updatedAt == null
+              ? 'Created  ${dateTimeFormat(
+                  'relative',
+                  createdAt,
+                  locale: FFLocalizations.of(context).languageCode,
+                )}'
+              : 'Updated ${dateTimeFormat(
+                  'relative',
+                  updatedAt,
+                  locale: FFLocalizations.of(context).languageCode,
+                )}',
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSecondary,
+                fontSize: 10.0,
+                fontWeight: FontWeight.w300,
+              ),
+          textAlign: TextAlign.start,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    );
+  }
 }
 
 class ModalBottomSheetHeaderText extends StatelessWidget {
