@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/components/setting_button/setting_button_model.dart';
 
 import '/components/financial_cards/financial_cards/financial_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
@@ -22,6 +23,8 @@ class FinancialCardsPageModel
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   Completer<List<FinancialCard>>? requestCompleter;
+  // Model for SettingButton component.
+  late SettingButtonModel settingButtonModel;
   // Models for FinancialCards dynamic component.
   late FlutterFlowDynamicModels<FinancialCardsModel> financialCardsModels;
   // Model for Logout component.
@@ -34,6 +37,7 @@ class FinancialCardsPageModel
     financialCardsModels =
         FlutterFlowDynamicModels(() => FinancialCardsModel());
     logoutModel = createModel(context, () => LogoutModel());
+    settingButtonModel = createModel(context, () => SettingButtonModel());
   }
 
   @override

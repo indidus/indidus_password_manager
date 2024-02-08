@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:indidus_password_manager/components/logins/login_cards/login_cards_widget.dart';
 import 'package:indidus_password_manager/components/logins/login_search_delegate/login_search_delegate_widget.dart';
+import 'package:indidus_password_manager/components/logout/logout_widget.dart';
+import 'package:indidus_password_manager/components/setting_button/setting_button_widget.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 import '/components/logins/empty_login_list/empty_login_list_widget.dart';
 import '/components/logins/forms/create_login/create_login_widget.dart';
-import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/src/rust/models/logins.dart';
@@ -68,7 +69,7 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
           onPressed: () async {
             logFirebaseEvent('LOGINS_FloatingActionButton_2r798tkq_ON_');
             logFirebaseEvent('FloatingActionButton_bottom_sheet');
-            showModalBottomSheet(
+            await showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
               useSafeArea: true,
@@ -99,11 +100,9 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
             setState(() => _model.requestCompleter = null);
             await _model.waitForRequestCompleted();
           },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
           elevation: 8.0,
-          child: Icon(
+          child: const Icon(
             Icons.add,
-            color: FlutterFlowTheme.of(context).info,
             size: 24.0,
           ),
         ),
@@ -113,15 +112,14 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
             SliverAppBar.large(
               pinned: true,
               floating: false,
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
               title: const Text('Logins'),
+              leading: wrapWithModel(
+                model: _model.logoutModel,
+                updateCallback: () => setState(() {}),
+                child: const LogoutWidget(),
+              ),
               actions: [
-                wrapWithModel(
-                  model: _model.logoutModel,
-                  updateCallback: () => setState(() {}),
-                  child: const LogoutWidget(),
-                ),
                 IconButton(
                   onPressed: () async {
                     logFirebaseEvent('LOGINS_IconButton_2r7a8tks_ON_');
@@ -154,6 +152,11 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                   icon: const Icon(
                     Icons.search,
                   ),
+                ),
+                wrapWithModel(
+                  model: _model.settingButtonModel,
+                  updateCallback: () => safeSetState(() {}),
+                  child: const SettingButtonWidget(),
                 ),
               ],
               centerTitle: false,

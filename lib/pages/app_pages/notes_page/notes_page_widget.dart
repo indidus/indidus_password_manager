@@ -84,7 +84,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
           setState(() => _model.requestCompleter = null);
           await _model.waitForRequestCompleted();
         },
-        // backgroundColor: FlutterFlowTheme.of(context).primary,
         elevation: 8.0,
         child: const Icon(
           Icons.add,
@@ -106,11 +105,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
               child: const LogoutWidget(),
             ),
             actions: [
-              wrapWithModel(
-                model: _model.settingButtonModel,
-                updateCallback: () => setState(() {}),
-                child: const SettingButtonWidget(),
-              ),
               IconButton(
                 onPressed: () async {
                   logFirebaseEvent('NOTES_IconButton_2r7a8tks_ON_');
@@ -141,6 +135,11 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                 icon: const Icon(
                   Icons.search,
                 ),
+              ),
+              wrapWithModel(
+                model: _model.settingButtonModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const SettingButtonWidget(),
               ),
             ],
             centerTitle: false,
