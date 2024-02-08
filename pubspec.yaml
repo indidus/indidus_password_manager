@@ -115,7 +115,6 @@ dependencies:
   cupertino_icons: ^1.0.0
   rust_builder:
     path: rust_builder
-  flutter_rust_bridge: 2.0.0-dev.22
   permission_handler: ^11.2.0
   file_picker: ^6.1.1
   path: ^1.8.3
@@ -126,6 +125,7 @@ dependency_overrides:
   rxdart: 0.27.7
 
 dev_dependencies:
+  flutter_rust_bridge: 2.0.0-dev.22
   flutter_lints: 3.0.0
   image: 4.0.17
   lints: 3.0.0
