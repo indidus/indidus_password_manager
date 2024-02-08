@@ -1,16 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:indidus_password_manager/components/logins/login_cards/login_cards_widget.dart';
+import 'package:indidus_password_manager/components/financial_cards/financial_cards/financial_cards_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
-import 'package:indidus_password_manager/src/rust/models/logins.dart';
+import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 
-class LoginSearchDelegate extends SearchDelegate<String> {
-  final List<Login> logins;
+class FinancialCardSearchDelegate extends SearchDelegate<String> {
+  final List<FinancialCard> cards;
   List<String> names = [];
   final Future Function() refreshList;
-  LoginSearchDelegate({required this.logins, required this.refreshList}) {
-    for (var i = 0; i < logins.length; i++) {
-      names.add(logins[i].name);
+  FinancialCardSearchDelegate(
+      {required this.cards, required this.refreshList}) {
+    for (var i = 0; i < cards.length; i++) {
+      names.add(cards[i].name);
     }
   }
 
@@ -41,23 +43,9 @@ class LoginSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder<List<Login>>(
-      future: listLogin(
-        query: '''{
-              "filters": [
-                {
-                  "column": "name",
-                  "operator": "Eq",
-                  "value": "$query"
-                }
-              ],
-              "orders": [
-                {
-                  "column": "created_at",
-                  "direction": "Desc"
-                }
-              ]
-            }''',
+    return FutureBuilder<List<FinancialCard>>(
+      future: listFinancialCard(
+        query: getSearchQuery(query, null),
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -78,21 +66,22 @@ class LoginSearchDelegate extends SearchDelegate<String> {
         if (kDebugMode) {
           print(snapshot.data?.length);
         }
-        List<Login> listViewLoginsRowList = snapshot.data!;
+        List<FinancialCard> listViewFinancialCardsRowList = snapshot.data!;
 
         return ListView.builder(
           padding: EdgeInsets.zero,
           primary: false,
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
-          itemCount: listViewLoginsRowList.length,
+          itemCount: listViewFinancialCardsRowList.length,
           itemBuilder: (context, listViewIndex) {
-            final listViewLoginsRow = listViewLoginsRowList[listViewIndex];
-            return LoginCardsWidget(
+            final listViewFinancialCardsRow =
+                listViewFinancialCardsRowList[listViewIndex];
+            return FinancialCardsWidget(
               key: Key(
-                'Key51j_${listViewLoginsRow.id.toString()}',
+                'Key51j_${listViewFinancialCardsRow.id.toString()}',
               ),
-              login: listViewLoginsRow,
+              card: listViewFinancialCardsRow,
               refreshListCallback: () async {
                 await refreshList();
               },

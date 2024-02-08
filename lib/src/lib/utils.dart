@@ -175,3 +175,34 @@ InputDecoration getInputDecoration(
     ),
   );
 }
+
+class SiteIconImage extends StatelessWidget {
+  const SiteIconImage({
+    super.key,
+    required this.url,
+    required this.initials,
+  });
+
+  final String? url;
+  final String initials;
+
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      foregroundImage: NetworkImage(
+        'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=$url',
+      ),
+      radius: 30.0,
+      backgroundColor:
+          Colors.primaries[initials.codeUnitAt(0) % Colors.primaries.length],
+      child: Text(
+        initials.toUpperCase(),
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 32,
+          color: Theme.of(context).colorScheme.onPrimary,
+        ),
+      ),
+    );
+  }
+}

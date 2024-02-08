@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:indidus_password_manager/components/logins/login_cards/login_cards_widget.dart';
 import 'package:indidus_password_manager/components/logins/login_search_delegate/login_search_delegate_widget.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
@@ -126,7 +126,8 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                   onPressed: () async {
                     logFirebaseEvent('LOGINS_IconButton_2r7a8tks_ON_');
                     logFirebaseEvent('IconButton_search_button');
-                    var logins = await listLogin(query: "{}");
+                    var logins =
+                        await listLogin(query: getSearchQuery(null, null));
                     // ignore: use_build_context_synchronously
                     showSearch(
                       context: context,
@@ -226,8 +227,6 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                           onRefresh: () async {
                             logFirebaseEvent(
                                 'LOGINS_ListView_b8tupkag_ON_PULL_TO_REFR');
-                            logFirebaseEvent(
-                                'ListView_refresh_database_request');
                             setState(() => _model.requestCompleter = null);
                             await _model.waitForRequestCompleted();
                           },
@@ -246,11 +245,17 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                                   listViewIndex,
                                 ),
                                 updateCallback: () => setState(() {}),
-                                child: LoginListTile(
-                                  id: listViewLoginsRow.id.toString(),
-                                  accountName: listViewLoginsRow.name,
-                                  loginId: listViewLoginsRow.username,
-                                  siteUrl: listViewLoginsRow.url!,
+                                child: LoginCardsWidget(
+                                  key: Key(
+                                      'Keynos_${listViewIndex}_of_${listViewLoginsRowList.length}'),
+                                  login: listViewLoginsRow,
+                                  refreshListCallback: () async {
+                                    logFirebaseEvent(
+                                        'LOGINS_CARDS_COMP_refresh_ICN_ON_TAP');
+                                    setState(
+                                        () => _model.requestCompleter = null);
+                                    await _model.waitForRequestCompleted();
+                                  },
                                 ),
                               );
                             },
@@ -263,83 +268,6 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
               );
             },
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class LoginListTile extends StatelessWidget {
-  final String id;
-  final String accountName;
-  final String siteUrl;
-  final String loginId;
-
-  const LoginListTile({
-    super.key,
-    required this.id,
-    required this.accountName,
-    this.loginId = '',
-    this.siteUrl = '',
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      dense: false,
-      visualDensity: VisualDensity.standard,
-      leading: const InkWell(
-        // onTap: () async {
-        //   try {
-        //     final Uri url = Uri.parse(siteUrl);
-        //     await launchUrl(url);
-        //   } catch (e) {
-        //     // TODOS: Show snackbar
-        //   }
-        // },
-        child: Icon(Icons.login),
-      ),
-      trailing: IconButton(
-        icon: const Icon(Icons.copy),
-        onPressed: () {
-          Clipboard.setData(const ClipboardData(text: "your text"));
-        },
-      ),
-      title: Text(
-        accountName,
-        overflow: TextOverflow.ellipsis,
-        style: GoogleFonts.roboto(
-          fontSize: 18,
-        ),
-      ),
-      subtitle: Text(
-        loginId,
-        style: GoogleFonts.roboto(
-          fontSize: 16,
-        ),
-      ),
-      onTap: () {},
-    );
-  }
-}
-
-class LeadingFaviconImage extends StatelessWidget {
-  final ImageProvider<Object> imageProvider;
-  const LeadingFaviconImage({
-    required this.imageProvider,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 48.0,
-      height: 48.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        image: DecorationImage(
-          image: imageProvider,
-          fit: BoxFit.cover,
         ),
       ),
     );

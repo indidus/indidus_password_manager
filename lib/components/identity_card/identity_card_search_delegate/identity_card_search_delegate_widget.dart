@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:indidus_password_manager/components/identity_card/identity_cards/identity_cards_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 
@@ -44,21 +45,7 @@ class IdentityCardSearchDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List<IdentityCard>>(
       future: listIdentityCard(
-        query: '''{
-              "filters": [
-                {
-                  "column": "name",
-                  "operator": "Eq",
-                  "value": "$query"
-                }
-              ],
-              "orders": [
-                {
-                  "column": "created_at",
-                  "direction": "Desc"
-                }
-              ]
-            }''',
+        query: getSearchQuery(query, null),
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {

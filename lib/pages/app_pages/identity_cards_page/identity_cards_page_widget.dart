@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/identity_card/empty_identity_card_list/empty_identity_card_list_widget.dart';
 import '/components/identity_card/forms/create_identity_card/create_identity_card_widget.dart';
@@ -234,7 +235,14 @@ class _IdentityCardsPageWidgetState extends State<IdentityCardsPageWidget> {
                       child: FutureBuilder<List<IdentityCard>>(
                         future: (_model.requestCompleter ??=
                                 Completer<List<IdentityCard>>()
-                                  ..complete(listIdentityCard(query: "{}")))
+                                  ..complete(
+                                    listIdentityCard(
+                                      query: getSearchQuery(
+                                        _model.searchQuery,
+                                        null,
+                                      ),
+                                    ),
+                                  ))
                             .future,
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.

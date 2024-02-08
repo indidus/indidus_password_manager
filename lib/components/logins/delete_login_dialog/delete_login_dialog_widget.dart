@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -83,19 +84,14 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: Image.network(
-                          'https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&size=256&url=${widget.login.url}',
-                          width: 60.0,
-                          height: 60.0,
-                          fit: BoxFit.contain,
-                        ),
+                      SiteIconImage(
+                        url: widget.login.url ?? "",
+                        initials: widget.login.name[0],
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Text(
-                          'Delete this login?',
+                          'Delete this login?...',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .headlineMedium

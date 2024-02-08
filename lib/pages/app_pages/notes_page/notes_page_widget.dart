@@ -219,6 +219,7 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                             'Keynos_${listViewIndex}_of_${listViewNotesRowList.length}'),
                         note: listViewNotesRow,
                         refreshListCallback: () async {
+                          logFirebaseEvent('NOTE_COMP_refresh_ICN_ON_TAP');
                           setState(() => _model.requestCompleter = null);
                           await _model.waitForRequestCompleted();
                         },

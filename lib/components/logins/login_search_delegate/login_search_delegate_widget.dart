@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:indidus_password_manager/components/logins/login_cards/login_cards_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 
@@ -43,21 +44,7 @@ class LoginSearchDelegate extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     return FutureBuilder<List<Login>>(
       future: listLogin(
-        query: '''{
-              "filters": [
-                {
-                  "column": "name",
-                  "operator": "Eq",
-                  "value": "$query"
-                }
-              ],
-              "orders": [
-                {
-                  "column": "created_at",
-                  "direction": "Desc"
-                }
-              ]
-            }''',
+        query: getSearchQuery(query, null),
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {

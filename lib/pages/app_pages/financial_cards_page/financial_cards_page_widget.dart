@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 import '/components/financial_cards/empty_financial_card_list/empty_financial_card_list_widget.dart';
@@ -233,7 +234,14 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                       child: FutureBuilder<List<FinancialCard>>(
                         future: (_model.requestCompleter ??=
                                 Completer<List<FinancialCard>>()
-                                  ..complete(listFinancialCard(query: "{}")))
+                                  ..complete(
+                                    listFinancialCard(
+                                      query: getSearchQuery(
+                                        _model.searchQuery,
+                                        null,
+                                      ),
+                                    ),
+                                  ))
                             .future,
                         builder: (context, snapshot) {
                           // Customize what your widget looks like when it's loading.
