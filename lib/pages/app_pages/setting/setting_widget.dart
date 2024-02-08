@@ -91,7 +91,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                                 'SETTING_PAGE_chevron_left_ICN_ON_TAP');
                             logFirebaseEvent(
                                 'IconButton_close_dialog,_drawer,_etc');
-                            Navigator.pop(context);
+                            context.safePop();
                           },
                         ),
                         Container(
