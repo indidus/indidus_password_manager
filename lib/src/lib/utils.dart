@@ -78,14 +78,19 @@ EdgeInsets getModalBottomSheetFooterPadding() {
   );
 }
 
-BoxDecoration getModalBottomSheetBoxDecoration(BuildContext context) {
+BoxDecoration getModalBottomSheetBoxDecoration(
+  BuildContext context, {
+  bool isAll = false,
+}) {
   return BoxDecoration(
     color: Theme.of(context).colorScheme.surface,
-    borderRadius: const BorderRadius.only(
-      bottomLeft: Radius.circular(0.0),
-      bottomRight: Radius.circular(0.0),
-      topLeft: Radius.circular(16.0),
-      topRight: Radius.circular(16.0),
+    borderRadius: BorderRadius.only(
+      bottomLeft:
+          isAll ? const Radius.circular(16.0) : const Radius.circular(0.0),
+      bottomRight:
+          isAll ? const Radius.circular(16.0) : const Radius.circular(0.0),
+      topLeft: const Radius.circular(16.0),
+      topRight: const Radius.circular(16.0),
     ),
   );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:indidus_password_manager/components/notes/delete_note_dialog/delete_note_dialog_widget.dart';
 import 'package:indidus_password_manager/components/notes/forms/update_note/update_note_widget.dart';
 import 'package:indidus_password_manager/components/notes/forms/view_note/view_note_widget.dart';
 
@@ -55,7 +56,30 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: (context) {},
+            onPressed: (context) async {
+              logFirebaseEvent('NOTES_CARDS_COMP_delete_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_bottom_sheet');
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: 300,
+                      child: DeleteNoteDialogWidget(
+                        note: widget.note,
+                      ),
+                    ),
+                  );
+                },
+              ).then((value) => safeSetState(() {}));
+
+              logFirebaseEvent('IconButton_execute_callback');
+              await widget.refreshListCallback.call();
+            },
             backgroundColor: Theme.of(context).colorScheme.errorContainer,
             foregroundColor: Theme.of(context).colorScheme.error,
             icon: Icons.delete,
