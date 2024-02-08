@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "update finantial_cards set created_at = ?, created_by = ?, updated_at = ?, updated_by = ?, card_holder_name = ?, card_number = ?, card_provider_name = ?, card_type = ?, cvv = ?, expiry_date = ?, issue_date = ?, name = ?, note = ?, pin = ? where id = ? returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
+  "query": "insert into financial_cards (id, created_at, created_by, updated_at, updated_by, card_holder_name, card_number, card_provider_name, card_type, cvv, expiry_date, issue_date, name, note, pin) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
   "describe": {
     "columns": [
       {
@@ -100,5 +100,5 @@
       true
     ]
   },
-  "hash": "06d57bdff646e240e135fa5f58b527eaa9cfd5362509b10df6b3711870392c53"
+  "hash": "02296c6950451c28ad701ca8db3ff6b634d3cbd9b3ff7bf32f4fa8c75739c7f4"
 }

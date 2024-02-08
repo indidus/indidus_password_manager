@@ -4,7 +4,7 @@ import 'package:indidus_password_manager/src/rust/api/simple.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'delete_financial_card_model.dart';
 
 export 'delete_financial_card_model.dart';
@@ -15,7 +15,7 @@ class DeleteFinancialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinantialCard card;
+  final FinancialCard card;
 
   @override
   State<DeleteFinancialCardWidget> createState() =>

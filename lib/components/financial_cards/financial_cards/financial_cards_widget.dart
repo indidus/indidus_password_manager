@@ -6,7 +6,7 @@ import '/components/financial_cards/forms/view_fianacial_card/view_fianacial_car
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'financial_cards_model.dart';
 
 export 'financial_cards_model.dart';
@@ -18,7 +18,7 @@ class FinancialCardsWidget extends StatefulWidget {
     required this.refreshListCallback,
   });
 
-  final FinantialCard card;
+  final FinancialCard card;
   final Future Function()? refreshListCallback;
 
   @override

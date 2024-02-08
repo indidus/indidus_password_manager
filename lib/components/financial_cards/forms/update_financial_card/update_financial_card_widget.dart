@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'update_financial_card_model.dart';
 
 export 'update_financial_card_model.dart';
@@ -18,7 +18,7 @@ class UpdateFinancialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinantialCard card;
+  final FinancialCard card;
 
   @override
   State<UpdateFinancialCardWidget> createState() =>
@@ -643,7 +643,7 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                     logFirebaseEvent('FinantcialCardCreateButton_backend_call');
                     await putFinancialCard(
                       id: widget.card.id!,
-                      data: FinantialCard(
+                      data: FinancialCard(
                         createdAt: widget.card.createdAt,
                         createdBy: widget.card.createdBy,
                         updatedAt: getCurrentTimestamp,

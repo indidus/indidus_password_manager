@@ -7,7 +7,7 @@ import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.dart';
-import 'models/finantial_cards.dart';
+import 'models/financial_cards.dart';
 import 'models/identity_cards.dart';
 import 'models/logins.dart';
 import 'models/notes.dart';
@@ -37,7 +37,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime dco_decode_box_autoadd_Chrono_Naive(dynamic raw);
 
   @protected
-  FinantialCard dco_decode_box_autoadd_finantial_card(dynamic raw);
+  FinancialCard dco_decode_box_autoadd_financial_card(dynamic raw);
 
   @protected
   IdentityCard dco_decode_box_autoadd_identity_card(dynamic raw);
@@ -49,7 +49,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Note dco_decode_box_autoadd_note(dynamic raw);
 
   @protected
-  FinantialCard dco_decode_finantial_card(dynamic raw);
+  FinancialCard dco_decode_financial_card(dynamic raw);
 
   @protected
   int dco_decode_i_64(dynamic raw);
@@ -58,7 +58,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   IdentityCard dco_decode_identity_card(dynamic raw);
 
   @protected
-  List<FinantialCard> dco_decode_list_finantial_card(dynamic raw);
+  List<FinancialCard> dco_decode_list_financial_card(dynamic raw);
 
   @protected
   List<IdentityCard> dco_decode_list_identity_card(dynamic raw);
@@ -106,7 +106,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   DateTime sse_decode_box_autoadd_Chrono_Naive(SseDeserializer deserializer);
 
   @protected
-  FinantialCard sse_decode_box_autoadd_finantial_card(
+  FinancialCard sse_decode_box_autoadd_financial_card(
       SseDeserializer deserializer);
 
   @protected
@@ -120,7 +120,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Note sse_decode_box_autoadd_note(SseDeserializer deserializer);
 
   @protected
-  FinantialCard sse_decode_finantial_card(SseDeserializer deserializer);
+  FinancialCard sse_decode_financial_card(SseDeserializer deserializer);
 
   @protected
   int sse_decode_i_64(SseDeserializer deserializer);
@@ -129,7 +129,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   IdentityCard sse_decode_identity_card(SseDeserializer deserializer);
 
   @protected
-  List<FinantialCard> sse_decode_list_finantial_card(
+  List<FinancialCard> sse_decode_list_financial_card(
       SseDeserializer deserializer);
 
   @protected
@@ -185,8 +185,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
       DateTime self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_finantial_card(
-      FinantialCard self, SseSerializer serializer);
+  void sse_encode_box_autoadd_financial_card(
+      FinancialCard self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_identity_card(
@@ -199,7 +199,7 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_box_autoadd_note(Note self, SseSerializer serializer);
 
   @protected
-  void sse_encode_finantial_card(FinantialCard self, SseSerializer serializer);
+  void sse_encode_financial_card(FinancialCard self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_64(int self, SseSerializer serializer);
@@ -208,8 +208,8 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_identity_card(IdentityCard self, SseSerializer serializer);
 
   @protected
-  void sse_encode_list_finantial_card(
-      List<FinantialCard> self, SseSerializer serializer);
+  void sse_encode_list_financial_card(
+      List<FinancialCard> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_identity_card(

@@ -477,7 +477,7 @@ fn wire_post_financial_card_impl(
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_data =
-                <crate::models::finantial_cards::FinantialCard>::sse_decode(&mut deserializer);
+                <crate::models::financial_cards::FinancialCard>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse((move || crate::api::simple::post_financial_card(api_data))())
@@ -583,7 +583,7 @@ fn wire_put_financial_card_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_id = <String>::sse_decode(&mut deserializer);
             let api_data =
-                <crate::models::finantial_cards::FinantialCard>::sse_decode(&mut deserializer);
+                <crate::models::financial_cards::FinancialCard>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse((move || {
@@ -723,7 +723,7 @@ impl SseDecode for bool {
     }
 }
 
-impl SseDecode for crate::models::finantial_cards::FinantialCard {
+impl SseDecode for crate::models::financial_cards::FinancialCard {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_id = <Option<String>>::sse_decode(deserializer);
@@ -741,7 +741,7 @@ impl SseDecode for crate::models::finantial_cards::FinantialCard {
         let mut var_name = <String>::sse_decode(deserializer);
         let mut var_note = <Option<String>>::sse_decode(deserializer);
         let mut var_pin = <Option<String>>::sse_decode(deserializer);
-        return crate::models::finantial_cards::FinantialCard {
+        return crate::models::financial_cards::FinancialCard {
             id: var_id,
             created_at: var_createdAt,
             created_by: var_createdBy,
@@ -804,13 +804,13 @@ impl SseDecode for crate::models::identity_cards::IdentityCard {
     }
 }
 
-impl SseDecode for Vec<crate::models::finantial_cards::FinantialCard> {
+impl SseDecode for Vec<crate::models::financial_cards::FinancialCard> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut len_ = <i32>::sse_decode(deserializer);
         let mut ans_ = vec![];
         for idx_ in 0..len_ {
-            ans_.push(<crate::models::finantial_cards::FinantialCard>::sse_decode(
+            ans_.push(<crate::models::financial_cards::FinancialCard>::sse_decode(
                 deserializer,
             ));
         }
@@ -1012,7 +1012,7 @@ fn pde_ffi_dispatcher_sync_impl(
 // Section: rust2dart
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::models::finantial_cards::FinantialCard {
+impl flutter_rust_bridge::IntoDart for crate::models::financial_cards::FinancialCard {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.id.into_into_dart().into_dart(),
@@ -1035,13 +1035,13 @@ impl flutter_rust_bridge::IntoDart for crate::models::finantial_cards::Finantial
     }
 }
 impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
-    for crate::models::finantial_cards::FinantialCard
+    for crate::models::financial_cards::FinancialCard
 {
 }
-impl flutter_rust_bridge::IntoIntoDart<crate::models::finantial_cards::FinantialCard>
-    for crate::models::finantial_cards::FinantialCard
+impl flutter_rust_bridge::IntoIntoDart<crate::models::financial_cards::FinancialCard>
+    for crate::models::financial_cards::FinancialCard
 {
-    fn into_into_dart(self) -> crate::models::finantial_cards::FinantialCard {
+    fn into_into_dart(self) -> crate::models::financial_cards::FinancialCard {
         self
     }
 }
@@ -1155,7 +1155,7 @@ impl SseEncode for bool {
     }
 }
 
-impl SseEncode for crate::models::finantial_cards::FinantialCard {
+impl SseEncode for crate::models::financial_cards::FinancialCard {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Option<String>>::sse_encode(self.id, serializer);
@@ -1203,12 +1203,12 @@ impl SseEncode for crate::models::identity_cards::IdentityCard {
     }
 }
 
-impl SseEncode for Vec<crate::models::finantial_cards::FinantialCard> {
+impl SseEncode for Vec<crate::models::financial_cards::FinancialCard> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
-            <crate::models::finantial_cards::FinantialCard>::sse_encode(item, serializer);
+            <crate::models::financial_cards::FinancialCard>::sse_encode(item, serializer);
         }
     }
 }

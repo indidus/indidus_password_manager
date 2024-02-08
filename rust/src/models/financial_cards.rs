@@ -16,8 +16,8 @@ use sqlx::FromRow;
     SqliteDelete,
     SqliteListFilter,
 )]
-#[crudlf(table_name = "finantial_cards")]
-pub struct FinantialCard {
+#[crudlf(table_name = "financial_cards")]
+pub struct FinancialCard {
     #[serde(rename = "id")]
     #[serde(skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,

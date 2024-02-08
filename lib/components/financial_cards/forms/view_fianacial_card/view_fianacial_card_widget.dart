@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/components/text_field/text_field_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'view_fianacial_card_model.dart';
 
 export 'view_fianacial_card_model.dart';
@@ -14,7 +14,7 @@ class ViewFianacialCardWidget extends StatefulWidget {
     required this.card,
   });
 
-  final FinantialCard card;
+  final FinancialCard card;
 
   @override
   State<ViewFianacialCardWidget> createState() =>

@@ -4,7 +4,7 @@
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
 import '../frb_generated.dart';
-import '../models/finantial_cards.dart';
+import '../models/financial_cards.dart';
 import '../models/identity_cards.dart';
 import '../models/logins.dart';
 import '../models/notes.dart';
@@ -32,21 +32,21 @@ Future<Login> deleteLogin({required String id, dynamic hint}) =>
 Future<List<Login>> listLogin({required String query, dynamic hint}) =>
     RustLib.instance.api.listLogin(query: query, hint: hint);
 
-Future<FinantialCard> getFinancialCard({required String id, dynamic hint}) =>
+Future<FinancialCard> getFinancialCard({required String id, dynamic hint}) =>
     RustLib.instance.api.getFinancialCard(id: id, hint: hint);
 
-Future<FinantialCard> postFinancialCard(
-        {required FinantialCard data, dynamic hint}) =>
+Future<FinancialCard> postFinancialCard(
+        {required FinancialCard data, dynamic hint}) =>
     RustLib.instance.api.postFinancialCard(data: data, hint: hint);
 
-Future<FinantialCard> putFinancialCard(
-        {required String id, required FinantialCard data, dynamic hint}) =>
+Future<FinancialCard> putFinancialCard(
+        {required String id, required FinancialCard data, dynamic hint}) =>
     RustLib.instance.api.putFinancialCard(id: id, data: data, hint: hint);
 
-Future<FinantialCard> deleteFinancialCard({required String id, dynamic hint}) =>
+Future<FinancialCard> deleteFinancialCard({required String id, dynamic hint}) =>
     RustLib.instance.api.deleteFinancialCard(id: id, hint: hint);
 
-Future<List<FinantialCard>> listFinancialCard(
+Future<List<FinancialCard>> listFinancialCard(
         {required String query, dynamic hint}) =>
     RustLib.instance.api.listFinancialCard(query: query, hint: hint);
 

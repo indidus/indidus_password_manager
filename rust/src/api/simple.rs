@@ -1,4 +1,4 @@
-use crate::models::{FinantialCard, IdentityCard, Login, Note};
+use crate::models::{FinancialCard, IdentityCard, Login, Note};
 
 #[flutter_rust_bridge::frb(sync)] // Synchronous mode for simplicity of the demo
 pub fn greet(name: String) -> String {
@@ -51,33 +51,33 @@ pub async fn list_login(query: String) -> anyhow::Result<Vec<Login>> {
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn get_financial_card(id: String) -> anyhow::Result<FinantialCard> {
-    let card = FinantialCard::get(id).await.unwrap();
+pub async fn get_financial_card(id: String) -> anyhow::Result<FinancialCard> {
+    let card = FinancialCard::get(id).await.unwrap();
     Ok(card)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn post_financial_card(data: FinantialCard) -> anyhow::Result<FinantialCard> {
-    let card = FinantialCard::insert(data).await.unwrap();
+pub async fn post_financial_card(data: FinancialCard) -> anyhow::Result<FinancialCard> {
+    let card = FinancialCard::insert(data).await.unwrap();
     Ok(card)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn put_financial_card(id: String, data: FinantialCard) -> anyhow::Result<FinantialCard> {
-    let card = FinantialCard::update(id, data).await.unwrap();
+pub async fn put_financial_card(id: String, data: FinancialCard) -> anyhow::Result<FinancialCard> {
+    let card = FinancialCard::update(id, data).await.unwrap();
     Ok(card)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn delete_financial_card(id: String) -> anyhow::Result<FinantialCard> {
-    let card = FinantialCard::delete(id).await.unwrap();
+pub async fn delete_financial_card(id: String) -> anyhow::Result<FinancialCard> {
+    let card = FinancialCard::delete(id).await.unwrap();
     Ok(card)
 }
 
 #[tokio::main(flavor = "current_thread")]
-pub async fn list_financial_card(query: String) -> anyhow::Result<Vec<FinantialCard>> {
+pub async fn list_financial_card(query: String) -> anyhow::Result<Vec<FinancialCard>> {
     let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
-    let cards = FinantialCard::get_list(query).await.unwrap();
+    let cards = FinancialCard::get_list(query).await.unwrap();
     Ok(cards)
 }
 
@@ -108,8 +108,8 @@ pub async fn delete_identity_card(id: String) -> anyhow::Result<IdentityCard> {
 #[tokio::main(flavor = "current_thread")]
 pub async fn list_identity_card(query: String) -> anyhow::Result<Vec<IdentityCard>> {
     let query = serde_json::from_str::<structs::HttpQuery>(&query).unwrap();
-    let notes = IdentityCard::get_list(query).await.unwrap();
-    Ok(notes)
+    let cards = IdentityCard::get_list(query).await.unwrap();
+    Ok(cards)
 }
 
 #[tokio::main(flavor = "current_thread")]

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
-import 'package:indidus_password_manager/src/rust/models/finantial_cards.dart';
+import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 import 'package:indidus_password_manager/src/rust/models/notes.dart';
@@ -43,7 +43,7 @@ class IdentityCardRestore {
 }
 
 class FinancialCardRestore {
-  final FinantialCard card;
+  final FinancialCard card;
   final bool isRestored;
   final bool isFailed;
   final String? failedReason;
@@ -366,7 +366,7 @@ class BackupRestoreManager {
 
   // returns all the financial cards which are failed to be restored
   Future<List<FinancialCardRestore>> restoreFinancialCards(
-      List<FinantialCard> cards) async {
+      List<FinancialCard> cards) async {
     List<FinancialCardRestore> failedCards = [];
     for (var card in cards) {
       if (card.id != null) {

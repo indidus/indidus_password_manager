@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "insert into finantial_cards (id, created_at, created_by, updated_at, updated_by, card_holder_name, card_number, card_provider_name, card_type, cvv, expiry_date, issue_date, name, note, pin) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
+  "query": "delete from financial_cards where id = ? returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
   "describe": {
     "columns": [
       {
@@ -80,7 +80,7 @@
       }
     ],
     "parameters": {
-      "Right": 15
+      "Right": 1
     },
     "nullable": [
       true,
@@ -100,5 +100,5 @@
       true
     ]
   },
-  "hash": "6907076dd8c377496ee077c1c39d08f5b954cd54083429c7ab993b8d4e91bc16"
+  "hash": "ca55261c8a93c9a58f1ba2211c419ad0dc6f9724e9befca1d63959891aa4ff0d"
 }

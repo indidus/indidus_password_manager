@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:indidus_password_manager/src/rust/models/finantial_cards.dart';
+import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 import 'package:indidus_password_manager/src/rust/models/notes.dart';
@@ -12,7 +12,7 @@ import 'model_extension/identity_card_extension.dart';
 
 class Models {
   static const _jsonEncode = JsonCodec();
-  final List<FinantialCard> cards;
+  final List<FinancialCard> cards;
   final List<Note> notes;
   final List<Login> logins;
   final List<IdentityCard> ids;
@@ -37,8 +37,8 @@ class Models {
     Map<String, dynamic> json = _jsonEncode.decode(str);
     return Models(
       cards: json['cards'] != null
-          ? List<FinantialCard>.from(
-              (json['cards']).map((e) => finantialCardFromJson(e)).toList())
+          ? List<FinancialCard>.from(
+              (json['cards']).map((e) => financialCardFromJson(e)).toList())
           : [],
       notes: json['notes'] != null
           ? List<Note>.from(

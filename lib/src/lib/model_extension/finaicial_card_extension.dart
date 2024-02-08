@@ -1,6 +1,6 @@
-import 'package:indidus_password_manager/src/rust/models/finantial_cards.dart';
+import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 
-finantialCardFromJson(Map<String, dynamic> json) => FinantialCard(
+financialCardFromJson(Map<String, dynamic> json) => FinancialCard(
       id: json['id'] as String?,
       createdAt: json['created_at'] != null
           ? DateTime.parse(json['created_at'] as String)
@@ -22,7 +22,7 @@ finantialCardFromJson(Map<String, dynamic> json) => FinantialCard(
       pin: json['pin'] as String?,
     );
 
-extension FinantialCardJson on FinantialCard {
+extension FinancialCardJson on FinancialCard {
   Map<String, dynamic> toJson() {
     return {
       'id': id,

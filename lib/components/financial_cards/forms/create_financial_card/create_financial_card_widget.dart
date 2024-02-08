@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'create_financial_card_model.dart';
 
 export 'create_financial_card_model.dart';
@@ -623,7 +623,7 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                         'CREATE_FINANCIAL_CARD_FinancialCardCreat');
                     logFirebaseEvent('FinancialCardCreateButton_backend_call');
                     await postFinancialCard(
-                      data: FinantialCard(
+                      data: FinancialCard(
                         createdAt: getCurrentTimestamp,
                         createdBy: currentUserUid,
                         cardHolderName:

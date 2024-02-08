@@ -11,7 +11,7 @@ import '/components/financial_cards/forms/create_financial_card/create_financial
 import '/components/logout/logout_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'financial_cards_page_model.dart';
 
 export 'financial_cards_page_model.dart';
@@ -230,9 +230,9 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                     Container(
                       height: MediaQuery.sizeOf(context).height * 0.75,
                       decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<FinantialCard>>(
+                      child: FutureBuilder<List<FinancialCard>>(
                         future: (_model.requestCompleter ??=
-                                Completer<List<FinantialCard>>()
+                                Completer<List<FinancialCard>>()
                                   ..complete(listFinancialCard(query: "{}")))
                             .future,
                         builder: (context, snapshot) {
@@ -250,7 +250,7 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
                               ),
                             );
                           }
-                          List<FinantialCard> listViewFinancialCardsRowList =
+                          List<FinancialCard> listViewFinancialCardsRowList =
                               snapshot.data!;
                           if (listViewFinancialCardsRowList.isEmpty) {
                             return Center(

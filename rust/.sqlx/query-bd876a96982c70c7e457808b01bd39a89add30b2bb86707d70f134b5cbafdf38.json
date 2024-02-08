@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "delete from finantial_cards where id = ? returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
+  "query": "update financial_cards set created_at = ?, created_by = ?, updated_at = ?, updated_by = ?, card_holder_name = ?, card_number = ?, card_provider_name = ?, card_type = ?, cvv = ?, expiry_date = ?, issue_date = ?, name = ?, note = ?, pin = ? where id = ? returning id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\"",
   "describe": {
     "columns": [
       {
@@ -80,7 +80,7 @@
       }
     ],
     "parameters": {
-      "Right": 1
+      "Right": 15
     },
     "nullable": [
       true,
@@ -100,5 +100,5 @@
       true
     ]
   },
-  "hash": "8d3b8c85c609c66060b006004192f26e09e86192ac783a5b32678cdb2695097f"
+  "hash": "bd876a96982c70c7e457808b01bd39a89add30b2bb86707d70f134b5cbafdf38"
 }

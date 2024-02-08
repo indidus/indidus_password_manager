@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "select id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\" from finantial_cards where id = ?",
+  "query": "select id as \"id?\", created_at as \"created_at?\", created_by as \"created_by?\", updated_at as \"updated_at?\", updated_by as \"updated_by?\", card_holder_name as \"card_holder_name!\", card_number as \"card_number!\", card_provider_name as \"card_provider_name?\", card_type as \"card_type?\", cvv as \"cvv?\", expiry_date as \"expiry_date?\", issue_date as \"issue_date?\", name as \"name!\", note as \"note?\", pin as \"pin?\" from financial_cards where id = ?",
   "describe": {
     "columns": [
       {
@@ -100,5 +100,5 @@
       true
     ]
   },
-  "hash": "e65f1fd9f93da415a305cfe7231de6e2fae0a1cab61f9cee2cb4c914d4a4f0a6"
+  "hash": "8240b3a75901609bd986e78e0ad1bbead93d4056e472d5f398e581df9d216df1"
 }

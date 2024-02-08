@@ -7,7 +7,7 @@ import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'frb_generated.io.dart' if (dart.library.html) 'frb_generated.web.dart';
-import 'models/finantial_cards.dart';
+import 'models/financial_cards.dart';
 import 'models/identity_cards.dart';
 import 'models/logins.dart';
 import 'models/notes.dart';
@@ -68,7 +68,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  Future<FinantialCard> deleteFinancialCard({required String id, dynamic hint});
+  Future<FinancialCard> deleteFinancialCard({required String id, dynamic hint});
 
   Future<IdentityCard> deleteIdentityCard({required String id, dynamic hint});
 
@@ -76,7 +76,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Note> deleteNote({required String id, dynamic hint});
 
-  Future<FinantialCard> getFinancialCard({required String id, dynamic hint});
+  Future<FinancialCard> getFinancialCard({required String id, dynamic hint});
 
   Future<IdentityCard> getIdentityCard({required String id, dynamic hint});
 
@@ -90,7 +90,7 @@ abstract class RustLibApi extends BaseApi {
 
   Future<void> initApp({dynamic hint});
 
-  Future<List<FinantialCard>> listFinancialCard(
+  Future<List<FinancialCard>> listFinancialCard(
       {required String query, dynamic hint});
 
   Future<List<IdentityCard>> listIdentityCard(
@@ -100,8 +100,8 @@ abstract class RustLibApi extends BaseApi {
 
   Future<List<Note>> listNote({required String query, dynamic hint});
 
-  Future<FinantialCard> postFinancialCard(
-      {required FinantialCard data, dynamic hint});
+  Future<FinancialCard> postFinancialCard(
+      {required FinancialCard data, dynamic hint});
 
   Future<IdentityCard> postIdentityCard(
       {required IdentityCard data, dynamic hint});
@@ -110,8 +110,8 @@ abstract class RustLibApi extends BaseApi {
 
   Future<Note> postNote({required Note data, dynamic hint});
 
-  Future<FinantialCard> putFinancialCard(
-      {required String id, required FinantialCard data, dynamic hint});
+  Future<FinancialCard> putFinancialCard(
+      {required String id, required FinancialCard data, dynamic hint});
 
   Future<IdentityCard> putIdentityCard(
       {required String id, required IdentityCard data, dynamic hint});
@@ -131,7 +131,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  Future<FinantialCard> deleteFinancialCard(
+  Future<FinancialCard> deleteFinancialCard(
       {required String id, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -141,7 +141,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             funcId: 12, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_finantial_card,
+        decodeSuccessData: sse_decode_financial_card,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kDeleteFinancialCardConstMeta,
@@ -232,7 +232,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<FinantialCard> getFinancialCard({required String id, dynamic hint}) {
+  Future<FinancialCard> getFinancialCard({required String id, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
@@ -241,7 +241,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             funcId: 9, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_finantial_card,
+        decodeSuccessData: sse_decode_financial_card,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kGetFinancialCardConstMeta,
@@ -405,7 +405,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<List<FinantialCard>> listFinancialCard(
+  Future<List<FinancialCard>> listFinancialCard(
       {required String query, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
@@ -415,7 +415,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             funcId: 13, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_list_finantial_card,
+        decodeSuccessData: sse_decode_list_financial_card,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kListFinancialCardConstMeta,
@@ -507,17 +507,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<FinantialCard> postFinancialCard(
-      {required FinantialCard data, dynamic hint}) {
+  Future<FinancialCard> postFinancialCard(
+      {required FinancialCard data, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_box_autoadd_finantial_card(data, serializer);
+        sse_encode_box_autoadd_financial_card(data, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 10, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_finantial_card,
+        decodeSuccessData: sse_decode_financial_card,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kPostFinancialCardConstMeta,
@@ -609,18 +609,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   @override
-  Future<FinantialCard> putFinancialCard(
-      {required String id, required FinantialCard data, dynamic hint}) {
+  Future<FinancialCard> putFinancialCard(
+      {required String id, required FinancialCard data, dynamic hint}) {
     return handler.executeNormal(NormalTask(
       callFfi: (port_) {
         final serializer = SseSerializer(generalizedFrbRustBinding);
         sse_encode_String(id, serializer);
-        sse_encode_box_autoadd_finantial_card(data, serializer);
+        sse_encode_box_autoadd_financial_card(data, serializer);
         pdeCallFfi(generalizedFrbRustBinding, serializer,
             funcId: 11, port: port_);
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_finantial_card,
+        decodeSuccessData: sse_decode_financial_card,
         decodeErrorData: sse_decode_AnyhowException,
       ),
       constMeta: kPutFinancialCardConstMeta,
@@ -746,9 +746,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FinantialCard dco_decode_box_autoadd_finantial_card(dynamic raw) {
+  FinancialCard dco_decode_box_autoadd_financial_card(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return dco_decode_finantial_card(raw);
+    return dco_decode_financial_card(raw);
   }
 
   @protected
@@ -770,12 +770,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FinantialCard dco_decode_finantial_card(dynamic raw) {
+  FinancialCard dco_decode_financial_card(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
     if (arr.length != 15)
       throw Exception('unexpected arr length: expect 15 but see ${arr.length}');
-    return FinantialCard(
+    return FinancialCard(
       id: dco_decode_opt_String(arr[0]),
       createdAt: dco_decode_opt_box_autoadd_Chrono_Naive(arr[1]),
       createdBy: dco_decode_opt_String(arr[2]),
@@ -825,9 +825,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<FinantialCard> dco_decode_list_finantial_card(dynamic raw) {
+  List<FinancialCard> dco_decode_list_financial_card(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_finantial_card).toList();
+    return (raw as List<dynamic>).map(dco_decode_financial_card).toList();
   }
 
   @protected
@@ -950,10 +950,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FinantialCard sse_decode_box_autoadd_finantial_card(
+  FinancialCard sse_decode_box_autoadd_financial_card(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return (sse_decode_finantial_card(deserializer));
+    return (sse_decode_financial_card(deserializer));
   }
 
   @protected
@@ -976,7 +976,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FinantialCard sse_decode_finantial_card(SseDeserializer deserializer) {
+  FinancialCard sse_decode_financial_card(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_id = sse_decode_opt_String(deserializer);
     var var_createdAt = sse_decode_opt_box_autoadd_Chrono_Naive(deserializer);
@@ -993,7 +993,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_name = sse_decode_String(deserializer);
     var var_note = sse_decode_opt_String(deserializer);
     var var_pin = sse_decode_opt_String(deserializer);
-    return FinantialCard(
+    return FinancialCard(
         id: var_id,
         createdAt: var_createdAt,
         createdBy: var_createdBy,
@@ -1052,14 +1052,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<FinantialCard> sse_decode_list_finantial_card(
+  List<FinancialCard> sse_decode_list_financial_card(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
     var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <FinantialCard>[];
+    var ans_ = <FinancialCard>[];
     for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_finantial_card(deserializer));
+      ans_.add(sse_decode_financial_card(deserializer));
     }
     return ans_;
   }
@@ -1229,10 +1229,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_box_autoadd_finantial_card(
-      FinantialCard self, SseSerializer serializer) {
+  void sse_encode_box_autoadd_financial_card(
+      FinancialCard self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_finantial_card(self, serializer);
+    sse_encode_financial_card(self, serializer);
   }
 
   @protected
@@ -1255,7 +1255,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_finantial_card(FinantialCard self, SseSerializer serializer) {
+  void sse_encode_financial_card(FinancialCard self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_opt_String(self.id, serializer);
     sse_encode_opt_box_autoadd_Chrono_Naive(self.createdAt, serializer);
@@ -1300,12 +1300,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_finantial_card(
-      List<FinantialCard> self, SseSerializer serializer) {
+  void sse_encode_list_financial_card(
+      List<FinancialCard> self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_i_32(self.length, serializer);
     for (final item in self) {
-      sse_encode_finantial_card(item, serializer);
+      sse_encode_financial_card(item, serializer);
     }
   }
 

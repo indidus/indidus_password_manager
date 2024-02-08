@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
-import 'package:indidus_password_manager/src/rust/models/finantial_cards.dart';
+import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 import 'package:indidus_password_manager/src/rust/models/notes.dart';
@@ -14,7 +14,7 @@ void main() {
       var model = Models(
         cards: [
           // All the fields
-          FinantialCard(
+          FinancialCard(
             id: '1234567890123456',
             createdAt: DateTime.now(),
             createdBy: 'JHON_DOE',
@@ -27,13 +27,13 @@ void main() {
             expiryDate: '12/20',
           ),
           // Only required fields
-          const FinantialCard(
+          const FinancialCard(
             name: 'Card 2',
             cardNumber: '12345678901234561',
             cardHolderName: 'John Doe1',
           ),
           // Random fields
-          FinantialCard(
+          FinancialCard(
             id: '1234567890123456',
             createdAt: DateTime.now(),
             createdBy: 'JHON_DON',
@@ -141,7 +141,7 @@ void main() {
       expect(model == jsonModel, true);
 
       // Match the original model with the jsonModel
-      expect(jsonModel.cards, isA<List<FinantialCard>>());
+      expect(jsonModel.cards, isA<List<FinancialCard>>());
       expect(jsonModel.cards.length, model.cards.length);
       expect(jsonModel.cards[0].name, model.cards[0].name);
       expect(jsonModel.cards[0].cardNumber, model.cards[0].cardNumber);

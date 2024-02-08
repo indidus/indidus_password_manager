@@ -1,4 +1,4 @@
-CREATE TABLE  IF NOT EXISTS finantial_cards (
+CREATE TABLE  IF NOT EXISTS financial_cards (
     id TEXT PRIMARY KEY,
     created_at DATETIME NOT NULL,
     created_by TEXT NOT NULL,

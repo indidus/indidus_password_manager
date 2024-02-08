@@ -6,7 +6,7 @@
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-class FinantialCard {
+class FinancialCard {
   final String? id;
   final DateTime? createdAt;
   final String? createdBy;
@@ -23,7 +23,7 @@ class FinantialCard {
   final String? note;
   final String? pin;
 
-  const FinantialCard({
+  const FinancialCard({
     this.id,
     this.createdAt,
     this.createdBy,
@@ -62,7 +62,7 @@ class FinantialCard {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FinantialCard &&
+      other is FinancialCard &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           createdAt == other.createdAt &&
