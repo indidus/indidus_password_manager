@@ -56,7 +56,6 @@ class _SettingWidgetState extends State<SettingWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Column(
@@ -69,8 +68,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
+                      color: Theme.of(context).colorScheme.background),
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         16.0, 8.0, 16.0, 8.0),
