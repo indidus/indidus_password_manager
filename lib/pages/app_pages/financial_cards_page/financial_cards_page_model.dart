@@ -48,6 +48,7 @@ class FinancialCardsPageModel
 
     financialCardsModels.dispose();
     logoutModel.dispose();
+    settingButtonModel.dispose();
   }
 
   /// Action blocks are added here.

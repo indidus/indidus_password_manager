@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'continue_with_google_model.dart';
+
 export 'continue_with_google_model.dart';
 
 class ContinueWithGoogleWidget extends StatefulWidget {
@@ -73,8 +75,7 @@ class _ContinueWithGoogleWidgetState extends State<ContinueWithGoogleWidget> {
                   const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
-                  logFirebaseEvent('CONTINUE_WITH_GOOGLE_CONTINUE_WITH_GOOGL');
-                  logFirebaseEvent('Button_auth');
+                  logFirebaseEvent('CONTINUE_WITH_GOOGLE');
                   GoRouter.of(context).prepareAuthEvent();
                   final user = await authManager.signInWithGoogle(context);
                   if (user == null) {

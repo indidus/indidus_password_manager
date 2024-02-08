@@ -620,8 +620,8 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                 child: FFButtonWidget(
                   onPressed: () async {
                     logFirebaseEvent(
-                        'CREATE_FINANCIAL_CARD_FinancialCardCreat');
-                    logFirebaseEvent('FinancialCardCreateButton_backend_call');
+                      'CREATE_FINANCIAL_CARD_DB_CALLING',
+                    );
                     await postFinancialCard(
                       data: FinancialCard(
                         createdAt: getCurrentTimestamp,
@@ -641,7 +641,8 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                       ),
                     );
                     logFirebaseEvent(
-                        'FinancialCardCreateButton_close_dialog,_');
+                      'CREATE_FINANCIAL_CARD_DB_SUCCESS',
+                    );
                     Navigator.pop(context);
                   },
                   text: 'Save card details',

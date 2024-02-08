@@ -70,6 +70,7 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                       child: TextFieldWidget(
                         fieldName: 'Name',
                         fieldValue: widget.note.name,
+                        isThreeLine: true,
                       ),
                     ),
                     wrapWithModel(
@@ -78,6 +79,7 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
                       child: TextFieldWidget(
                         fieldName: 'Note',
                         fieldValue: widget.note.note,
+                        isThreeLine: true,
                       ),
                     ),
                   ],

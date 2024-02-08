@@ -135,7 +135,7 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
           );
         },
         isThreeLine: false,
-        leading: const Icon(Icons.note_alt),
+        leading: const Icon(Icons.edit_note_sharp, size: 40.0),
         title: Text(
           widget.note.name,
           overflow: TextOverflow.ellipsis,
@@ -152,101 +152,6 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
             ListMetadataChip(
               createdAt: widget.note.createdAt!,
               updatedAt: widget.note.updatedAt,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class UpdateBottomSheet extends StatefulWidget {
-  // final Function onUpdate;
-  const UpdateBottomSheet({
-    super.key,
-    // required this.onUpdate,
-  });
-  @override
-  _UpdateBottomSheetState createState() => _UpdateBottomSheetState();
-}
-
-class _UpdateBottomSheetState extends State<UpdateBottomSheet> {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primaryContainer,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16.0),
-            topRight: Radius.circular(16.0),
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Fixed Header
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: SizedBox(
-                width: double.infinity,
-                child: Text(
-                  "Update Note",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                ),
-              ),
-            ),
-            const Divider(),
-
-            // Scrollable Body
-            const Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.0),
-                  child: Column(
-                    children: [
-                      // Your scrollable content here
-                      ListTile(title: Text("Item 1")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      ListTile(title: Text("Item 2")),
-                      ListTile(title: Text("Item 3")),
-                      // ...more items
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            // Fixed Footer
-            Container(
-              color: Colors.grey[200],
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Cancel"),
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text("Submit"),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

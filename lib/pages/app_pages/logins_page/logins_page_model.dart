@@ -46,6 +46,7 @@ class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
 
     loginCardsModels.dispose();
     logoutModel.dispose();
+    settingButtonModel.dispose();
   }
 
   /// Action blocks are added here.

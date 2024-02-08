@@ -14,10 +14,7 @@ export 'create_login_model.dart';
 class CreateLoginWidget extends StatefulWidget {
   const CreateLoginWidget({
     super.key,
-    required this.refreshCallback,
   });
-
-  final Future Function()? refreshCallback;
 
   @override
   State<CreateLoginWidget> createState() => _CreateLoginWidgetState();

@@ -130,9 +130,8 @@ class _DeleteFinancialCardWidgetState extends State<DeleteFinancialCardWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'DELETE_FINANCIAL_CARD_CancelButton_ON_TA');
-                            logFirebaseEvent(
-                                'CancelButton_close_dialog,_drawer,_etc');
+                              'DELETE_FINANCIAL_CARD_CANCELLED',
+                            );
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -153,11 +152,12 @@ class _DeleteFinancialCardWidgetState extends State<DeleteFinancialCardWidget> {
                       FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
-                              'DELETE_FINANCIAL_CARD_DeleteButton_ON_TA');
-                          logFirebaseEvent('DeleteButton_backend_call');
+                            'DELETE_FINANCIAL_CARD_DELETED',
+                          );
                           await deleteFinancialCard(id: widget.card.id!);
                           logFirebaseEvent(
-                              'DeleteButton_close_dialog,_drawer,_etc');
+                            'DELETE_FINANCIAL_CARD_DELETED_SUCCESSFUL',
+                          );
                           Navigator.pop(context);
                         },
                         text: 'Delete',

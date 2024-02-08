@@ -1,14 +1,19 @@
 import 'dart:math';
 
 import 'package:firebase_analytics/firebase_analytics.dart';
-import '../../auth/firebase_auth/auth_util.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../auth/firebase_auth/auth_util.dart';
 
 const kMaxEventNameLength = 40;
 const kMaxParameterLength = 100;
 
 void logFirebaseEvent(String eventName, {Map<String?, dynamic>? parameters}) {
   // https://firebase.google.com/docs/reference/cpp/group/event-names
+  // TODO: Remove this
+  eventName = eventName.length > kMaxEventNameLength
+      ? eventName.substring(0, kMaxEventNameLength)
+      : eventName;
   assert(eventName.length <= kMaxEventNameLength);
 
   parameters ??= {};

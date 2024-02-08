@@ -59,7 +59,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      // backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           logFirebaseEvent('NOTES_FloatingActionButton_3p05vpdn_ON_T');
@@ -87,7 +86,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
         elevation: 8.0,
         child: const Icon(
           Icons.add,
-          // color: FlutterFlowTheme.of(context).info,
           size: 24.0,
         ),
       ),

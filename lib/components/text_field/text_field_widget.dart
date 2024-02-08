@@ -12,10 +12,12 @@ class TextFieldWidget extends StatefulWidget {
     super.key,
     required this.fieldName,
     required this.fieldValue,
+    this.isThreeLine = false,
   });
 
   final String? fieldName;
   final String? fieldValue;
+  final bool isThreeLine;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -46,7 +48,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      isThreeLine: true,
+      isThreeLine: widget.isThreeLine,
       title: Text(
         valueOrDefault<String>(
           widget.fieldName,
