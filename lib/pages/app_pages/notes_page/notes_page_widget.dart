@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/components/notes/note_search_delegate/note_search_delegate_widget.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/logout/logout_widget.dart';
@@ -110,16 +111,75 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
                 updateCallback: () => setState(() {}),
                 child: const SettingButtonWidget(),
               ),
+              IconButton(
+                onPressed: () async {
+                  logFirebaseEvent('NOTES_IconButton_2r7a8tks_ON_');
+                  logFirebaseEvent('IconButton_search_button');
+                  var notes = await listNote(query: getSearchQuery(null, null));
+                  // ignore: use_build_context_synchronously
+                  showSearch(
+                    context: context,
+                    delegate: NoteSearchDelegate(
+                      notes: notes,
+                      refreshList: () {
+                        logFirebaseEvent('NOTES_Container_2r7a8tks_CALLBACK');
+                        logFirebaseEvent(
+                            'NoteSearchDelegate_refresh_database_request');
+                        setState(() => _model.requestCompleter = null);
+                        return _model.waitForRequestCompleted();
+                      },
+                    ),
+                  ).then((value) {
+                    logFirebaseEvent(
+                      'NoteSearchDelegate_refresh_database_re',
+                    );
+                    _model.searchQuery = value;
+                    setState(() => _model.requestCompleter = null);
+                    return _model.waitForRequestCompleted();
+                  });
+                },
+                icon: const Icon(
+                  Icons.search,
+                ),
+              ),
             ],
             centerTitle: false,
             elevation: 0.0,
+            bottom: sanitizeString(_model.searchQuery) != null
+                ? PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: sanitizeString(_model.searchQuery) != null
+                          ? RawChip(
+                              label: Text(
+                                'Name: ${sanitizeString(_model.searchQuery)}',
+                              ),
+                              onDeleted: () {
+                                safeSetState(() {
+                                  _model.searchQuery = null;
+                                  _model.requestCompleter = null;
+                                });
+                              },
+                            )
+                          : Container(),
+                    ),
+                  )
+                : null,
           )
         ],
         body: Builder(
           builder: (context) {
             return FutureBuilder<List<Note>>(
               future: (_model.requestCompleter ??= Completer<List<Note>>()
-                    ..complete(listNote(query: getSearchQuery(null, null))))
+                    ..complete(
+                      listNote(
+                        query: getSearchQuery(
+                          _model.searchQuery,
+                          null,
+                        ),
+                      ),
+                    ))
                   .future,
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.

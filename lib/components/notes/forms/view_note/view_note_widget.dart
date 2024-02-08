@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/text_field/text_field_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/src/rust/models/notes.dart';
 import 'view_note_model.dart';
@@ -53,74 +53,51 @@ class _ViewNoteWidgetState extends State<ViewNoteWidget> {
           minHeight: MediaQuery.sizeOf(context).height * 0.6,
           maxHeight: MediaQuery.sizeOf(context).height * 0.6,
         ),
-        decoration: const BoxDecoration(
-          // color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 7.0,
-              color: Color(0x33000000),
-              offset: Offset(0.0, -2.0),
-            )
-          ],
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0),
-            topLeft: Radius.circular(16.0),
-            topRight: Radius.circular(16.0),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-          child: ListView(
-            padding: EdgeInsets.zero,
-            scrollDirection: Axis.vertical,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 60.0,
-                    height: 3.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      borderRadius: BorderRadius.circular(4.0),
+        decoration: getModalBottomSheetBoxDecoration(context),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const ModalBottomSheetUpperBar(),
+            const ModalBottomSheetHeaderText(level: "View Note"),
+            const Divider(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    wrapWithModel(
+                      model: _model.textFieldModel1,
+                      updateCallback: () => setState(() {}),
+                      child: TextFieldWidget(
+                        fieldName: 'Name',
+                        fieldValue: widget.note.name,
+                      ),
                     ),
-                  ),
-                ],
+                    wrapWithModel(
+                      model: _model.textFieldModel2,
+                      updateCallback: () => setState(() {}),
+                      child: TextFieldWidget(
+                        fieldName: 'Note',
+                        fieldValue: widget.note.note,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
+            ),
+            const Divider(),
+            Container(
+              padding: getModalBottomSheetFooterPadding(),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        16.0, 4.0, 0.0, 0.0),
-                    child: Text(
-                      'View Note',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
+                  OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Cancel"),
                   ),
                 ],
               ),
-              wrapWithModel(
-                model: _model.textFieldModel1,
-                updateCallback: () => setState(() {}),
-                child: TextFieldWidget(
-                  fieldName: 'Name',
-                  fieldValue: widget.note.name,
-                ),
-              ),
-              wrapWithModel(
-                model: _model.textFieldModel2,
-                updateCallback: () => setState(() {}),
-                child: TextFieldWidget(
-                  fieldName: 'Note',
-                  fieldValue: widget.note.note,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

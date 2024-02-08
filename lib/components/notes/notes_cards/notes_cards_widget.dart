@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:indidus_password_manager/components/notes/forms/update_note/update_note_widget.dart';
 import 'package:indidus_password_manager/components/notes/forms/view_note/view_note_widget.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -74,7 +75,9 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
                     padding: MediaQuery.viewInsetsOf(context),
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.9,
-                      child: _BottomSheetContent(),
+                      child: UpdateNoteWidget(
+                        note: widget.note,
+                      ),
                     ),
                   );
                 },
@@ -177,30 +180,47 @@ class ListMetadataChip extends StatelessWidget {
   }
 }
 
-class _BottomSheetContent extends StatefulWidget {
+class UpdateBottomSheet extends StatefulWidget {
+  // final Function onUpdate;
+  const UpdateBottomSheet({
+    super.key,
+    // required this.onUpdate,
+  });
   @override
-  __BottomSheetContentState createState() => __BottomSheetContentState();
+  _UpdateBottomSheetState createState() => _UpdateBottomSheetState();
 }
 
-class __BottomSheetContentState extends State<_BottomSheetContent> {
+class _UpdateBottomSheetState extends State<UpdateBottomSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        color: Colors.white,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(16.0),
+            topRight: Radius.circular(16.0),
+          ),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             // Fixed Header
-            Container(
-              color: Colors.blue,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-              child: const Text(
-                "Header Title",
-                style: TextStyle(color: Colors.white, fontSize: 18.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  "Update Note",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onPrimaryContainer,
+                      ),
+                ),
               ),
             ),
+            const Divider(),
+
             // Scrollable Body
             const Expanded(
               child: SingleChildScrollView(

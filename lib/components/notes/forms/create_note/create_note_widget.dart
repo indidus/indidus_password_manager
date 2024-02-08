@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/src/rust/api/simple.dart';
 import '/src/rust/models/notes.dart';
 import 'create_note_model.dart';
@@ -58,202 +56,89 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
           minHeight: MediaQuery.sizeOf(context).height * 0.6,
           maxHeight: MediaQuery.sizeOf(context).height * 0.6,
         ),
-        decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: const [
-            BoxShadow(
-              blurRadius: 7.0,
-              color: Color(0x33000000),
-              offset: Offset(0.0, -2.0),
-            )
-          ],
-          borderRadius: const BorderRadius.only(
-            bottomLeft: Radius.circular(0.0),
-            bottomRight: Radius.circular(0.0),
-            topLeft: Radius.circular(16.0),
-            topRight: Radius.circular(16.0),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
+        decoration: getModalBottomSheetBoxDecoration(context),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const ModalBottomSheetUpperBar(),
+            const ModalBottomSheetHeaderText(level: "Create a note"),
+            const Divider(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: getEdgeInsetsDirectional(),
+                        child: TextFormField(
+                          controller: _model.nameFieldController,
+                          focusNode: _model.nameFieldFocusNode,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: getInputDecoration(
+                            context,
+                            "Name of the note",
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          validator: _model.nameFieldControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                      Padding(
+                        padding: getEdgeInsetsDirectional(),
+                        child: TextFormField(
+                          controller: _model.noteFieldController,
+                          focusNode: _model.noteFieldFocusNode,
+                          textCapitalization: TextCapitalization.sentences,
+                          obscureText: false,
+                          decoration: getInputDecoration(
+                            context,
+                            "Leave a note here",
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          maxLines: 4,
+                          cursorColor: FlutterFlowTheme.of(context).primary,
+                          validator: _model.noteFieldControllerValidator
+                              .asValidator(context),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const Divider(),
+            Container(
+              padding: getModalBottomSheetFooterPadding(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 60.0,
-                    height: 3.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
+                  OutlinedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Cancel"),
+                  ),
+                  FilledButton(
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
+                      logFirebaseEvent('NoteUpdateButton_backend_call');
+                      await postNote(
+                        data: Note(
+                          name: _model.nameFieldController.text,
+                          createdBy: currentUserUid,
+                          note: _model.noteFieldController.text,
+                        ),
+                      );
+                      logFirebaseEvent('NoteUpdateButton_navigate_back');
+                      context.pop();
+                    },
+                    child: const Text("Save"),
                   ),
                 ],
               ),
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 4.0, 0.0, 0.0),
-                child: Text(
-                  'Create a note',
-                  style: FlutterFlowTheme.of(context).headlineSmall.override(
-                        fontFamily: 'Readex Pro',
-                        fontWeight: FontWeight.w300,
-                      ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                child: TextFormField(
-                  controller: _model.nameFieldController,
-                  focusNode: _model.nameFieldFocusNode,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelText: 'Name of the note',
-                    labelStyle: FlutterFlowTheme.of(context).bodyMedium,
-                    hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium,
-                  validator:
-                      _model.nameFieldControllerValidator.asValidator(context),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                child: TextFormField(
-                  controller: _model.noteFieldController,
-                  focusNode: _model.noteFieldFocusNode,
-                  textCapitalization: TextCapitalization.sentences,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    labelStyle: FlutterFlowTheme.of(context).bodyLarge.override(
-                          fontFamily: 'Inter',
-                          fontSize: 14.0,
-                        ),
-                    hintText: 'Leave note here...',
-                    hintStyle: FlutterFlowTheme.of(context).labelLarge.override(
-                          fontFamily: 'Inter',
-                          fontSize: 14.0,
-                        ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).alternate,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).primary,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    contentPadding: const EdgeInsets.all(12.0),
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium,
-                  maxLines: 4,
-                  cursorColor: FlutterFlowTheme.of(context).primary,
-                  validator:
-                      _model.noteFieldControllerValidator.asValidator(context),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(
-                    16.0, 16.0, 16.0, 44.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    logFirebaseEvent(
-                        'CREATE_NOTE_COMP_NoteCreateButton_ON_TAP');
-                    logFirebaseEvent('NoteCreateButton_backend_call');
-                    unawaited(
-                      () async {
-                        await postNote(
-                          data: Note(
-                            name: _model.nameFieldController.text,
-                            createdBy: currentUserUid,
-                            note: _model.noteFieldController.text,
-                          ),
-                        );
-                      }(),
-                    );
-                    logFirebaseEvent('NoteCreateButton_navigate_back');
-                    context.safePop();
-                  },
-                  text: 'Save note',
-                  options: FFButtonOptions(
-                    width: double.infinity,
-                    height: 50.0,
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
-                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Inter',
-                          color: Colors.white,
-                        ),
-                    elevation: 2.0,
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(12.0),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

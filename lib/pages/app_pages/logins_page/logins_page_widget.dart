@@ -153,7 +153,7 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                   icon: const Icon(
                     Icons.search,
                   ),
-                )
+                ),
               ],
               centerTitle: false,
               elevation: 0.0,
@@ -252,21 +252,6 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                                   loginId: listViewLoginsRow.username,
                                   siteUrl: listViewLoginsRow.url!,
                                 ),
-                                // LoginCardsWidget(
-                                //   key: Key(
-                                //     'Key51j_${listViewLoginsRow.id.toString()}',
-                                //   ),
-                                //   login: listViewLoginsRow,
-                                //   refreshListCallback: () async {
-                                //     logFirebaseEvent(
-                                //         'LOGINS_Container_51jrxfha_CALLBACK');
-                                //     logFirebaseEvent(
-                                //         'LoginCards_refresh_database_request');
-                                //     setState(
-                                //         () => _model.requestCompleter = null);
-                                //     await _model.waitForRequestCompleted();
-                                //   },
-                                // ),
                               );
                             },
                           ),
