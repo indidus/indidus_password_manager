@@ -65,7 +65,7 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
         onPressed: () async {
           logFirebaseEvent('FINANCIAL_CARDS_FloatingActionButton_dja');
           logFirebaseEvent('FloatingActionButton_bottom_sheet');
-          showModalBottomSheet(
+          await showModalBottomSheet(
             isScrollControlled: true,
             backgroundColor: Colors.transparent,
             useSafeArea: true,

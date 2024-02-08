@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/src/lib/storage.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
@@ -632,12 +633,16 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                         cardProviderName:
                             _model.cardProviderNameFieldController.text,
                         cardType: _model.cardTypeFieldValue,
-                        cvv: _model.cvvFieldController.text,
+                        cvv: await SecureStorage.encrypt(
+                          _model.cvvFieldController.text,
+                        ),
                         expiryDate: _model.expireDateFieldController.text,
                         issueDate: _model.issueDateFieldController.text,
                         name: _model.nameFieldController.text,
                         note: _model.noteFieldController.text,
-                        pin: _model.pinFieldController.text,
+                        pin: await SecureStorage.encrypt(
+                          _model.pinFieldController.text,
+                        ),
                       ),
                     );
                     logFirebaseEvent(

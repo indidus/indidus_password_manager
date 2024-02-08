@@ -1,3 +1,4 @@
+import 'package:indidus_password_manager/src/lib/storage.dart';
 import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 
 financialCardFromJson(Map<String, dynamic> json) => FinancialCard(
@@ -41,5 +42,27 @@ extension FinancialCardJson on FinancialCard {
       'note': note,
       'pin': pin,
     };
+  }
+}
+
+extension FinancialCardDecrypt on FinancialCard {
+  Future<FinancialCard> decrypt() async {
+    return FinancialCard(
+      id: id,
+      createdAt: createdAt,
+      createdBy: createdBy,
+      updatedAt: updatedAt,
+      updatedBy: updatedBy,
+      name: name,
+      note: note,
+      cardHolderName: cardHolderName,
+      cardNumber: cardNumber,
+      cardProviderName: cardProviderName,
+      cardType: cardType,
+      cvv: cvv != null ? await SecureStorage.decrypt(cvv!) : null,
+      expiryDate: expiryDate,
+      issueDate: issueDate,
+      pin: pin != null ? await SecureStorage.decrypt(pin!) : null,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:indidus_password_manager/src/lib/storage.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 
 loginFromJson(Map<String, dynamic> json) => Login(
@@ -33,5 +34,24 @@ extension LoginJson on Login {
       'password': password,
       'password_hint': passwordHint,
     };
+  }
+}
+
+extension LoginDecrypt on Login {
+  Future<Login> decrypt() async {
+    return Login(
+      id: id,
+      createdAt: createdAt,
+      createdBy: createdBy,
+      updatedAt: updatedAt,
+      updatedBy: updatedBy,
+      name: name,
+      note: note,
+      username: username,
+      url: url,
+      password:
+          password != null ? await SecureStorage.decrypt(password!) : null,
+      passwordHint: passwordHint,
+    );
   }
 }

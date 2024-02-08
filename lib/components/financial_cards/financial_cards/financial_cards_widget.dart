@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:indidus_password_manager/src/lib/model_extension/finaicial_card_extension.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/financial_cards/delete_financial_card/delete_financial_card_widget.dart';
@@ -87,6 +88,8 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
               logFirebaseEvent(
                 'FINANTIAL_CARDS_EDIT_CLICK',
               );
+              var decryptCard = await widget.card.decrypt();
+              // ignore: use_build_context_synchronously
               await showModalBottomSheet(
                 isScrollControlled: true,
                 backgroundColor: Colors.transparent,
@@ -98,7 +101,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                     child: SizedBox(
                       height: MediaQuery.sizeOf(context).height * 0.9,
                       child: UpdateFinancialCardWidget(
-                        card: widget.card,
+                        card: decryptCard,
                       ),
                     ),
                   );
@@ -117,6 +120,8 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
       child: ListTile(
         onTap: () async {
           logFirebaseEvent('FINANTIAL_CARDS_VIEW_CLICK');
+          var decryptCard = await widget.card.decrypt();
+          // ignore: use_build_context_synchronously
           await showModalBottomSheet(
             context: context,
             builder: (context) {
@@ -125,7 +130,7 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
                 child: SizedBox(
                   height: 360,
                   child: ViewFianacialCardWidget(
-                    card: widget.card,
+                    card: decryptCard,
                   ),
                 ),
               );
