@@ -80,7 +80,6 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                             context,
                             "Name of the note",
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
                           validator: _model.nameFieldControllerValidator
                               .asValidator(context),
                         ),
@@ -96,7 +95,6 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                             context,
                             "Leave a note here",
                           ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
                           maxLines: 4,
                           cursorColor: FlutterFlowTheme.of(context).primary,
                           validator: _model.noteFieldControllerValidator

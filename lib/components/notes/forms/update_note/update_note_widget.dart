@@ -121,7 +121,6 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                     onPressed: () async {
                       logFirebaseEvent(
                           'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
-                      logFirebaseEvent('NoteUpdateButton_backend_call');
                       putNote(
                         id: widget.note.id!,
                         data: Note(

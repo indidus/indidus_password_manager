@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/src/rust/api/simple.dart';
 import '/src/rust/models/logins.dart';
 import 'delete_login_dialog_model.dart';
@@ -56,21 +54,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
           constraints: const BoxConstraints(
             maxWidth: double.infinity,
           ),
-          decoration: BoxDecoration(
-            color: FlutterFlowTheme.of(context).secondaryBackground,
-            boxShadow: const [
-              BoxShadow(
-                blurRadius: 3.0,
-                color: Color(0x33000000),
-                offset: Offset(0.0, 1.0),
-              )
-            ],
-            borderRadius: BorderRadius.circular(24.0),
-            border: Border.all(
-              color: FlutterFlowTheme.of(context).primaryBackground,
-              width: 1.0,
-            ),
-          ),
+          decoration: getModalBottomSheetBoxDecoration(context, isAll: true),
           child: Padding(
             padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
             child: Column(
@@ -93,13 +77,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                         child: Text(
                           'Delete this login?...',
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: 'Readex Pro',
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w300,
-                              ),
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                       Padding(
@@ -107,11 +85,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                             0.0, 12.0, 0.0, 0.0),
                         child: Text(
                           'Are you sure you want to delete this login details? it is not reversible...',
-                          style:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ),
                     ],
@@ -127,30 +101,17 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                       Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 0.0, 12.0, 0.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'DELETE_LOGIN_DIALOG_CancelButton_ON_TAP');
-                            logFirebaseEvent(
-                                'CancelButton_close_dialog,_drawer,_etc');
-                            Navigator.pop(context);
-                          },
-                          text: 'Cancel',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 0.0, 20.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            textStyle: FlutterFlowTheme.of(context).bodyLarge,
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(40.0),
-                          ),
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Cancel"),
                         ),
                       ),
-                      FFButtonWidget(
+                      FilledButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).colorScheme.error,
+                          ),
+                        ),
                         onPressed: () async {
                           logFirebaseEvent(
                               'DELETE_LOGIN_DIALOG_DeleteButton_ON_TAP');
@@ -161,26 +122,7 @@ class _DeleteLoginDialogWidgetState extends State<DeleteLoginDialogWidget> {
                               'DeleteButton_close_dialog,_drawer,_etc');
                           Navigator.pop(context);
                         },
-                        text: 'Delete',
-                        options: FFButtonOptions(
-                          height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).error,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter',
-                                    color: Colors.white,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
+                        child: const Text("Delete"),
                       ),
                     ],
                   ),
