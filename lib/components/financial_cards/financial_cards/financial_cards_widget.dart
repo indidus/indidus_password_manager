@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:indidus_password_manager/src/lib/model_extension/finaicial_card_extension.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/financial_cards/delete_financial_card/delete_financial_card_widget.dart';
 import '/components/financial_cards/forms/update_financial_card/update_financial_card_widget.dart';
 import '/components/financial_cards/forms/view_fianacial_card/view_fianacial_card_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'financial_cards_model.dart';
 
 export 'financial_cards_model.dart';
@@ -18,8 +19,8 @@ class FinancialCardsWidget extends StatefulWidget {
     required this.refreshListCallback,
   });
 
-  final FinantialCard card;
-  final Future Function()? refreshListCallback;
+  final FinancialCard card;
+  final Future Function() refreshListCallback;
 
   @override
   State<FinancialCardsWidget> createState() => _FinancialCardsWidgetState();
@@ -49,267 +50,117 @@ class _FinancialCardsWidgetState extends State<FinancialCardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 1.0,
-            color: Color(0x2F1D2429),
-            offset: Offset(0.0, 1.0),
-          )
-        ],
-        borderRadius: BorderRadius.circular(0.0),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
+    return Slidable(
+      endActionPane: ActionPane(
+        // A motion is a widget used to control how the pane animates.
+        motion: const ScrollMotion(),
         children: [
-          Container(
-            decoration: const BoxDecoration(),
-            child: Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 8.0, 0.0),
-                    child: Icon(
-                      Icons.credit_card,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 64.0,
+          SlidableAction(
+            onPressed: (context) async {
+              logFirebaseEvent('FINANTIAL_CARDS_DELETE_CLICKED');
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: 300,
+                      child: DeleteFinancialCardWidget(
+                        card: widget.card,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          valueOrDefault<String>(
-                            widget.card.name,
-                            '-',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 4.0, 0.0, 0.0),
-                          child: Text(
-                            valueOrDefault<String>(
-                              widget.card.cardHolderName,
-                              '-',
-                            ),
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 4.0, 0.0, 0.0),
-                          child: Text(
-                            'XXXX XXXX XXXX ${valueOrDefault<String>(
-                              widget.card.cardNumber.substring(14),
-                              'XXXX',
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  );
+                },
+              ).then((value) => safeSetState(() {}));
+
+              await widget.refreshListCallback.call();
+            },
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            foregroundColor: Theme.of(context).colorScheme.error,
+            icon: Icons.delete,
+            label: 'Delete',
           ),
-          Container(
-            decoration: const BoxDecoration(),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                  child: Container(
-                    decoration: const BoxDecoration(),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        if (widget.card.updatedAt == null)
-                          Text(
-                            'Created  ${dateTimeFormat(
-                              'relative',
-                              widget.card.createdAt,
-                              locale: FFLocalizations.of(context).languageCode,
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                        if (widget.card.updatedAt != null)
-                          Text(
-                            'Updated ${dateTimeFormat(
-                              'relative',
-                              widget.card.updatedAt,
-                              locale: FFLocalizations.of(context).languageCode,
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                      ],
+          SlidableAction(
+            onPressed: (context) async {
+              logFirebaseEvent(
+                'FINANTIAL_CARDS_EDIT_CLICK',
+              );
+              var decryptCard = await widget.card.decrypt();
+              // ignore: use_build_context_synchronously
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.9,
+                      child: UpdateFinancialCardWidget(
+                        card: decryptCard,
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.visibility,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'FINANCIAL_CARDS_visibility_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.6,
-                                    child: ViewFianacialCardWidget(
-                                      card: widget.card,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.edit,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'FINANCIAL_CARDS_COMP_edit_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.6,
-                                    child: UpdateFinancialCardWidget(
-                                      card: widget.card,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
+                  );
+                },
+              ).then((value) => safeSetState(() {}));
 
-                            logFirebaseEvent('IconButton_execute_callback');
-                            await widget.refreshListCallback?.call();
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.delete,
-                            color: FlutterFlowTheme.of(context).error,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'FINANCIAL_CARDS_COMP_delete_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
-                                    child: DeleteFinancialCardWidget(
-                                      card: widget.card,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-
-                            logFirebaseEvent('IconButton_execute_callback');
-                            await widget.refreshListCallback?.call();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              await widget.refreshListCallback.call();
+            },
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            icon: Icons.edit,
+            label: 'Edit',
           ),
         ],
+      ),
+      child: ListTile(
+        onTap: () async {
+          logFirebaseEvent('FINANTIAL_CARDS_VIEW_CLICK');
+          var decryptCard = await widget.card.decrypt();
+          // ignore: use_build_context_synchronously
+          await showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: SizedBox(
+                  height: 360,
+                  child: ViewFianacialCardWidget(
+                    card: decryptCard,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        isThreeLine: false,
+        leading: const Icon(Icons.credit_card, size: 40),
+        title: Text(
+          widget.card.name,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'XXXX XXXX XXXX ${valueOrDefault<String>(
+                widget.card.cardNumber.substring(14),
+                'XXXX',
+              )}',
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            ListMetadataChip(
+              createdAt: widget.card.createdAt!,
+              updatedAt: widget.card.updatedAt,
+            ),
+          ],
+        ),
       ),
     );
   }

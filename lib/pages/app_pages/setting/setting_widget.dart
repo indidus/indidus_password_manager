@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/settings/forms/supprot/supprot_widget.dart';
 import '/components/settings/forms/update_profile/update_profile_widget.dart';
@@ -5,9 +8,8 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'setting_model.dart';
+
 export 'setting_model.dart';
 
 class SettingWidget extends StatefulWidget {
@@ -54,7 +56,6 @@ class _SettingWidgetState extends State<SettingWidget> {
           : FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
           child: Column(
@@ -67,8 +68,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                 child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
+                      color: Theme.of(context).colorScheme.background),
                   child: Padding(
                     padding: const EdgeInsetsDirectional.fromSTEB(
                         16.0, 8.0, 16.0, 8.0),
@@ -89,7 +89,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                                 'SETTING_PAGE_chevron_left_ICN_ON_TAP');
                             logFirebaseEvent(
                                 'IconButton_close_dialog,_drawer,_etc');
-                            Navigator.pop(context);
+                            context.safePop();
                           },
                         ),
                         Container(
@@ -407,7 +407,9 @@ class _SettingWidgetState extends State<SettingWidget> {
                       GoRouter.of(context).clearRedirectLocation();
 
                       context.goNamedAuth(
-                          'GoogleOnlyLoginPage', context.mounted);
+                        'GoogleOnlyLoginPage',
+                        context.mounted,
+                      );
                     },
                     text: 'Log Out',
                     options: FFButtonOptions(

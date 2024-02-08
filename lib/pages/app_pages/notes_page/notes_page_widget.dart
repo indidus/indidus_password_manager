@@ -1,15 +1,15 @@
 import 'dart:async';
 
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/components/notes/note_search_delegate/note_search_delegate_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/logout/logout_widget.dart';
 import '/components/notes/empty_note_list/empty_note_list_widget.dart';
 import '/components/notes/forms/create_note/create_note_widget.dart';
 import '/components/notes/notes_cards/notes_cards_widget.dart';
 import '/components/setting_button/setting_button_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/src/rust/api/simple.dart';
 import '/src/rust/models/notes.dart';
@@ -59,7 +59,6 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
 
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           logFirebaseEvent('NOTES_FloatingActionButton_3p05vpdn_ON_T');
@@ -84,200 +83,151 @@ class _NotesPageWidgetState extends State<NotesPageWidget> {
           setState(() => _model.requestCompleter = null);
           await _model.waitForRequestCompleted();
         },
-        backgroundColor: FlutterFlowTheme.of(context).primary,
         elevation: 8.0,
-        child: Icon(
+        child: const Icon(
           Icons.add,
-          color: FlutterFlowTheme.of(context).info,
           size: 24.0,
         ),
       ),
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (context, _) => [
-          SliverAppBar(
+          SliverAppBar.large(
             pinned: true,
             floating: false,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             automaticallyImplyLeading: false,
-            title: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Text(
-                    'Notes',
-                    style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'Readex Pro',
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w300,
-                        ),
-                  ),
-                ),
-                wrapWithModel(
-                  model: _model.logoutModel,
-                  updateCallback: () => setState(() {}),
-                  child: const LogoutWidget(),
-                ),
-                wrapWithModel(
-                  model: _model.settingButtonModel,
-                  updateCallback: () => setState(() {}),
-                  child: const SettingButtonWidget(),
-                ),
-              ],
+            title: const Text('Notes'),
+            leading: wrapWithModel(
+              model: _model.logoutModel,
+              updateCallback: () => setState(() {}),
+              child: const LogoutWidget(),
             ),
-            actions: const [],
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  logFirebaseEvent('NOTES_IconButton_2r7a8tks_ON_');
+                  logFirebaseEvent('IconButton_search_button');
+                  var notes = await listNote(query: getSearchQuery(null, null));
+                  // ignore: use_build_context_synchronously
+                  showSearch(
+                    context: context,
+                    delegate: NoteSearchDelegate(
+                      notes: notes,
+                      refreshList: () {
+                        logFirebaseEvent('NOTES_Container_2r7a8tks_CALLBACK');
+                        logFirebaseEvent(
+                            'NoteSearchDelegate_refresh_database_request');
+                        setState(() => _model.requestCompleter = null);
+                        return _model.waitForRequestCompleted();
+                      },
+                    ),
+                  ).then((value) {
+                    logFirebaseEvent(
+                      'NoteSearchDelegate_refresh_database_re',
+                    );
+                    _model.searchQuery = value;
+                    setState(() => _model.requestCompleter = null);
+                    return _model.waitForRequestCompleted();
+                  });
+                },
+                icon: const Icon(
+                  Icons.search,
+                ),
+              ),
+              wrapWithModel(
+                model: _model.settingButtonModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const SettingButtonWidget(),
+              ),
+            ],
             centerTitle: false,
             elevation: 0.0,
+            bottom: sanitizeString(_model.searchQuery) != null
+                ? PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: sanitizeString(_model.searchQuery) != null
+                          ? RawChip(
+                              label: Text(
+                                'Name: ${sanitizeString(_model.searchQuery)}',
+                              ),
+                              onDeleted: () {
+                                safeSetState(() {
+                                  _model.searchQuery = null;
+                                  _model.requestCompleter = null;
+                                });
+                              },
+                            )
+                          : Container(),
+                    ),
+                  )
+                : null,
           )
         ],
         body: Builder(
           builder: (context) {
-            return Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: TextFormField(
-                      controller: _model.textController,
-                      focusNode: _model.textFieldFocusNode,
-                      onChanged: (_) => EasyDebounce.debounce(
-                        '_model.textController',
-                        const Duration(milliseconds: 2000),
-                        () => setState(() {}),
+            return FutureBuilder<List<Note>>(
+              future: (_model.requestCompleter ??= Completer<List<Note>>()
+                    ..complete(
+                      listNote(
+                        query: getSearchQuery(
+                          _model.searchQuery,
+                          null,
+                        ),
                       ),
-                      onFieldSubmitted: (_) async {
-                        logFirebaseEvent(
-                            'NOTES_TextField_n15j3gf9_ON_TEXTFIELD_SU');
-                        logFirebaseEvent('TextField_update_page_state');
-                        setState(() {
-                          _model.searchQuery = _model.textController.text;
-                        });
-                        logFirebaseEvent('TextField_refresh_database_request');
-                        setState(() => _model.requestCompleter = null);
-                        await _model.waitForRequestCompleted();
-                      },
-                      textInputAction: TextInputAction.search,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelStyle: FlutterFlowTheme.of(context).labelMedium,
-                        hintText: 'Search',
-                        hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(22.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).primary,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(22.0),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(22.0),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).error,
-                            width: 2.0,
-                          ),
-                          borderRadius: BorderRadius.circular(22.0),
-                        ),
-                        prefixIcon: const Icon(
-                          Icons.search,
-                        ),
-                        suffixIcon: _model.textController!.text.isNotEmpty
-                            ? InkWell(
-                                onTap: () async {
-                                  _model.textController?.clear();
-                                  setState(() {});
-                                },
-                                child: const Icon(
-                                  Icons.clear,
-                                  size: 24.0,
-                                ),
-                              )
-                            : null,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                      maxLines: null,
-                      validator:
-                          _model.textControllerValidator.asValidator(context),
+                    ))
+                  .future,
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: SizedBox(
+                      width: 40.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator(),
                     ),
-                  ),
-                ),
-                FutureBuilder<List<Note>>(
-                  future: (_model.requestCompleter ??= Completer<List<Note>>()
-                        ..complete(listNote(query: "{}")))
-                      .future,
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 40.0,
-                          height: 40.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
-                            ),
-                          ),
-                        ),
-                      );
-                    }
-                    List<Note> listViewNotesRowList = snapshot.data!;
-                    if (listViewNotesRowList.isEmpty) {
-                      return Center(
-                        child: SizedBox(
-                          width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: 128.0,
-                          child: const EmptyNoteListWidget(),
-                        ),
-                      );
-                    }
-                    return RefreshIndicator(
-                      onRefresh: () async {
-                        logFirebaseEvent(
-                            'NOTES_ListView_27ifpm0h_ON_PULL_TO_REFRE');
-                        logFirebaseEvent('ListView_refresh_database_request');
-                        setState(() => _model.requestCompleter = null);
-                        await _model.waitForRequestCompleted();
-                      },
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        primary: false,
-                        scrollDirection: Axis.vertical,
-                        itemCount: listViewNotesRowList.length,
-                        itemBuilder: (context, listViewIndex) {
-                          final listViewNotesRow =
-                              listViewNotesRowList[listViewIndex];
-                          return NotesCardsWidget(
-                            key: Key(
-                                'Keynos_${listViewIndex}_of_${listViewNotesRowList.length}'),
-                            note: listViewNotesRow,
-                            refreshListCallback: () async {},
-                          );
-                        },
-                      ),
-                    );
+                  );
+                }
+                List<Note> listViewNotesRowList = snapshot.data!;
+                if (listViewNotesRowList.isEmpty) {
+                  return Center(
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.9,
+                      height: 128.0,
+                      child: const EmptyNoteListWidget(),
+                    ),
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    logFirebaseEvent(
+                        'NOTES_ListView_27ifpm0h_ON_PULL_TO_REFRE');
+                    logFirebaseEvent('ListView_refresh_database_request');
+                    setState(() => _model.requestCompleter = null);
+                    await _model.waitForRequestCompleted();
                   },
-                ),
-              ],
+                  child: ListView.separated(
+                    itemBuilder: (context, listViewIndex) {
+                      final listViewNotesRow =
+                          listViewNotesRowList[listViewIndex];
+                      return NotesCardsWidget(
+                        key: Key(
+                            'Keynos_${listViewIndex}_of_${listViewNotesRowList.length}'),
+                        note: listViewNotesRow,
+                        refreshListCallback: () async {
+                          logFirebaseEvent('NOTE_COMP_refresh_ICN_ON_TAP');
+                          setState(() => _model.requestCompleter = null);
+                          await _model.waitForRequestCompleted();
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                    itemCount: listViewNotesRowList.length,
+                  ),
+                );
+              },
             );
           },
         ),

@@ -72,16 +72,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const NavBarPage()
-          : const GoogleOnlyLoginPageWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? const NavBarPage() : const LoginPage(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? const NavBarPage()
-              : const GoogleOnlyLoginPageWidget(),
+              : const LoginPage(),
         ),
         FFRoute(
           name: 'LoginsPage',
@@ -123,7 +122,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'GoogleOnlyLoginPage',
           path: '/googleOnlyLoginPage',
-          builder: (context, params) => const GoogleOnlyLoginPageWidget(),
+          builder: (context, params) => const LoginPage(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -307,7 +306,7 @@ class FFRoute {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/AppIcon~ios-marketing.png',
+                      'assets/images/play_store_512.png',
                       width: 200.0,
                       height: 200.0,
                       fit: BoxFit.fitWidth,

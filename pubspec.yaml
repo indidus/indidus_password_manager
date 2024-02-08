@@ -105,19 +105,28 @@ dependencies:
   webview_flutter_wkwebview: 3.1.1
   xml: 6.3.0
 
+  key_store_plugin:
+    git:
+      url: https://github.com/indidus/key_store_plugin.git
+      ref: v1.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   rust_builder:
     path: rust_builder
+  permission_handler: ^11.2.0
+  file_picker: ^6.1.1
+  path: ^1.8.3
+  flutter_slidable: ^3.0.1
+  crypto: ^3.0.3
   flutter_rust_bridge: 2.0.0-dev.22
 
 dependency_overrides:
+  flutter_launcher_icons: ^0.13.1
   rxdart: 0.27.7
 
 dev_dependencies:
-  flutter_launcher_icons: 0.13.1
   flutter_lints: 3.0.0
   image: 4.0.17
   lints: 3.0.0
@@ -126,6 +135,7 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter
+  build_runner: ^2.4.8
 
 
 flutter_launcher_icons:
@@ -134,7 +144,7 @@ flutter_launcher_icons:
   remove_alpha_ios: true
   web:
     generate: true
-  image_path: 'assets/images/app_launcher_icon.png'
+  image_path: 'assets/images/play_store_512.png'
 
 
 # For information on the generic Dart part of this file, see the
@@ -152,11 +162,6 @@ flutter:
   assets:
     - assets/fonts/
     - assets/images/
-    - assets/videos/
-    - assets/audios/
-    - assets/lottie_animations/
-    - assets/rive_animations/
-    - assets/pdfs/
   fonts:
     - family: Icomoon
       fonts:

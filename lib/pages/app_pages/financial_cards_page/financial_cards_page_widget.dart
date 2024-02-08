@@ -1,17 +1,18 @@
 import 'dart:async';
 
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/components/financial_cards/financial_card_search_delegate/financial_card_search_delegate_widget.dart';
+import 'package:indidus_password_manager/components/setting_button/setting_button_widget.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 
 import '/components/financial_cards/empty_financial_card_list/empty_financial_card_list_widget.dart';
 import '/components/financial_cards/financial_cards/financial_cards_widget.dart';
 import '/components/financial_cards/forms/create_financial_card/create_financial_card_widget.dart';
 import '/components/logout/logout_widget.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/src/rust/models/finantial_cards.dart';
+import '/src/rust/models/financial_cards.dart';
 import 'financial_cards_page_model.dart';
 
 export 'financial_cards_page_model.dart';
@@ -58,252 +59,184 @@ class _FinancialCardsPageWidgetState extends State<FinancialCardsPageWidget> {
       );
     }
 
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            logFirebaseEvent('FINANCIAL_CARDS_FloatingActionButton_dja');
-            logFirebaseEvent('FloatingActionButton_bottom_sheet');
-            showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              useSafeArea: true,
-              context: context,
-              builder: (context) {
-                return GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Padding(
-                    padding: MediaQuery.viewInsetsOf(context),
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.8,
-                      child: const CreateFinancialCardWidget(),
-                    ),
-                  ),
-                );
-              },
-            ).then((value) => safeSetState(() {}));
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          elevation: 8.0,
-          child: Icon(
-            Icons.add,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
-          ),
-        ),
-        body: NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder: (context, _) => [
-            SliverAppBar(
-              pinned: true,
-              floating: false,
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              automaticallyImplyLeading: false,
-              title: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Text(
-                      'Debit - Credit Cards',
-                      style: FlutterFlowTheme.of(context)
-                          .headlineMedium
-                          .override(
-                            fontFamily: 'Readex Pro',
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w300,
-                          ),
-                    ),
-                  ),
-                  wrapWithModel(
-                    model: _model.logoutModel,
-                    updateCallback: () => setState(() {}),
-                    child: const LogoutWidget(),
-                  ),
-                ],
-              ),
-              actions: const [],
-              centerTitle: false,
-              elevation: 0.0,
-            )
-          ],
-          body: Builder(
+    return Scaffold(
+      key: scaffoldKey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          logFirebaseEvent('FINANCIAL_CARDS_FloatingActionButton_dja');
+          logFirebaseEvent('FloatingActionButton_bottom_sheet');
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            useSafeArea: true,
+            context: context,
             builder: (context) {
-              return SafeArea(
-                top: false,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 60.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: TextFormField(
-                          controller: _model.textController,
-                          focusNode: _model.textFieldFocusNode,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            '_model.textController',
-                            const Duration(milliseconds: 2000),
-                            () => setState(() {}),
-                          ),
-                          onFieldSubmitted: (_) async {
-                            logFirebaseEvent(
-                                'FINANCIAL_CARDS_TextField_nzlg87v6_ON_TE');
-                            logFirebaseEvent('TextField_update_page_state');
-                            setState(() {
-                              _model.searchQuery = _model.textController.text;
-                            });
-                            logFirebaseEvent(
-                                'TextField_refresh_database_request');
-                            setState(() => _model.requestCompleter = null);
-                            await _model.waitForRequestCompleted();
-                          },
-                          textInputAction: TextInputAction.search,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            hintText: 'Search',
-                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).primary,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: FlutterFlowTheme.of(context).error,
-                                width: 2.0,
-                              ),
-                              borderRadius: BorderRadius.circular(22.0),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.search,
-                            ),
-                            suffixIcon: _model.textController!.text.isNotEmpty
-                                ? InkWell(
-                                    onTap: () async {
-                                      _model.textController?.clear();
-                                      setState(() {});
-                                    },
-                                    child: const Icon(
-                                      Icons.clear,
-                                      size: 24.0,
-                                    ),
-                                  )
-                                : null,
-                          ),
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                          maxLines: null,
-                          validator: _model.textControllerValidator
-                              .asValidator(context),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
-                      decoration: const BoxDecoration(),
-                      child: FutureBuilder<List<FinantialCard>>(
-                        future: (_model.requestCompleter ??=
-                                Completer<List<FinantialCard>>()
-                                  ..complete(listFinancialCard(query: "{}")))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50.0,
-                                height: 50.0,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    FlutterFlowTheme.of(context).primary,
-                                  ),
-                                ),
-                              ),
-                            );
-                          }
-                          List<FinantialCard> listViewFinancialCardsRowList =
-                              snapshot.data!;
-                          if (listViewFinancialCardsRowList.isEmpty) {
-                            return Center(
-                              child: SizedBox(
-                                width: MediaQuery.sizeOf(context).width * 0.9,
-                                height: 128.0,
-                                child: const EmptyFinancialCardListWidget(),
-                              ),
-                            );
-                          }
-                          return RefreshIndicator(
-                            onRefresh: () async {
-                              logFirebaseEvent(
-                                  'FINANCIAL_CARDS_ListView_f0k41zum_ON_PUL');
-                              logFirebaseEvent(
-                                  'ListView_refresh_database_request');
-                              setState(() => _model.requestCompleter = null);
-                              await _model.waitForRequestCompleted();
-                            },
-                            child: ListView.builder(
-                              padding: EdgeInsets.zero,
-                              primary: false,
-                              scrollDirection: Axis.vertical,
-                              itemCount: listViewFinancialCardsRowList.length,
-                              itemBuilder: (context, listViewIndex) {
-                                final listViewFinancialCardsRow =
-                                    listViewFinancialCardsRowList[
-                                        listViewIndex];
-                                return wrapWithModel(
-                                  model: _model.financialCardsModels.getModel(
-                                    listViewFinancialCardsRow.id.toString(),
-                                    listViewIndex,
-                                  ),
-                                  updateCallback: () => setState(() {}),
-                                  child: FinancialCardsWidget(
-                                    key: Key(
-                                      'Keywzf_${listViewFinancialCardsRow.id.toString()}',
-                                    ),
-                                    card: listViewFinancialCardsRow,
-                                    refreshListCallback: () async {},
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+              return Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.8,
+                  child: const CreateFinancialCardWidget(),
                 ),
               );
             },
-          ),
+          ).then((value) => safeSetState(() {}));
+
+          logFirebaseEvent('FloatingActionButton_refresh_database_re');
+          setState(() => _model.requestCompleter = null);
+          await _model.waitForRequestCompleted();
+        },
+        elevation: 8.0,
+        child: const Icon(
+          Icons.add,
+          size: 24.0,
+        ),
+      ),
+      body: NestedScrollView(
+        floatHeaderSlivers: true,
+        headerSliverBuilder: (context, _) => [
+          SliverAppBar.large(
+            pinned: true,
+            floating: false,
+            automaticallyImplyLeading: false,
+            title: const Text('Bank Cards'),
+            leading: wrapWithModel(
+              model: _model.logoutModel,
+              updateCallback: () => setState(() {}),
+              child: const LogoutWidget(),
+            ),
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  logFirebaseEvent('NOTES_IconButton_2r7a8tks_ON_');
+                  logFirebaseEvent('IconButton_search_button');
+                  var cards = await listFinancialCard(
+                      query: getSearchQuery(null, null));
+                  // ignore: use_build_context_synchronously
+                  await showSearch(
+                    context: context,
+                    delegate: FinancialCardSearchDelegate(
+                      cards: cards,
+                      refreshList: () {
+                        logFirebaseEvent(
+                            'FINANTIAL_CARD_Container_2r7a8tks_CALLBACK');
+                        logFirebaseEvent(
+                            'FinancialCardSearchDelegate_refresh_database_request');
+                        setState(() => _model.requestCompleter = null);
+                        return _model.waitForRequestCompleted();
+                      },
+                    ),
+                  ).then((value) {
+                    logFirebaseEvent(
+                      'FinancialCardSearchDelegate_refresh_database_re',
+                    );
+                    _model.searchQuery = value;
+                    setState(() => _model.requestCompleter = null);
+                    return _model.waitForRequestCompleted();
+                  });
+                },
+                icon: const Icon(
+                  Icons.search,
+                ),
+              ),
+              wrapWithModel(
+                model: _model.settingButtonModel,
+                updateCallback: () => safeSetState(() {}),
+                child: const SettingButtonWidget(),
+              ),
+            ],
+            centerTitle: false,
+            elevation: 0.0,
+            bottom: sanitizeString(_model.searchQuery) != null
+                ? PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: sanitizeString(_model.searchQuery) != null
+                          ? RawChip(
+                              label: Text(
+                                'Name: ${sanitizeString(_model.searchQuery)}',
+                              ),
+                              onDeleted: () {
+                                safeSetState(() {
+                                  _model.searchQuery = null;
+                                  _model.requestCompleter = null;
+                                });
+                              },
+                            )
+                          : Container(),
+                    ),
+                  )
+                : null,
+          )
+        ],
+        body: Builder(
+          builder: (context) {
+            return FutureBuilder<List<FinancialCard>>(
+              future:
+                  (_model.requestCompleter ??= Completer<List<FinancialCard>>()
+                        ..complete(
+                          listFinancialCard(
+                            query: getSearchQuery(
+                              _model.searchQuery,
+                              null,
+                            ),
+                          ),
+                        ))
+                      .future,
+              builder: (context, snapshot) {
+                // Customize what your widget looks like when it's loading.
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: SizedBox(
+                      width: 40.0,
+                      height: 40.0,
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                List<FinancialCard> listViewFinancialCardsRowList =
+                    snapshot.data!;
+                if (listViewFinancialCardsRowList.isEmpty) {
+                  return Center(
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width * 0.9,
+                      height: 128.0,
+                      child: const EmptyFinancialCardListWidget(),
+                    ),
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    logFirebaseEvent(
+                        'FINANCIAL_CARDS_ListView_f0k41zum_ON_PUL');
+                    logFirebaseEvent('ListView_refresh_database_request');
+                    setState(() => _model.requestCompleter = null);
+                    await _model.waitForRequestCompleted();
+                  },
+                  child: ListView.separated(
+                    itemBuilder: (context, listViewIndex) {
+                      final listViewFinancialCardsRow =
+                          listViewFinancialCardsRowList[listViewIndex];
+                      return FinancialCardsWidget(
+                        key: Key(
+                          'Keywzf_${listViewFinancialCardsRow.id.toString()}',
+                        ),
+                        card: listViewFinancialCardsRow,
+                        refreshListCallback: () async {
+                          logFirebaseEvent('NOTE_COMP_refresh_ICN_ON_TAP');
+                          setState(() => _model.requestCompleter = null);
+                          await _model.waitForRequestCompleted();
+                        },
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(),
+                    itemCount: listViewFinancialCardsRowList.length,
+                  ),
+                );
+              },
+            );
+          },
         ),
       ),
     );

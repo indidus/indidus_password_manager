@@ -1,8 +1,9 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'setting_button_model.dart';
+
 export 'setting_button_model.dart';
 
 class SettingButtonWidget extends StatefulWidget {
@@ -42,9 +43,8 @@ class _SettingButtonWidgetState extends State<SettingButtonWidget> {
         borderRadius: 20.0,
         borderWidth: 1.0,
         buttonSize: 40.0,
-        icon: Icon(
+        icon: const Icon(
           Icons.settings_sharp,
-          color: FlutterFlowTheme.of(context).secondaryText,
           size: 24.0,
         ),
         onPressed: () async {

@@ -1,7 +1,8 @@
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+
+import '/flutter_flow/flutter_flow_util.dart';
 import 'empty_note_list_model.dart';
+
 export 'empty_note_list_model.dart';
 
 class EmptyNoteListWidget extends StatefulWidget {
@@ -36,8 +37,6 @@ class _EmptyNoteListWidgetState extends State<EmptyNoteListWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.transparent,
-      elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
       ),
@@ -45,18 +44,18 @@ class _EmptyNoteListWidgetState extends State<EmptyNoteListWidget> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: FlutterFlowTheme.of(context).secondaryBackground,
+          color: Theme.of(context).cardColor,
           boxShadow: const [
             BoxShadow(
-              blurRadius: 4.0,
+              blurRadius: 0.02,
               color: Color(0x33000000),
-              offset: Offset(0.0, 2.0),
+              offset: Offset(0.0, 0.03),
             )
           ],
           borderRadius: BorderRadius.circular(16.0),
           border: Border.all(
-            color: FlutterFlowTheme.of(context).alternate,
-            width: 0.5,
+            color: Theme.of(context).dividerColor,
+            width: 0.01,
           ),
         ),
         child: Padding(
@@ -69,19 +68,14 @@ class _EmptyNoteListWidgetState extends State<EmptyNoteListWidget> {
                     const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
                 child: Text(
                   'No note are saved',
-                  style: FlutterFlowTheme.of(context).labelLarge.override(
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.normal,
-                      ),
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ),
               Text(
                 'Please click on \'+\' button at bottom right corner to add your first note.',
                 textAlign: TextAlign.center,
-                style: FlutterFlowTheme.of(context).labelMedium.override(
-                      fontFamily: 'Inter',
-                      fontWeight: FontWeight.w300,
-                    ),
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ],
           ),

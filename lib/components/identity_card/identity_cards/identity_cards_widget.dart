@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:indidus_password_manager/src/lib/utils.dart';
 
 import '/components/identity_card/delete_identity_card/delete_identity_card_widget.dart';
 import '/components/identity_card/forms/update_identity_card/update_identity_card_widget.dart';
 import '/components/identity_card/forms/view_identity_card/view_identity_card_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/src/rust/models/identity_cards.dart';
 import 'identity_cards_model.dart';
@@ -19,7 +19,7 @@ class IdentityCardsWidget extends StatefulWidget {
   });
 
   final IdentityCard identity;
-  final Future Function()? refreshListCallback;
+  final Future Function() refreshListCallback;
 
   @override
   State<IdentityCardsWidget> createState() => _IdentityCardsWidgetState();
@@ -49,259 +49,112 @@ class _IdentityCardsWidgetState extends State<IdentityCardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: const [
-          BoxShadow(
-            blurRadius: 1.0,
-            color: Color(0x2F1D2429),
-            offset: Offset(0.0, 1.0),
-          )
-        ],
-        borderRadius: BorderRadius.circular(0.0),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
+    return Slidable(
+      endActionPane: ActionPane(
+        // A motion is a widget used to control how the pane animates.
+        motion: const ScrollMotion(),
         children: [
-          Container(
-            decoration: const BoxDecoration(),
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(
-                        0.0, 0.0, 8.0, 0.0),
-                    child: Icon(
-                      Icons.person,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 64.0,
+          SlidableAction(
+            onPressed: (context) async {
+              logFirebaseEvent('NOTES_CARDS_COMP_delete_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_bottom_sheet');
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: 300,
+                      child: DeleteIdentityCardWidget(
+                        idCard: widget.identity,
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          valueOrDefault<String>(
-                            widget.identity.name,
-                            '-',
-                          ),
-                          textAlign: TextAlign.start,
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                        ),
-                        Text(
-                          valueOrDefault<String>(
-                            widget.identity.nameOnCard,
-                            '-',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                        ),
-                        Text(
-                          '${valueOrDefault<String>(
-                            widget.identity.identityCardType,
-                            'OTHER Card',
-                          )} - ${valueOrDefault<String>(
-                            widget.identity.identityCardNumber,
-                            '-',
-                          )}',
-                          style:
-                              FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  );
+                },
+              ).then((value) => safeSetState(() {}));
+
+              logFirebaseEvent('IconButton_execute_callback');
+              await widget.refreshListCallback.call();
+            },
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            foregroundColor: Theme.of(context).colorScheme.error,
+            icon: Icons.delete,
+            label: 'Delete',
           ),
-          Container(
-            decoration: const BoxDecoration(),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                  child: Container(
-                    decoration: const BoxDecoration(),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        if (widget.identity.updatedAt == null)
-                          Text(
-                            'Created  ${dateTimeFormat(
-                              'relative',
-                              widget.identity.createdAt,
-                              locale: FFLocalizations.of(context).languageCode,
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                        if (widget.identity.updatedAt != null)
-                          Text(
-                            'Updated ${dateTimeFormat(
-                              'relative',
-                              widget.identity.updatedAt,
-                              locale: FFLocalizations.of(context).languageCode,
-                            )}',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  fontSize: 12.0,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                          ),
-                      ],
+          SlidableAction(
+            onPressed: (context) async {
+              logFirebaseEvent('NOTES_CARDS_COMP_edit_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_bottom_sheet');
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.9,
+                      child: UpdateIdentityCardWidget(
+                        idCard: widget.identity,
+                      ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.visibility,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'IDENTITY_CARDS_visibility_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.6,
-                                    child: ViewIdentityCardWidget(
-                                      idCard: widget.identity,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          borderColor: Colors.transparent,
-                          borderRadius: 8.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.edit,
-                            color: FlutterFlowTheme.of(context).primary,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'IDENTITY_CARDS_COMP_edit_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.6,
-                                    child: UpdateIdentityCardWidget(
-                                      idCard: widget.identity,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-
-                            logFirebaseEvent('IconButton_execute_callback');
-                            await widget.refreshListCallback?.call();
-                          },
-                        ),
-                        FlutterFlowIconButton(
-                          borderRadius: 8.0,
-                          borderWidth: 1.0,
-                          buttonSize: 40.0,
-                          icon: Icon(
-                            Icons.delete,
-                            color: FlutterFlowTheme.of(context).error,
-                            size: 24.0,
-                          ),
-                          onPressed: () async {
-                            logFirebaseEvent(
-                                'IDENTITY_CARDS_COMP_delete_ICN_ON_TAP');
-                            logFirebaseEvent('IconButton_bottom_sheet');
-                            await showModalBottomSheet(
-                              isScrollControlled: true,
-                              backgroundColor: Colors.transparent,
-                              enableDrag: false,
-                              context: context,
-                              builder: (context) {
-                                return Padding(
-                                  padding: MediaQuery.viewInsetsOf(context),
-                                  child: SizedBox(
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.3,
-                                    child: DeleteIdentityCardWidget(
-                                      idCard: widget.identity,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ).then((value) => safeSetState(() {}));
-
-                            logFirebaseEvent('IconButton_execute_callback');
-                            await widget.refreshListCallback?.call();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                  );
+                },
+              ).then((value) => safeSetState(() {}));
+              logFirebaseEvent('IconButton_execute_callback');
+              await widget.refreshListCallback.call();
+            },
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            foregroundColor: Theme.of(context).colorScheme.primary,
+            icon: Icons.edit,
+            label: 'Edit',
           ),
         ],
+      ),
+      child: ListTile(
+        onTap: () async {
+          logFirebaseEvent('NOTES_CARDS_COMP_visibility_ICN_ON_TAP');
+          logFirebaseEvent('IconButton_bottom_sheet');
+          await showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Padding(
+                padding: MediaQuery.viewInsetsOf(context),
+                child: SizedBox(
+                  height: MediaQuery.sizeOf(context).height * 0.9,
+                  child: ViewIdentityCardWidget(
+                    idCard: widget.identity,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        isThreeLine: false,
+        leading: const Icon(Icons.contact_page_sharp, size: 40),
+        title: Text(
+          widget.identity.name,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.identity.identityCardNumber,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodyMedium,
+            ),
+            ListMetadataChip(
+              createdAt: widget.identity.createdAt!,
+              updatedAt: widget.identity.updatedAt,
+            ),
+          ],
+        ),
       ),
     );
   }

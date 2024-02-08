@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/components/setting_button/setting_button_model.dart';
 
 import '/components/logins/login_cards/login_cards_widget.dart';
 import '/components/logout/logout_widget.dart';
@@ -21,6 +22,8 @@ class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
   Completer<List<Login>>? requestCompleter;
+  // Model for SettingButton component.
+  late SettingButtonModel settingButtonModel;
   // Models for LoginCards dynamic component.
   late FlutterFlowDynamicModels<LoginCardsModel> loginCardsModels;
   // Model for Logout component.
@@ -32,6 +35,7 @@ class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
   void initState(BuildContext context) {
     loginCardsModels = FlutterFlowDynamicModels(() => LoginCardsModel());
     logoutModel = createModel(context, () => LogoutModel());
+    settingButtonModel = createModel(context, () => SettingButtonModel());
   }
 
   @override
@@ -42,6 +46,7 @@ class LoginsPageModel extends FlutterFlowModel<LoginsPageWidget> {
 
     loginCardsModels.dispose();
     logoutModel.dispose();
+    settingButtonModel.dispose();
   }
 
   /// Action blocks are added here.

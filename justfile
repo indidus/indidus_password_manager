@@ -34,3 +34,13 @@ abb: clean
 apk: clean
   flutter build apk --target-platform android-arm,android-arm64,android-x64 --release --split-per-abi
 
+# Add command for sqlx
+
+# Add command to update all cargo
+update_cargo:
+  cargo update --manifest-path ./rust/utils/Cargo.toml
+  cargo update --manifest-path ./rust/structs/Cargo.toml
+  cargo update --manifest-path ./rust/sqlite_wrapper/Cargo.toml
+  cargo update --manifest-path ./rust/crudlf_core/Cargo.toml
+  cargo update --manifest-path ./rust/crudlf_derive/Cargo.toml
+  cargo update --manifest-path ./rust/Cargo.toml

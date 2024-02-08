@@ -8,5 +8,4 @@ export '/pages/app_pages/logins_page/logins_page_widget.dart'
 export '/pages/app_pages/notes_page/notes_page_widget.dart'
     show NotesPageWidget;
 export '/pages/app_pages/setting/setting_widget.dart' show SettingWidget;
-export '/pages/authentication/google_only_login_page/google_only_login_page_widget.dart'
-    show GoogleOnlyLoginPageWidget;
+export '/pages/authentication/google_only_login_page/login.dart' show LoginPage;
