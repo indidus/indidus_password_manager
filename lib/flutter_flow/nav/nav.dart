@@ -306,7 +306,7 @@ class FFRoute {
                   color: FlutterFlowTheme.of(context).secondaryBackground,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/AppIcon~ios-marketing.png',
+                      'assets/images/play_store_512.png',
                       width: 200.0,
                       height: 200.0,
                       fit: BoxFit.fitWidth,
