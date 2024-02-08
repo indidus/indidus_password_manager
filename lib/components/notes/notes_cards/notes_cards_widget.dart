@@ -48,8 +48,6 @@ class _NotesCardsWidgetState extends State<NotesCardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(Theme.of(context).colorScheme.primaryContainer);
-    print(Theme.of(context).colorScheme.primary);
     return Slidable(
       endActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.

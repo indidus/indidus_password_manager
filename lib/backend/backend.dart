@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../auth/firebase_auth/auth_util.dart';
+import 'package:flutter/foundation.dart';
 
+import '../auth/firebase_auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import 'schema/users_record.dart';
 import 'schema/util/firestore_util.dart';
 
-import 'schema/users_record.dart';
-
 export 'dart:async' show StreamSubscription;
+
 export 'package:cloud_firestore/cloud_firestore.dart';
+
 export 'schema/index.dart';
+export 'schema/users_record.dart';
 export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
-
-export 'schema/users_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -64,7 +65,9 @@ Future<int> queryCollectionCount(
   }
 
   return query.count().get().catchError((err) {
-    print('Error querying $collection: $err');
+    if (kDebugMode) {
+      print('Error querying $collection: $err');
+    }
   }).then((value) => value.count);
 }
 
@@ -81,12 +84,18 @@ Stream<List<T>> queryCollection<T>(
     query = query.limit(singleRecord ? 1 : limit);
   }
   return query.snapshots().handleError((err) {
-    print('Error querying $collection: $err');
+    if (kDebugMode) {
+      print('Error querying $collection: $err');
+    }
   }).map((s) => s.docs
       .map(
         (d) => safeGet(
           () => recordBuilder(d),
-          (e) => print('Error serializing doc ${d.reference.path}:\n$e'),
+          (e) {
+            if (kDebugMode) {
+              print('Error serializing doc ${d.reference.path}:\n$e');
+            }
+          },
         ),
       )
       .where((d) => d != null)
@@ -110,7 +119,11 @@ Future<List<T>> queryCollectionOnce<T>(
       .map(
         (d) => safeGet(
           () => recordBuilder(d),
-          (e) => print('Error serializing doc ${d.reference.path}:\n$e'),
+          (e) {
+            if (kDebugMode) {
+              print('Error serializing doc ${d.reference.path}:\n$e');
+            }
+          },
         ),
       )
       .where((d) => d != null)
@@ -166,7 +179,11 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
       .map(
         (d) => safeGet(
           () => recordBuilder(d),
-          (e) => print('Error serializing doc ${d.reference.path}:\n$e'),
+          (e) {
+            if (kDebugMode) {
+              print('Error serializing doc ${d.reference.path}:\n$e');
+            }
+          },
         ),
       )
       .where((d) => d != null)
