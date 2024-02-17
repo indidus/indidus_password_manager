@@ -13,11 +13,13 @@ class TextFieldWidget extends StatefulWidget {
     required this.fieldName,
     required this.fieldValue,
     this.isThreeLine = false,
+    this.mask,
   });
 
   final String? fieldName;
   final String? fieldValue;
   final bool isThreeLine;
+  final String? mask;
 
   @override
   State<TextFieldWidget> createState() => _TextFieldWidgetState();
@@ -55,12 +57,14 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           '-',
         ),
       ),
-      subtitle: Text(
-        valueOrDefault<String>(
-          widget.fieldValue,
-          '-',
-        ),
-      ),
+      subtitle: widget.mask == null
+          ? Text(
+              valueOrDefault<String>(
+                widget.fieldValue,
+                '-',
+              ),
+            )
+          : Text(widget.mask!),
       leading: const VerticalDivider(
         thickness: 5,
         color: Colors.black,

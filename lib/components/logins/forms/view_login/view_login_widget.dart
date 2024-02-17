@@ -94,6 +94,7 @@ class _ViewLoginWidgetState extends State<ViewLoginWidget> {
                       child: TextFieldWidget(
                         fieldName: 'Password',
                         fieldValue: widget.login.password ?? "",
+                        mask: "********",
                       ),
                     ),
                     wrapWithModel(
