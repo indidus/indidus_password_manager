@@ -120,7 +120,7 @@ dependencies:
   path: ^1.8.3
   flutter_slidable: ^3.0.1
   crypto: ^3.0.3
-  flutter_rust_bridge: 2.0.0-dev.22
+  flutter_rust_bridge: 2.0.0-dev.24
 
 dependency_overrides:
   flutter_launcher_icons: ^0.13.1

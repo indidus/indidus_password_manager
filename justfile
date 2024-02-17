@@ -32,7 +32,7 @@ abb: clean
   flutter build appbundle --target-platform android-arm,android-arm64,android-x64 --release
 
 apk: clean
-  flutter build apk --target-platform android-arm,android-arm64,android-x64 --release --split-per-abi
+  flutter build apk --release --split-per-abi --target-platform android-arm,android-arm64,android-x64 
 
 # Add command for sqlx
 
