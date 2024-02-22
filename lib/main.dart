@@ -16,65 +16,28 @@ import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'src/rust/api/simple.dart';
 
+// bool isBiomerticAuthDone = false;
+
 class AppLifecycle extends WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.inactive:
-        print(
-            "###############################################################");
-        print("##############################################################");
-        print("#############################################################");
         print('App went off-screen!');
-        print("#############################################################");
-        print("##############################################################");
-        print(
-            "###############################################################");
-        authManager.signOut();
+        // isBiomerticAuthDone = false;
         break;
       case AppLifecycleState.paused:
-        print(
-            "###############################################################");
-        print("##############################################################");
-        print("#############################################################");
         print('App went to background!');
-        print("#############################################################");
-        print("##############################################################");
-        print(
-            "###############################################################");
+        // isBiomerticAuthDone = false;
         break;
       case AppLifecycleState.resumed:
-        print(
-            "###############################################################");
-        print("##############################################################");
-        print("#############################################################");
         print('App came back to the foreground!');
-        print("#############################################################");
-        print("##############################################################");
-        print(
-            "###############################################################");
         break;
       case AppLifecycleState.detached:
-        print(
-            "###############################################################");
-        print("##############################################################");
-        print("#############################################################");
         print('App is closing!');
-        print("#############################################################");
-        print("##############################################################");
-        print(
-            "###############################################################");
         break;
       case AppLifecycleState.hidden:
-        print(
-            "###############################################################");
-        print("##############################################################");
-        print("#############################################################");
         print('App is hidden!');
-        print("#############################################################");
-        print("##############################################################");
-        print(
-            "###############################################################");
         break;
       default:
         break;
@@ -85,8 +48,8 @@ class AppLifecycle extends WidgetsBindingObserver {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final observer = AppLifecycle();
-  WidgetsBinding.instance.addObserver(observer);
+  // final observer = AppLifecycle();
+  // WidgetsBinding.instance.addObserver(observer);
 
   usePathUrlStrategy();
   await initFirebase();
@@ -203,10 +166,62 @@ class NavBarPage extends StatefulWidget {
 class _NavBarPageState extends State<NavBarPage> {
   String _currentPageName = 'LoginsPage';
   late Widget? _currentPage;
+  bool isBiometricAuthRequired = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(
+      LifecycleEventHandler(
+        resumeCallBack: () async {
+          if (isBiometricAuthRequired) {
+            showGeneralDialog(
+              context: context,
+              pageBuilder: (BuildContext context, __, _) {
+                return SafeArea(
+                  child: Container(
+                    color: Colors.white,
+                    child: SizedBox(
+                      height: 200,
+                      child: Column(
+                        children: [
+                          Text(
+                            'Authentication',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                          Text(
+                            "Please authentication your account, as we here we are storing your passwords and other sensitive data.",
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                isBiometricAuthRequired = false;
+                              });
+                              context.safePop();
+                            },
+                            child: const Text('Authenticate'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          }
+        },
+        suspendingCallBack: () async => setState(
+          () {
+            isBiometricAuthRequired = true;
+            print('App is suspended');
+          },
+        ),
+      ),
+    );
     _currentPageName = widget.initialPage ?? _currentPageName;
     _currentPage = widget.page;
   }
@@ -223,15 +238,32 @@ class _NavBarPageState extends State<NavBarPage> {
 
     return Scaffold(
       body: _currentPage ?? tabs[_currentPageName],
+      // bottomSheet: isBiometricAuthRequired
+      //     ? SizedBox(
+      //         height: double.infinity,
+      //         width: double.infinity,
+      //         child: Column(
+      //           children: [
+      //             const Text('Biometric Auth'),
+      //             ElevatedButton(
+      //               onPressed: () {
+      //                 setState(() {
+      //                   isBiometricAuthRequired = false;
+      //                 });
+      //                 // context.safePop();
+      //               },
+      //               child: const Text('Authenticate'),
+      //             ),
+      //           ],
+      //         ),
+      //       )
+      //     : null,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (i) => setState(() {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
-        // backgroundColor: Colors.white,
-        // selectedItemColor: FlutterFlowTheme.of(context).primary,
-        // unselectedItemColor: const Color(0x8A000000),
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
@@ -276,8 +308,57 @@ class _NavBarPageState extends State<NavBarPage> {
       ),
     );
   }
+
+  showBiomerticAuth() {
+    return SizedBox(
+      height: 200,
+      child: Column(
+        children: [
+          const Text('Biometric Auth'),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                isBiometricAuthRequired = false;
+              });
+              context.safePop();
+            },
+            child: const Text('Authenticate'),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
+class LifecycleEventHandler extends WidgetsBindingObserver {
+  final AsyncCallback? resumeCallBack;
+  final AsyncCallback? suspendingCallBack;
+
+  LifecycleEventHandler({
+    this.resumeCallBack,
+    this.suspendingCallBack,
+  });
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    print("state changed ${state.name}");
+    switch (state) {
+      case AppLifecycleState.resumed:
+        if (resumeCallBack != null) {
+          await resumeCallBack!();
+        }
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+      case AppLifecycleState.hidden:
+        if (suspendingCallBack != null) {
+          await suspendingCallBack!();
+        }
+        break;
+    }
+  }
+}
 
 // import 'package:flutter/material.dart';
 // import 'package:indidus_password_manager/src/rust/api/simple.dart';
