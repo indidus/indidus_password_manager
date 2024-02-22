@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:indidus_password_manager/auth/local_auth_observer.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/components/settings/forms/supprot/supprot_widget.dart';
@@ -21,6 +22,7 @@ class SettingWidget extends StatefulWidget {
 
 class _SettingWidgetState extends State<SettingWidget> {
   late SettingModel _model;
+  var observer = LocalAuthObserver();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,12 +31,17 @@ class _SettingWidgetState extends State<SettingWidget> {
     super.initState();
     _model = createModel(context, () => SettingModel());
 
+    // Ensure local authentication is required when the app is resumed
+    WidgetsBinding.instance.addObserver(observer);
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'Setting'});
   }
 
   @override
   void dispose() {
     _model.dispose();
+
+    WidgetsBinding.instance.removeObserver(observer);
 
     super.dispose();
   }
