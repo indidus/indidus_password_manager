@@ -13,3 +13,9 @@ syn = { version = "2.0.50" , features= ["fold", "extra-traits", "full"]}
 
 [dev-dependencies]
 colored-diff = "0.2.3" 
+
+[profile.dev]
+split-debuginfo = "unpacked"
+
+[profile.dev.build-override]
+opt-level = 3

@@ -22,3 +22,6 @@ utils = { version = "0.1.0", path = "./utils" }
 
 [package.metadata.cargo-machete]
 ignored = ["utils"]
+
+[profile.dev]
+split-debuginfo = "unpacked"

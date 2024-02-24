@@ -4,6 +4,7 @@ alias c := clean
 alias cf := clean_flutter
 alias cc := clean_cargo
 alias cac := clean_all_cargo
+alias cu := cargo_unused
 
 alias i := install_tools
 alias uc := update_cargo
@@ -26,6 +27,10 @@ install_tools:
   cargo install cargo-tree
   cargo install cargo-features-manager
   cargo install cargo-machete
+  cargo install cargo-features-manager
+
+cargo_unused:
+  cargo machete rust
 
 # Clean the flutter project
 clean_flutter: && dep

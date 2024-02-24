@@ -67,4 +67,5 @@ class DefaultFirebaseOptions {
     iosClientId: '867001464038-iucvta5m7t0ppra5i2m9pvlheht26rct.apps.googleusercontent.com',
     iosBundleId: 'com.indidus.password',
   );
+
 }
