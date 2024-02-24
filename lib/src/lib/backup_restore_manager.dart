@@ -110,26 +110,48 @@ class BackupRestoreManager {
     var notes = await listNote(query: getSearchQuery(null, null));
 
     var model = Models(logins: logins, ids: ids, cards: cards, notes: notes);
+    var path = await FilePicker.platform.getDirectoryPath(
+      dialogTitle: 'Select a folder to save the backup file.',
+    );
 
-    if (await Permission.storage.request().isGranted) {
-      var path = await FilePicker.platform.getDirectoryPath(
-        dialogTitle: 'Select a folder to save the backup file.',
-      );
-      if (path != null) {
-        // Create a json string from the model
-        var jsonString = model.toJson();
-        // Create a file name
-        var now = DateTime.now();
-        var fileName =
-            "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}.json";
-        // Save the model to the file system
-        path = join(path, 'Indidus Password Manager Backup', fileName);
-        // Save to file
-        var file = File(path);
-        var x = await file.writeAsString(jsonString, flush: true);
-        return x.path.toString();
-      }
+    if (path != null) {
+      // Create a json string from the model
+      var jsonString = model.toJson();
+      // Create a file name
+      var now = DateTime.now();
+      var fileName =
+          "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}.json";
+      // Save the model to the file system
+      path = join(path, fileName);
+      // Save to file
+      var file = File(path);
+      var x = await file.writeAsString(jsonString, flush: true);
+      return x.path.toString();
     }
+    // var status = await Permission.storage.status;
+
+    // final x = await Permission.storage.request();
+
+    // if (status.isPermanentlyDenied) {}
+    // if (await Permission.storage.request().isGranted) {
+    //   var path = await FilePicker.platform.getDirectoryPath(
+    //     dialogTitle: 'Select a folder to save the backup file.',
+    //   );
+    //   if (path != null) {
+    //     // Create a json string from the model
+    //     var jsonString = model.toJson();
+    //     // Create a file name
+    //     var now = DateTime.now();
+    //     var fileName =
+    //         "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}.json";
+    //     // Save the model to the file system
+    //     path = join(path, 'Indidus Password Manager Backup', fileName);
+    //     // Save to file
+    //     var file = File(path);
+    //     var x = await file.writeAsString(jsonString, flush: true);
+    //     return x.path.toString();
+    //   }
+    // }
 
     // Backup is not done
     return null;

@@ -1,18 +1,18 @@
-import '/flutter_flow/flutter_flow_util.dart';
-import 'continue_with_google_widget.dart' show ContinueWithGoogleWidget;
-import 'package:flutter/material.dart';
+// import '/flutter_flow/flutter_flow_util.dart';
+// import 'continue_with_google_widget.dart' show ContinueWithGoogleWidget;
+// import 'package:flutter/material.dart';
 
-class ContinueWithGoogleModel
-    extends FlutterFlowModel<ContinueWithGoogleWidget> {
-  /// Initialization and disposal methods.
+// class ContinueWithGoogleModel
+//     extends FlutterFlowModel<ContinueWithGoogleWidget> {
+//   /// Initialization and disposal methods.
 
-  @override
-  void initState(BuildContext context) {}
+//   @override
+//   void initState(BuildContext context) {}
 
-  @override
-  void dispose() {}
+//   @override
+//   void dispose() {}
 
-  /// Action blocks are added here.
+//   /// Action blocks are added here.
 
-  /// Additional helper methods are added here.
-}
+//   /// Additional helper methods are added here.
+// }

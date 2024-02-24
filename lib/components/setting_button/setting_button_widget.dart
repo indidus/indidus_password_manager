@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'setting_button_model.dart';
 
@@ -39,10 +38,7 @@ class _SettingButtonWidgetState extends State<SettingButtonWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
-      child: FlutterFlowIconButton(
-        borderRadius: 20.0,
-        borderWidth: 1.0,
-        buttonSize: 40.0,
+      child: IconButton(
         icon: const Icon(
           Icons.settings_sharp,
           size: 24.0,
@@ -51,7 +47,7 @@ class _SettingButtonWidgetState extends State<SettingButtonWidget> {
           logFirebaseEvent('SETTING_BUTTON_settings_sharp_ICN_ON_TAP');
           logFirebaseEvent('IconButton_navigate_to');
 
-          context.goNamed('Setting');
+          context.pushNamed('Setting');
         },
       ),
     );

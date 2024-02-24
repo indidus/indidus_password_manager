@@ -1,14 +1,18 @@
 default: dep
 
 alias c := clean
+alias cf := clean_flutter
+alias cc := clean_cargo
+alias cac := clean_all_cargo
+
 alias i := install_tools
 alias uc := update_cargo
-alias cac := clean_all_cargo
 
 # Get dependencies for flutter and rust
 dep:
   flutter pub get
 
+# Generate the splash screen for the flutter app
 splash:
   dart run flutter_native_splash:create
 
@@ -16,25 +20,33 @@ splash:
 frb:
   flutter_rust_bridge_codegen generate
 
+# Install the tools required for the project
 install_tools:
   cargo install just
   cargo install cargo-tree
+  cargo install cargo-features-manager
+  cargo install cargo-machete
 
-clean_flutter:
+# Clean the flutter project
+clean_flutter: && dep
   flutter clean
 
+# Clean the rust project
 clean_cargo: 
   cargo clean --manifest-path ./rust/Cargo.toml
 
+# Show the dependency tree for the rust project
 tree:
   cargo tree --manifest-path ./rust/Cargo.toml
 
 # Clean all the generated files during the build process by flutter and cargo
-clean: clean_flutter clean_cargo && dep
+clean: clean_flutter clean_cargo
 
+# Build the flutter app bundle
 abb: clean
   flutter build appbundle --target-platform android-arm,android-arm64,android-x64 --release
 
+# Build the flutter apk
 apk: clean
   flutter build apk --release --split-per-abi --target-platform android-arm,android-arm64,android-x64 
 

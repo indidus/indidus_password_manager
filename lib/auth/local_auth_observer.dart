@@ -21,7 +21,8 @@ class LocalAuthObserver extends WidgetsBindingObserver {
         bool authenticated = false;
         try {
           authenticated = await auth.authenticate(
-            localizedReason: 'For your data to be we have to verify it is you.',
+            localizedReason:
+                'For your data to be safe we have to verify it is you.',
             options: const AuthenticationOptions(
               stickyAuth: false,
               sensitiveTransaction: true,
@@ -42,7 +43,7 @@ class LocalAuthObserver extends WidgetsBindingObserver {
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.hidden:
-        isAuthRequired = true;
+        isAuthRequired = false;
         break;
     }
   }

@@ -17,35 +17,6 @@ import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 import 'src/rust/api/simple.dart';
 
-// bool isBiomerticAuthDone = false;
-
-class AppLifecycle extends WidgetsBindingObserver {
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.inactive:
-        print('App went off-screen!');
-        // isBiomerticAuthDone = false;
-        break;
-      case AppLifecycleState.paused:
-        print('App went to background!');
-        // isBiomerticAuthDone = false;
-        break;
-      case AppLifecycleState.resumed:
-        print('App came back to the foreground!');
-        break;
-      case AppLifecycleState.detached:
-        print('App is closing!');
-        break;
-      case AppLifecycleState.hidden:
-        print('App is hidden!');
-        break;
-      default:
-        break;
-    }
-  }
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -67,6 +38,8 @@ void main() async {
   runApp(const MyApp());
 }
 
+Future<void> Function()? asyncFuncVar;
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -81,6 +54,18 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
   ThemeMode _themeMode = ThemeMode.system;
+  ThemeData theme = ThemeData(
+    brightness: Brightness.light,
+    useMaterial3: true,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.lightGreenAccent,
+    ),
+    scrollbarTheme: ScrollbarThemeData(
+      thumbVisibility: MaterialStateProperty.all(false),
+      trackVisibility: MaterialStateProperty.all(false),
+      interactive: false,
+    ),
+  );
 
   late Stream<BaseAuthUser> userStream;
 
@@ -92,6 +77,23 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+
+    asyncFuncVar = () async {
+      setState(() {
+        theme = ThemeData(
+          brightness: Brightness.light,
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blue,
+          ),
+          scrollbarTheme: ScrollbarThemeData(
+            thumbVisibility: MaterialStateProperty.all(false),
+            trackVisibility: MaterialStateProperty.all(false),
+            interactive: false,
+          ),
+        );
+      });
+    };
 
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
@@ -133,20 +135,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: const [
         Locale('en'),
       ],
-      theme: ThemeData(
-        brightness: Brightness.light,
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          // seedColor: Colors.blue,
-          seedColor: Colors.lightGreenAccent,
-          // seedColor: const Color.fromARGB(100, 38, 50, 87),
-        ),
-        scrollbarTheme: ScrollbarThemeData(
-          thumbVisibility: MaterialStateProperty.all(false),
-          trackVisibility: MaterialStateProperty.all(false),
-          interactive: false,
-        ),
-      ),
+      theme: theme,
       themeMode: _themeMode,
       routerConfig: _router,
     );
@@ -180,7 +169,7 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(observer);
+    // WidgetsBinding.instance.removeObserver(observer);
 
     super.dispose();
   }
