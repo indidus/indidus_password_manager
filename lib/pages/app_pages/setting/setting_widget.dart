@@ -27,10 +27,8 @@ class _SettingWidgetState extends State<SettingWidget> {
   SettingsThemeData getSettingsTheme(BuildContext context) {
     return SettingsThemeData(
       settingsSectionBackground: Theme.of(context).colorScheme.background,
-      settingsListBackground: Theme.of(context).colorScheme.secondary,
-      titleTextColor: Theme.of(context).colorScheme.onSecondary,
-
-      tileHighlightColor: Colors.red, //Theme.of(context).colorScheme.secondary,
+      settingsListBackground: Theme.of(context).colorScheme.surfaceVariant,
+      titleTextColor: Theme.of(context).colorScheme.onSurfaceVariant,
     );
   }
 

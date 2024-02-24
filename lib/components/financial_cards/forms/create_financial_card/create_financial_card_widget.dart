@@ -280,7 +280,7 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                             Icons.keyboard_arrow_down_rounded,
                             size: 24.0,
                           ),
-                          fillColor: Colors.transparent,
+                          fillColor: Theme.of(context).colorScheme.surface,
                           elevation: 0.0,
                           borderColor: Theme.of(context).colorScheme.outline,
                           borderWidth: 1.5,
