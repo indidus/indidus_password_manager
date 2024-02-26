@@ -9,7 +9,6 @@ import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 import 'package:indidus_password_manager/src/rust/models/notes.dart';
 import 'package:path/path.dart' show join;
-import 'package:permission_handler/permission_handler.dart';
 
 class LoginRestore {
   final Login login;
@@ -160,44 +159,42 @@ class BackupRestoreManager {
   // It will return null if no file was selected or json
   // Else it will return all the failed backup items
   Future<RestoreResult> restoreBackup() async {
-    if (await Permission.storage.request().isGranted) {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: ['json'],
-        allowMultiple: false,
-        dialogTitle: 'Select the backup file to restore.',
-      );
-      if (result == null) {
-        return RestoreResult(isFileNotSelected: true);
-      }
-
-      File file = File(result.files.single.path!);
-      var jsonString = "";
-      try {
-        jsonString = await file.readAsString();
-      } catch (e) {
-        return RestoreResult(
-          isFailed: true,
-          failedReason: "Failed to read the file",
-        );
-      }
-
-      Models model;
-      try {
-        model = Models.fromJson(jsonString);
-      } catch (e) {
-        return RestoreResult(
-          isFailed: true,
-          failedReason: "Failed to parse the json file",
-        );
-      }
-      return await restoreModel(model);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['json'],
+      allowMultiple: false,
+      dialogTitle: 'Select the backup file to restore.',
+    );
+    if (result == null) {
+      return RestoreResult(isFileNotSelected: true);
     }
 
-    return RestoreResult(
-      isFailed: true,
-      failedReason: "Storage Permission Denied",
-    );
+    File file = File(result.files.single.path!);
+    var jsonString = "";
+    try {
+      jsonString = await file.readAsString();
+    } catch (e) {
+      return RestoreResult(
+        isFailed: true,
+        failedReason: "Failed to read the file",
+      );
+    }
+
+    Models model;
+    try {
+      model = Models.fromJson(jsonString);
+    } catch (e) {
+      return RestoreResult(
+        isFailed: true,
+        failedReason: "Failed to parse the json file",
+      );
+    }
+    return await restoreModel(model);
+
+    // return RestoreResult(
+    //   isFailed: true,
+    //   failedReason: "Storage Permission Denied",
+    // );
   }
 
   // It will return all failed items that failed to be restored
