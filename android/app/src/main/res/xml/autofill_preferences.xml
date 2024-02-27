@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:key="autofill_enable"
+        android:title="Enable Autofill"
+        android:summary="Toggle to enable or disable your autofill service"
+        android:defaultValue="true" /> 
+
+</PreferenceScreen>
+    

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<autofill-service xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <meta-data android:name="android.autofill" android:resource="@xml/autofill_service" />-->
+    <auth-required/> 
+    <!-- <compatibility-package android:name="com.example.myapp" />
+    <compatibility-package android:name="com.example.popularwebsite" />  -->
+</autofill-service>
+<!-- 
+  <autofill-service
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:settingsActivity="com.example.android.SettingsActivity" /> -->

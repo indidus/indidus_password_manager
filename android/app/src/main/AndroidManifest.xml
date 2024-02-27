@@ -58,6 +58,19 @@
             android:value="2" />
 
 
+        <service
+            android:name="com.indidus.password.IndidusPasswordManagerAutofillService"
+            android:label="Indidus Password Manager Autofill"
+            android:permission="android.permission.BIND_AUTOFILL_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.service.autofill.AutofillService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.autofill"
+                android:resource="@xml/service_configuration" />
+        </service>
 
     </application>
 </manifest>
