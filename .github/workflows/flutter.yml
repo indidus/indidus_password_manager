@@ -35,6 +35,6 @@ jobs:
           ref: main
       - name: Build abb
         run: |
-          git config --global url."https://<username>:$GH_PAT@github.com".insteadOf "https://github.com"
+          git config --global url."https://ashim-kr-saha:$GH_PAT@github.com".insteadOf "https://github.com"
           just abb
  
