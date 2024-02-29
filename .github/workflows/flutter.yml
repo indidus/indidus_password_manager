@@ -21,6 +21,14 @@ jobs:
       - name: Install Rust
         run: |
           curl https://sh.rustup.rs -sSf | sh -s -- -y 
-      - run: |
+      
+      - name: Validate rust installation
+        run: |
           source $HOME/.cargo/env
           cargo --version
+      - name: Install just
+        run: cargo install just
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        with:
+          ref: main
