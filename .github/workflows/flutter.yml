@@ -22,6 +22,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt install build-essential -y
+          sudo apt install unzip
       
       # - uses: actions/checkout@v3
       - uses: actions-rs/toolchain@v1
