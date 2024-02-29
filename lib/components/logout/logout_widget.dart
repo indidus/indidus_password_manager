@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:indidus_password_manager/auth/local_auth_observer.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -49,6 +50,7 @@ class _LogoutWidgetState extends State<LogoutWidget> {
         logFirebaseEvent('IconButton_auth');
         GoRouter.of(context).prepareAuthEvent();
         await authManager.signOut();
+        await AuthManagerStorage.instance.setAuthRequired(false);
         GoRouter.of(context).clearRedirectLocation();
 
         logFirebaseEvent('IconButton_navigate_to');

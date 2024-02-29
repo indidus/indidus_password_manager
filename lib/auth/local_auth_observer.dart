@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 
-class AuthManager {
-  static final AuthManager _instance = AuthManager._();
+class AuthManagerStorage {
+  static final AuthManagerStorage _instance = AuthManagerStorage._();
   static const FlutterSecureStorage _storage = FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
@@ -15,13 +15,13 @@ class AuthManager {
       resetOnError: false,
     ),
   );
-  factory AuthManager() {
+  factory AuthManagerStorage() {
     return _instance;
   }
 
-  AuthManager._();
+  AuthManagerStorage._();
 
-  static AuthManager get instance => _instance;
+  static AuthManagerStorage get instance => _instance;
 
   Future<bool> setAuthRequired(bool isAuthRequired) async {
     try {
@@ -69,7 +69,7 @@ class LocalAuthObserver extends WidgetsBindingObserver {
     }
     switch (state) {
       case AppLifecycleState.resumed:
-        isAuthRequired = await AuthManager.instance.isAuthRequired();
+        isAuthRequired = await AuthManagerStorage.instance.isAuthRequired();
         if (!isAuthRequired) {
           return;
         }
@@ -85,7 +85,7 @@ class LocalAuthObserver extends WidgetsBindingObserver {
               biometricOnly: false,
             ),
           );
-          await AuthManager.instance.setAuthRequired(!authenticated);
+          await AuthManagerStorage.instance.setAuthRequired(!authenticated);
         } catch (e) {
           if (kDebugMode) {
             print("error using biometric auth: $e");
@@ -96,7 +96,8 @@ class LocalAuthObserver extends WidgetsBindingObserver {
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.hidden:
-        isAuthRequired = await AuthManager.instance.setAuthRequired(true);
+        isAuthRequired =
+            await AuthManagerStorage.instance.setAuthRequired(true);
         break;
     }
   }
