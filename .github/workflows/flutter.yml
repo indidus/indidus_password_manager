@@ -37,4 +37,3 @@ jobs:
         run: |
           git config --global url."https://ashim-kr-saha:$GH_PAT@github.com".insteadOf "https://github.com"
           just abb
- 
