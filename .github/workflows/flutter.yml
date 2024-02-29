@@ -21,7 +21,7 @@ jobs:
       - name: Install Rust
         run: |
           curl https://sh.rustup.rs -sSf | sh -s -- -y 
-          echo "$HOME/.cargo/env" >> $GITHUB_PATH
+          echo "$HOME/.cargo/env:$PATH" >> $GITHUB_PATH
       - name: Validate rust installation
         run: cargo --version
       - name: Install just
