@@ -118,6 +118,7 @@ dependencies:
   local_auth: ^2.1.8
   flutter_settings_ui: ^3.0.0
   downloadsfolder: ^0.1.1
+  flutter_secure_storage: ^9.0.0
 
 dependency_overrides:
   flutter_launcher_icons: ^0.13.1
