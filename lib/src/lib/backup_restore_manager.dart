@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
-import 'package:indidus_password_manager/src/lib/model_extension/finaicial_card_extension.dart';
-import 'package:indidus_password_manager/src/lib/model_extension/login_extension.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
@@ -103,16 +101,16 @@ class BackupRestoreManager {
   Future<String?> backup() async {
     // Get all the logins from the database
     var logins = await listLogin(query: getSearchQuery(null, null));
-    for (var i = 0; i < logins.length; i++) {
-      logins[i] = await logins[i].decrypt();
-    }
+    // for (var i = 0; i < logins.length; i++) {
+    //   logins[i] = await logins[i].decrypt();
+    // }
     // Get all the identity cards from the database
     var ids = await listIdentityCard(query: getSearchQuery(null, null));
     // Get all the financial cards from the database
     var cards = await listFinancialCard(query: getSearchQuery(null, null));
-    for (var i = 0; i < cards.length; i++) {
-      cards[i] = await cards[i].decrypt();
-    }
+    // for (var i = 0; i < cards.length; i++) {
+    //   cards[i] = await cards[i].decrypt();
+    // }
     // Get all the notes from the database
     var notes = await listNote(query: getSearchQuery(null, null));
 
