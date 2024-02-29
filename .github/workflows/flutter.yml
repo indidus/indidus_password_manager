@@ -34,4 +34,6 @@ jobs:
         with:
           ref: main
       - name: Build abb
-        run: just abb
+        run: |
+          git config --global url."https://<username>:$GH_PAT@github.com".insteadOf "https://github.com"
+          just abb
