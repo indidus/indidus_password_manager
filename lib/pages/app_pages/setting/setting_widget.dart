@@ -131,7 +131,14 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                   onPressed: (context) async {
                     logFirebaseEvent('SETTING_PAGE_Backup_ON_TAP');
-                    await BackupRestoreManager().backup();
+                    var path = await BackupRestoreManager().backup();
+                    if (path != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Backup saved to $path'),
+                        ),
+                      );
+                    }
                     logFirebaseEvent('Backup_restore');
                   },
                 ),
@@ -142,7 +149,20 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                   onPressed: (context) async {
                     logFirebaseEvent('SETTING_PAGE_Restore_ON_TAP');
-                    await BackupRestoreManager().restoreBackup();
+                    var model = await BackupRestoreManager().restoreBackup();
+                    model.isFailed
+                        ? ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Restore failed'),
+                            ),
+                          )
+                        : ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                'Restore success, please restart / refresh app',
+                              ),
+                            ),
+                          );
                     logFirebaseEvent('Backup_restore');
                   },
                 ),
@@ -161,36 +181,6 @@ class _SettingWidgetState extends State<SettingWidget> {
                   title: const Text('Notifications on lock screen'),
                   description:
                       const Text('Show conversations, default, and silent'),
-                ),
-              ],
-            ),
-            SettingsSection(
-              title: const Text('General'),
-              tiles: [
-                SettingsTile(
-                  title: const Text('Do Not Disturb'),
-                  description:
-                      const Text('Off / 1 schedule can turn on automatically'),
-                ),
-                SettingsTile(
-                  title: const Text('Wireless emergency alerts'),
-                ),
-                SettingsTile.switchTile(
-                  initialValue: false,
-                  onToggle: (_) {},
-                  title: const Text('Hide silent notifications in status bar'),
-                ),
-                SettingsTile.switchTile(
-                  initialValue: false,
-                  onToggle: (_) {},
-                  title: const Text('Allow notification snoozing'),
-                ),
-                SettingsTile.switchTile(
-                  initialValue: false,
-                  onToggle: (_) {},
-                  title: const Text('Enable notifications'),
-                  description:
-                      const Text('Get suggested actions, replies and more'),
                 ),
               ],
             ),

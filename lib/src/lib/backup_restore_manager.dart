@@ -1,14 +1,16 @@
 import 'dart:io';
 
+import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
+import 'package:indidus_password_manager/src/lib/model_extension/finaicial_card_extension.dart';
+import 'package:indidus_password_manager/src/lib/model_extension/login_extension.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
 import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/logins.dart';
 import 'package:indidus_password_manager/src/rust/models/notes.dart';
-import 'package:path/path.dart' show join;
 
 class LoginRestore {
   final Login login;
@@ -101,17 +103,21 @@ class BackupRestoreManager {
   Future<String?> backup() async {
     // Get all the logins from the database
     var logins = await listLogin(query: getSearchQuery(null, null));
+    for (var i = 0; i < logins.length; i++) {
+      logins[i] = await logins[i].decrypt();
+    }
     // Get all the identity cards from the database
     var ids = await listIdentityCard(query: getSearchQuery(null, null));
     // Get all the financial cards from the database
     var cards = await listFinancialCard(query: getSearchQuery(null, null));
+    for (var i = 0; i < cards.length; i++) {
+      cards[i] = await cards[i].decrypt();
+    }
     // Get all the notes from the database
     var notes = await listNote(query: getSearchQuery(null, null));
 
     var model = Models(logins: logins, ids: ids, cards: cards, notes: notes);
-    var path = await FilePicker.platform.getDirectoryPath(
-      dialogTitle: 'Select a folder to save the backup file.',
-    );
+    var path = await getDownloadDirectoryPath();
 
     if (path != null) {
       // Create a json string from the model
@@ -119,7 +125,7 @@ class BackupRestoreManager {
       // Create a file name
       var now = DateTime.now();
       var fileName =
-          "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}.json";
+          "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}_indidus_password_backup.json";
       // Save the model to the file system
       path = join(path, fileName);
       // Save to file
@@ -127,32 +133,6 @@ class BackupRestoreManager {
       var x = await file.writeAsString(jsonString, flush: true);
       return x.path.toString();
     }
-    // var status = await Permission.storage.status;
-
-    // final x = await Permission.storage.request();
-
-    // if (status.isPermanentlyDenied) {}
-    // if (await Permission.storage.request().isGranted) {
-    //   var path = await FilePicker.platform.getDirectoryPath(
-    //     dialogTitle: 'Select a folder to save the backup file.',
-    //   );
-    //   if (path != null) {
-    //     // Create a json string from the model
-    //     var jsonString = model.toJson();
-    //     // Create a file name
-    //     var now = DateTime.now();
-    //     var fileName =
-    //         "${now.year}_${now.month}_${now.day}_${now.hour}_${now.minute}_${now.second}.json";
-    //     // Save the model to the file system
-    //     path = join(path, 'Indidus Password Manager Backup', fileName);
-    //     // Save to file
-    //     var file = File(path);
-    //     var x = await file.writeAsString(jsonString, flush: true);
-    //     return x.path.toString();
-    //   }
-    // }
-
-    // Backup is not done
     return null;
   }
 
@@ -190,11 +170,6 @@ class BackupRestoreManager {
       );
     }
     return await restoreModel(model);
-
-    // return RestoreResult(
-    //   isFailed: true,
-    //   failedReason: "Storage Permission Denied",
-    // );
   }
 
   // It will return all failed items that failed to be restored
