@@ -29,7 +29,7 @@ tree:
 clean: clean_flutter clean_cargo && dep
 
 abb: clean
-  flutter build appbundle --target-platform android-arm,android-arm64,android-x64 --release
+  flutter build appbundle --target-platform android-arm,android-arm64,android-x64 --release --verbose
 
 apk: clean
   flutter build apk --target-platform android-arm,android-arm64,android-x64 --release --split-per-abi
