@@ -119,6 +119,7 @@ dependencies:
   flutter_settings_ui: ^3.0.0
   downloadsfolder: ^0.1.1
   flutter_secure_storage: ^9.0.0
+  package_info_plus: ^5.0.1
 
 dependency_overrides:
   flutter_launcher_icons: ^0.13.1

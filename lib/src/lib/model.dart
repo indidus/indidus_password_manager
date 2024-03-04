@@ -12,12 +12,14 @@ import 'model_extension/identity_card_extension.dart';
 
 class Models {
   static const _jsonEncode = JsonCodec();
+  final String version;
   final List<FinancialCard> cards;
   final List<Note> notes;
   final List<Login> logins;
   final List<IdentityCard> ids;
 
   const Models({
+    required this.version,
     required this.logins,
     required this.ids,
     required this.cards,
@@ -26,6 +28,7 @@ class Models {
 
   toJson() {
     return _jsonEncode.encode({
+      'version': version,
       'cards': cards.map((e) => e.toJson()).toList(),
       'notes': notes.map((e) => e.toJson()).toList(),
       'logins': logins.map((e) => e.toJson()).toList(),
@@ -36,6 +39,7 @@ class Models {
   factory Models.fromJson(String str) {
     Map<String, dynamic> json = _jsonEncode.decode(str);
     return Models(
+      version: json['version'],
       cards: json['cards'] != null
           ? List<FinancialCard>.from(
               (json['cards']).map((e) => financialCardFromJson(e)).toList())
@@ -62,6 +66,7 @@ class Models {
     (other as Models);
     return identical(this, other) ||
         runtimeType == other.runtimeType &&
+            version == other.version &&
             cards.length == other.cards.length &&
             cards.every((e) => other.cards.contains(e)) &&
             notes.length == other.notes.length &&
@@ -74,5 +79,9 @@ class Models {
 
   @override
   int get hashCode =>
-      cards.hashCode ^ notes.hashCode ^ logins.hashCode ^ ids.hashCode;
+      version.hashCode ^
+      cards.hashCode ^
+      notes.hashCode ^
+      logins.hashCode ^
+      ids.hashCode;
 }

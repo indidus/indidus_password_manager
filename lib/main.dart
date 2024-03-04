@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:indidus_password_manager/auth/local_auth_observer.dart';
+import 'package:indidus_password_manager/init_const.dart';
 import 'package:indidus_password_manager/src/lib/storage.dart';
 import 'package:indidus_password_manager/src/rust/frb_generated.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'auth/firebase_auth/auth_util.dart';
@@ -19,6 +21,13 @@ import 'src/rust/api/simple.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+
+  appName = packageInfo.appName;
+  appVersion = packageInfo.version;
+  packageName = packageInfo.packageName;
+  buildNumber = packageInfo.buildNumber;
 
   // final observer = AppLifecycle();
   // WidgetsBinding.instance.addObserver(observer);

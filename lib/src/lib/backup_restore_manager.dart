@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:downloadsfolder/downloadsfolder.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:indidus_password_manager/init_const.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
 import 'package:indidus_password_manager/src/lib/utils.dart';
 import 'package:indidus_password_manager/src/rust/api/simple.dart';
@@ -114,7 +115,13 @@ class BackupRestoreManager {
     // Get all the notes from the database
     var notes = await listNote(query: getSearchQuery(null, null));
 
-    var model = Models(logins: logins, ids: ids, cards: cards, notes: notes);
+    var model = Models(
+      version: appVersion,
+      logins: logins,
+      ids: ids,
+      cards: cards,
+      notes: notes,
+    );
     var path = await getDownloadDirectoryPath();
 
     if (path != null) {
