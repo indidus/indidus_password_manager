@@ -82,7 +82,6 @@ dependencies:
   sign_in_with_apple: ^5.0.0
   # sign_in_with_apple_platform_interface: 1.0.0
   # sign_in_with_apple_web: 1.0.1
-  sqflite: 2.2.6
   storage_client: 1.5.4
   stream_transform: 2.1.0
   # supabase: 1.11.11
@@ -129,6 +128,7 @@ dev_dependencies:
   flutter_lints: 3.0.0
   image: 4.0.17
   lints: 3.0.0
+  sqflite: ^2.3.2
 
   flutter_test:
     sdk: flutter
