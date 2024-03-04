@@ -8,7 +8,7 @@ import 'package:indidus_password_manager/init_const.dart';
 import 'package:indidus_password_manager/src/lib/storage.dart';
 import 'package:indidus_password_manager/src/rust/frb_generated.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
@@ -37,7 +37,7 @@ void main() async {
   await SecureStorage.init();
   await RustLib.init();
 
-  final String databasesPath = (await getApplicationDocumentsDirectory()).path;
+  final String databasesPath = await getDatabasesPath();
   await init(dbPath: '$databasesPath/password.db');
 
   if (!kIsWeb) {
