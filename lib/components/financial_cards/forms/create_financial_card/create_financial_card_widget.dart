@@ -357,35 +357,37 @@ class _CreateFinancialCardWidgetState extends State<CreateFinancialCardWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                        'CREATE_FINANCIAL_CARD_DB_CALLING',
-                      );
-                      await postFinancialCard(
-                        data: FinancialCard(
-                          createdAt: getCurrentTimestamp,
-                          createdBy: currentUserUid,
-                          cardHolderName:
-                              _model.cardHolderNameFieldController.text,
-                          cardNumber: _model.cardNumberFieldController.text,
-                          cardProviderName:
-                              _model.cardProviderNameFieldController.text,
-                          cardType: _model.cardTypeFieldValue,
-                          cvv: await SecureStorage.encrypt(
-                            _model.cvvFieldController.text,
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                          'CREATE_FINANCIAL_CARD_DB_CALLING',
+                        );
+                        await postFinancialCard(
+                          data: FinancialCard(
+                            createdAt: getCurrentTimestamp,
+                            createdBy: currentUserUid,
+                            cardHolderName:
+                                _model.cardHolderNameFieldController.text,
+                            cardNumber: _model.cardNumberFieldController.text,
+                            cardProviderName:
+                                _model.cardProviderNameFieldController.text,
+                            cardType: _model.cardTypeFieldValue,
+                            cvv: await SecureStorage.encrypt(
+                              _model.cvvFieldController.text,
+                            ),
+                            expiryDate: _model.expireDateFieldController.text,
+                            issueDate: _model.issueDateFieldController.text,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            pin: await SecureStorage.encrypt(
+                              _model.pinFieldController.text,
+                            ),
                           ),
-                          expiryDate: _model.expireDateFieldController.text,
-                          issueDate: _model.issueDateFieldController.text,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          pin: await SecureStorage.encrypt(
-                            _model.pinFieldController.text,
-                          ),
-                        ),
-                      );
-                      logFirebaseEvent(
-                        'CREATE_FINANCIAL_CARD_DB_SUCCESS',
-                      );
-                      Navigator.pop(context);
+                        );
+                        logFirebaseEvent(
+                          'CREATE_FINANCIAL_CARD_DB_SUCCESS',
+                        );
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text("Save"),
                   ),

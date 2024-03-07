@@ -361,38 +361,40 @@ class _UpdateFinancialCardWidgetState extends State<UpdateFinancialCardWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'UPDATE_FINANCIAL_CARD_FinantcialCardCrea');
-                      logFirebaseEvent(
-                          'FinantcialCardCreateButton_backend_call');
-                      await putFinancialCard(
-                        id: widget.card.id!,
-                        data: FinancialCard(
-                          createdAt: widget.card.createdAt,
-                          createdBy: widget.card.createdBy,
-                          updatedAt: getCurrentTimestamp,
-                          updatedBy: currentUserUid,
-                          cardHolderName:
-                              _model.cardHolderNameFieldController.text,
-                          cardNumber: _model.cardNumberFieldController.text,
-                          cardProviderName:
-                              _model.cardProviderNameFieldController.text,
-                          cardType: _model.cardTypeFieldValue,
-                          cvv: await SecureStorage.encrypt(
-                            _model.cvvFieldController.text,
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'UPDATE_FINANCIAL_CARD_FinantcialCardCrea');
+                        logFirebaseEvent(
+                            'FinantcialCardCreateButton_backend_call');
+                        await putFinancialCard(
+                          id: widget.card.id!,
+                          data: FinancialCard(
+                            createdAt: widget.card.createdAt,
+                            createdBy: widget.card.createdBy,
+                            updatedAt: getCurrentTimestamp,
+                            updatedBy: currentUserUid,
+                            cardHolderName:
+                                _model.cardHolderNameFieldController.text,
+                            cardNumber: _model.cardNumberFieldController.text,
+                            cardProviderName:
+                                _model.cardProviderNameFieldController.text,
+                            cardType: _model.cardTypeFieldValue,
+                            cvv: await SecureStorage.encrypt(
+                              _model.cvvFieldController.text,
+                            ),
+                            expiryDate: _model.expireDateFieldController.text,
+                            issueDate: _model.issueDateFieldController.text,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            pin: await SecureStorage.encrypt(
+                              _model.pinFieldController.text,
+                            ),
                           ),
-                          expiryDate: _model.expireDateFieldController.text,
-                          issueDate: _model.issueDateFieldController.text,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          pin: await SecureStorage.encrypt(
-                            _model.pinFieldController.text,
-                          ),
-                        ),
-                      );
-                      logFirebaseEvent(
-                          'FinantcialCardCreateButton_close_dialog,');
-                      Navigator.pop(context);
+                        );
+                        logFirebaseEvent(
+                            'FinantcialCardCreateButton_close_dialog,');
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text("Update"),
                   ),

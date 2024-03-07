@@ -118,18 +118,22 @@ class _CreateNoteWidgetState extends State<CreateNoteWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
-                      logFirebaseEvent('NoteUpdateButton_backend_call');
-                      await postNote(
-                        data: Note(
-                          name: _model.nameFieldController.text,
-                          createdBy: currentUserUid,
-                          note: _model.noteFieldController.text,
-                        ),
-                      );
-                      logFirebaseEvent('NoteUpdateButton_navigate_back');
-                      context.pop();
+                      if (_model.formKey.currentState!.validate()) {
+                        // Check validation
+                        // Your postNote logic here
+                        logFirebaseEvent(
+                            'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
+                        logFirebaseEvent('NoteUpdateButton_backend_call');
+                        await postNote(
+                          data: Note(
+                            name: _model.nameFieldController.text,
+                            createdBy: currentUserUid,
+                            note: _model.noteFieldController.text,
+                          ),
+                        );
+                        logFirebaseEvent('NoteUpdateButton_navigate_back');
+                        context.pop();
+                      }
                     },
                     child: const Text("Save"),
                   ),

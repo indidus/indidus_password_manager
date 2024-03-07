@@ -231,26 +231,30 @@ class _CreateLoginWidgetState extends State<CreateLoginWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent('CREATE_LOGIN_LoginCreateButton_ON_TAP');
-                      logFirebaseEvent('LoginCreateButton_backend_call');
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'CREATE_LOGIN_LoginCreateButton_ON_TAP');
+                        logFirebaseEvent('LoginCreateButton_backend_call');
 
-                      postLogin(
-                        data: Login(
-                          createdAt: getCurrentTimestamp,
-                          createdBy: currentUserUid,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          username: _model.usernameFieldController.text,
-                          url: _model.urlFieldController.text,
-                          password: await SecureStorage.encrypt(
-                            _model.passwordFieldController.text,
+                        postLogin(
+                          data: Login(
+                            createdAt: getCurrentTimestamp,
+                            createdBy: currentUserUid,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            username: _model.usernameFieldController.text,
+                            url: _model.urlFieldController.text,
+                            password: await SecureStorage.encrypt(
+                              _model.passwordFieldController.text,
+                            ),
+                            passwordHint:
+                                _model.passwordHintFieldController.text,
                           ),
-                          passwordHint: _model.passwordHintFieldController.text,
-                        ),
-                      );
-                      logFirebaseEvent(
-                          'LoginCreateButton_close_dialog,_drawer,_');
-                      Navigator.pop(context);
+                        );
+                        logFirebaseEvent(
+                            'LoginCreateButton_close_dialog,_drawer,_');
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text("Save"),
                   ),

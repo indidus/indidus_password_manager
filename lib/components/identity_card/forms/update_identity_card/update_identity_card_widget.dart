@@ -302,28 +302,31 @@ class _UpdateIdentityCardWidgetState extends State<UpdateIdentityCardWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'UPDATE_IDENTITY_CARD_IdentityCardCreateB');
-                      logFirebaseEvent('IdentityCardCreateButton_backend_call');
-                      await putIdentityCard(
-                        id: widget.idCard.id!,
-                        data: IdentityCard(
-                          createdAt: widget.idCard.createdAt,
-                          createdBy: widget.idCard.createdBy,
-                          updatedAt: getCurrentTimestamp,
-                          updatedBy: currentUserUid,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          country: _model.countryFieldController.text,
-                          expiryDate: _model.expireDateFieldController.text,
-                          identityCardNumber:
-                              _model.cardNumberFieldController.text,
-                          identityCardType: _model.cardTypeFieldValue,
-                          issueDate: _model.issueDateFieldController.text,
-                          nameOnCard: _model.nameOnCardFieldController.text,
-                          state: _model.stateFieldController.text,
-                        ),
-                      );
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'UPDATE_IDENTITY_CARD_IdentityCardCreateB');
+                        logFirebaseEvent(
+                            'IdentityCardCreateButton_backend_call');
+                        await putIdentityCard(
+                          id: widget.idCard.id!,
+                          data: IdentityCard(
+                            createdAt: widget.idCard.createdAt,
+                            createdBy: widget.idCard.createdBy,
+                            updatedAt: getCurrentTimestamp,
+                            updatedBy: currentUserUid,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            country: _model.countryFieldController.text,
+                            expiryDate: _model.expireDateFieldController.text,
+                            identityCardNumber:
+                                _model.cardNumberFieldController.text,
+                            identityCardType: _model.cardTypeFieldValue,
+                            issueDate: _model.issueDateFieldController.text,
+                            nameOnCard: _model.nameOnCardFieldController.text,
+                            state: _model.stateFieldController.text,
+                          ),
+                        );
+                      }
                       logFirebaseEvent(
                           'IdentityCardCreateButton_close_dialog,_d');
                       Navigator.pop(context);
