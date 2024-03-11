@@ -5,6 +5,7 @@ import 'package:indidus_password_manager/auth/firebase_auth/auth_util.dart';
 import 'package:indidus_password_manager/auth/local_auth_observer.dart';
 import 'package:indidus_password_manager/components/settings/forms/update_profile/update_profile_widget.dart';
 import 'package:indidus_password_manager/src/lib/backup_restore_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'setting_model.dart';
@@ -169,18 +170,29 @@ class _SettingWidgetState extends State<SettingWidget> {
               ],
             ),
             SettingsSection(
-              title: const Text('Privacy'),
+              title: const Text('Legal'),
               tiles: [
                 SettingsTile(
-                  title: const Text('Device & app notifications'),
+                  title: const Text('Terms and Conditions'),
                   description: const Text(
-                    'Control which apps and devices can read notifications',
+                    'Terms and Conditions of Indidus Password Manager',
+                  ),
+                  onPressed: (context) => launchUrl(
+                    Uri.parse(
+                      'https://password.indidus.com/indidus-password-manager-terms-and-conditions/',
+                    ),
                   ),
                 ),
                 SettingsTile(
-                  title: const Text('Notifications on lock screen'),
-                  description:
-                      const Text('Show conversations, default, and silent'),
+                  title: const Text('Privacy Policy'),
+                  description: const Text(
+                    'Privacy Policy of Indidus Password Manager',
+                  ),
+                  onPressed: (context) => launchUrl(
+                    Uri.parse(
+                      'https://password.indidus.com/indidus-password-manager-privacy-policy/',
+                    ),
+                  ),
                 ),
               ],
             ),

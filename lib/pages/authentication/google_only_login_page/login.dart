@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:indidus_password_manager/auth/firebase_auth/auth_util.dart';
+import 'package:indidus_password_manager/components/link_button.dart';
 import 'package:indidus_password_manager/flutter_flow/flutter_flow_util.dart';
 
 class LoginPage extends StatelessWidget {
@@ -66,13 +66,42 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 20),
             const ContinueWIthGoogle(),
             const SizedBox(height: 20),
-            Text(
-              "Connect with us",
-              style: GoogleFonts.ubuntu(
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RichText(
+                text: TextSpan(
+                  text:
+                      'By continuing with Google, you agree to our  and Privacy Policy.',
+                  style: Theme.of(context).textTheme.bodySmall,
+                  children: const [
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: LinkButton(
+                        urlLabel: "Terms and Conditions",
+                        url:
+                            "https://password.indidus.com/indidus-password-manager-terms-and-conditions/",
+                      ),
+                    ),
+                    TextSpan(
+                      text: ' and ',
+                    ),
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: LinkButton(
+                        urlLabel: "Privacy Policy",
+                        url:
+                            "https://password.indidus.com/indidus-password-manager-privacy-policy/",
+                      ),
+                    ),
+                    TextSpan(
+                      text: '.',
+                    ),
+                  ],
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
