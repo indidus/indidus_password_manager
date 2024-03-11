@@ -60,7 +60,7 @@ class LoginPage extends StatelessWidget {
               maxLines: 1,
             ),
             Text(
-              'Never forget a password again.',
+              'Strong security. Simple to use.',
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 20),
