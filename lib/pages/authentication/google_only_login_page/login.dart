@@ -67,7 +67,7 @@ class LoginPage extends StatelessWidget {
             const ContinueWIthGoogle(),
             const SizedBox(height: 20),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(24.0),
               child: RichText(
                 text: TextSpan(
                   text:
