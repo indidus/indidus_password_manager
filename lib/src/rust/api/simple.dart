@@ -10,13 +10,8 @@ import '../models/logins.dart';
 import '../models/notes.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-/// frb_marker: #[frb(sync)]
-Future<String> greet({required String name, dynamic hint}) =>
+String greet({required String name, dynamic hint}) =>
     RustLib.instance.api.greet(name: name, hint: hint);
-
-/// frb_marker: #[frb(init)]
-Future<void> initApp({dynamic hint}) =>
-    RustLib.instance.api.initApp(hint: hint);
 
 Future<bool> init({required String dbPath, dynamic hint}) =>
     RustLib.instance.api.init(dbPath: dbPath, hint: hint);
