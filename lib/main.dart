@@ -49,6 +49,20 @@ void main() async {
 
 Future<void> Function()? asyncFuncVar;
 
+class MyResponsiveApp extends StatefulWidget {
+  const MyResponsiveApp({super.key});
+
+  @override
+  State<MyResponsiveApp> createState() => _MyResponsiveAppState();
+}
+
+class _MyResponsiveAppState extends State<MyResponsiveApp> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
