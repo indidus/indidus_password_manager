@@ -241,29 +241,33 @@ class _UpdateLoginWidgetState extends State<UpdateLoginWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent('UPDATE_LOGIN_NoteUpdateButton_ON_TAP');
-                      logFirebaseEvent('NoteUpdateButton_backend_call');
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'UPDATE_LOGIN_NoteUpdateButton_ON_TAP');
+                        logFirebaseEvent('NoteUpdateButton_backend_call');
 
-                      await putLogin(
-                        id: widget.login.id!,
-                        data: Login(
-                          createdAt: widget.login.createdAt,
-                          createdBy: widget.login.createdBy,
-                          updatedAt: getCurrentTimestamp,
-                          updatedBy: currentUserUid,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          username: _model.usernameFieldController.text,
-                          url: _model.urlFieldController.text,
-                          password: await SecureStorage.encrypt(
-                            _model.passwordFieldController.text,
+                        await putLogin(
+                          id: widget.login.id!,
+                          data: Login(
+                            createdAt: widget.login.createdAt,
+                            createdBy: widget.login.createdBy,
+                            updatedAt: getCurrentTimestamp,
+                            updatedBy: currentUserUid,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            username: _model.usernameFieldController.text,
+                            url: _model.urlFieldController.text,
+                            password: await SecureStorage.encrypt(
+                              _model.passwordFieldController.text,
+                            ),
+                            passwordHint:
+                                _model.passwordHintFieldController.text,
                           ),
-                          passwordHint: _model.passwordHintFieldController.text,
-                        ),
-                      );
-                      logFirebaseEvent(
-                          'NoteUpdateButton_close_dialog,_drawer,_e');
-                      Navigator.pop(context);
+                        );
+                        logFirebaseEvent(
+                            'NoteUpdateButton_close_dialog,_drawer,_e');
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text("Update"),
                   ),

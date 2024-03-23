@@ -119,21 +119,23 @@ class _UpdateNoteWidgetState extends State<UpdateNoteWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
-                      putNote(
-                        id: widget.note.id!,
-                        data: Note(
-                          createdAt: widget.note.createdAt!,
-                          createdBy: widget.note.createdBy!,
-                          updatedAt: getCurrentTimestamp,
-                          updatedBy: currentUserUid,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                        ),
-                      );
-                      logFirebaseEvent('NoteUpdateButton_navigate_back');
-                      context.pop();
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'UPDATE_NOTE_COMP_NoteUpdateButton_ON_TAP');
+                        putNote(
+                          id: widget.note.id!,
+                          data: Note(
+                            createdAt: widget.note.createdAt!,
+                            createdBy: widget.note.createdBy!,
+                            updatedAt: getCurrentTimestamp,
+                            updatedBy: currentUserUid,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                          ),
+                        );
+                        logFirebaseEvent('NoteUpdateButton_navigate_back');
+                        context.pop();
+                      }
                     },
                     child: const Text("Update"),
                   ),

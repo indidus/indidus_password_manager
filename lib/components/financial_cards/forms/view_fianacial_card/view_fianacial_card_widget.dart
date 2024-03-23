@@ -95,6 +95,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                       child: TextFieldWidget(
                         fieldName: 'Cvv',
                         fieldValue: widget.card.cvv ?? "",
+                        mask: '***',
                       ),
                     ),
                     wrapWithModel(
@@ -103,6 +104,7 @@ class _ViewFianacialCardWidgetState extends State<ViewFianacialCardWidget> {
                       child: TextFieldWidget(
                         fieldName: 'Pin',
                         fieldValue: widget.card.pin ?? "",
+                        mask: '****',
                       ),
                     ),
                     wrapWithModel(

@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import 'create_identity_card_widget.dart' show CreateIdentityCardWidget;
-import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CreateIdentityCardModel
     extends FlutterFlowModel<CreateIdentityCardWidget> {
@@ -13,14 +14,40 @@ class CreateIdentityCardModel
   FocusNode? nameFieldFocusNode;
   TextEditingController? nameFieldController;
   String? Function(BuildContext, String?)? nameFieldControllerValidator;
+  String? _nameFieldControllerValidator(BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for nameOnCardField widget.
   FocusNode? nameOnCardFieldFocusNode;
   TextEditingController? nameOnCardFieldController;
   String? Function(BuildContext, String?)? nameOnCardFieldControllerValidator;
+  String? _nameOnCardFieldControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for cardNumberField widget.
   FocusNode? cardNumberFieldFocusNode;
   TextEditingController? cardNumberFieldController;
   String? Function(BuildContext, String?)? cardNumberFieldControllerValidator;
+  String? _cardNumberFieldControllerValidator(
+      BuildContext context, String? val) {
+    if (val == null || val.isEmpty) {
+      return 'Field is required';
+    }
+
+    return null;
+  }
+
   // State field(s) for countryField widget.
   FocusNode? countryFieldFocusNode;
   TextEditingController? countryFieldController;
@@ -50,7 +77,11 @@ class CreateIdentityCardModel
   /// Initialization and disposal methods.
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    nameFieldControllerValidator = _nameFieldControllerValidator;
+    nameOnCardFieldControllerValidator = _nameOnCardFieldControllerValidator;
+    cardNumberFieldControllerValidator = _cardNumberFieldControllerValidator;
+  }
 
   @override
   void dispose() {

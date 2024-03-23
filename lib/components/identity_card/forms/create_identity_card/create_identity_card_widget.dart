@@ -201,7 +201,7 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                             Icons.keyboard_arrow_down_rounded,
                             size: 24.0,
                           ),
-                          fillColor: Colors.transparent,
+                          fillColor: Theme.of(context).colorScheme.surface,
                           elevation: 0.0,
                           borderColor: Theme.of(context).colorScheme.outline,
                           borderWidth: 1.5,
@@ -282,29 +282,32 @@ class _CreateIdentityCardWidgetState extends State<CreateIdentityCardWidget> {
                   ),
                   FilledButton(
                     onPressed: () async {
-                      logFirebaseEvent(
-                          'CREATE_IDENTITY_CARD_IdentityCardCreateB');
-                      logFirebaseEvent('IdentityCardCreateButton_backend_call');
+                      if (_model.formKey.currentState!.validate()) {
+                        logFirebaseEvent(
+                            'CREATE_IDENTITY_CARD_IdentityCardCreateB');
+                        logFirebaseEvent(
+                            'IdentityCardCreateButton_backend_call');
 
-                      await postIdentityCard(
-                        data: IdentityCard(
-                          createdAt: getCurrentTimestamp,
-                          createdBy: currentUserUid,
-                          name: _model.nameFieldController.text,
-                          note: _model.noteFieldController.text,
-                          country: _model.countryFieldController.text,
-                          expiryDate: _model.expireDateFieldController.text,
-                          identityCardNumber:
-                              _model.cardNumberFieldController.text,
-                          identityCardType: _model.cardTypeFieldValue,
-                          issueDate: _model.issueDateFieldController.text,
-                          nameOnCard: _model.nameOnCardFieldController.text,
-                          state: _model.stateFieldController.text,
-                        ),
-                      );
-                      logFirebaseEvent(
-                          'IdentityCardCreateButton_close_dialog,_d');
-                      Navigator.pop(context);
+                        await postIdentityCard(
+                          data: IdentityCard(
+                            createdAt: getCurrentTimestamp,
+                            createdBy: currentUserUid,
+                            name: _model.nameFieldController.text,
+                            note: _model.noteFieldController.text,
+                            country: _model.countryFieldController.text,
+                            expiryDate: _model.expireDateFieldController.text,
+                            identityCardNumber:
+                                _model.cardNumberFieldController.text,
+                            identityCardType: _model.cardTypeFieldValue,
+                            issueDate: _model.issueDateFieldController.text,
+                            nameOnCard: _model.nameOnCardFieldController.text,
+                            state: _model.stateFieldController.text,
+                          ),
+                        );
+                        logFirebaseEvent(
+                            'IdentityCardCreateButton_close_dialog,_d');
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text("Save"),
                   ),

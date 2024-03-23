@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:indidus_password_manager/init_const.dart';
 import 'package:indidus_password_manager/src/lib/model.dart';
 import 'package:indidus_password_manager/src/rust/models/financial_cards.dart';
 import 'package:indidus_password_manager/src/rust/models/identity_cards.dart';
@@ -120,6 +121,7 @@ void main() {
             nameOnCard: 'John Doe2',
           ),
         ],
+        version: appVersion,
       );
 
       // act

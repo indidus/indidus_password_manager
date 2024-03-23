@@ -68,7 +68,7 @@ Future<int> queryCollectionCount(
     if (kDebugMode) {
       print('Error querying $collection: $err');
     }
-  }).then((value) => value.count);
+  }).then((value) => Future.value(value.count));
 }
 
 Stream<List<T>> queryCollection<T>(

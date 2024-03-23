@@ -195,7 +195,7 @@ class _LoginsPageWidgetState extends State<LoginsPageWidget> {
                   return Center(
                     child: SizedBox(
                       width: MediaQuery.sizeOf(context).width * 0.9,
-                      height: 128.0,
+                      height: 150.0,
                       child: const EmptyLoginListWidget(),
                     ),
                   );
