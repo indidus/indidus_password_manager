@@ -3,48 +3,25 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
-import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
-class Note {
-  final String? id;
-  final DateTime? createdAt;
-  final String? createdBy;
-  final DateTime? updatedAt;
-  final String? updatedBy;
-  final String name;
-  final String? note;
+import '../frb_generated.dart';
 
-  const Note({
-    this.id,
-    this.createdAt,
-    this.createdBy,
-    this.updatedAt,
-    this.updatedBy,
-    required this.name,
-    this.note,
-  });
+part 'notes.freezed.dart';
+part 'notes.g.dart';
 
-  @override
-  int get hashCode =>
-      id.hashCode ^
-      createdAt.hashCode ^
-      createdBy.hashCode ^
-      updatedAt.hashCode ^
-      updatedBy.hashCode ^
-      name.hashCode ^
-      note.hashCode;
+@freezed
+class Note with _$Note {
+  const factory Note({
+    String? id,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    required String name,
+    String? note,
+  }) = _Note;
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is Note &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          createdAt == other.createdAt &&
-          createdBy == other.createdBy &&
-          updatedAt == other.updatedAt &&
-          updatedBy == other.updatedBy &&
-          name == other.name &&
-          note == other.note;
+  factory Note.fromJson(Map<String, Object?> json) => _$NoteFromJson(json);
 }

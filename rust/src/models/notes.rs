@@ -1,5 +1,6 @@
 use chrono::NaiveDateTime;
 use crudlf_derive::{SqliteDelete, SqliteInsert, SqliteListFilter, SqliteSelect, SqliteUpdate};
+use flutter_rust_bridge::frb;
 use serde::{Deserialize, Serialize};
 use sqlx::FromRow;
 
@@ -17,6 +18,7 @@ use sqlx::FromRow;
     SqliteListFilter,
 )]
 #[crudlf(table_name = "notes")]
+#[frb(dart_metadata=("freezed"))]
 pub struct Note {
     #[serde(rename = "id")]
     #[serde(skip_serializing_if = "Option::is_none")]

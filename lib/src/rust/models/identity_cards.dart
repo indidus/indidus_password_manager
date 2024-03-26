@@ -3,76 +3,33 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
-import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
-class IdentityCard {
-  final String? id;
-  final DateTime? createdAt;
-  final String? createdBy;
-  final DateTime? updatedAt;
-  final String? updatedBy;
-  final String name;
-  final String? note;
-  final String? country;
-  final String? expiryDate;
-  final String identityCardNumber;
-  final String? identityCardType;
-  final String? issueDate;
-  final String nameOnCard;
-  final String? state;
+import '../frb_generated.dart';
 
-  const IdentityCard({
-    this.id,
-    this.createdAt,
-    this.createdBy,
-    this.updatedAt,
-    this.updatedBy,
-    required this.name,
-    this.note,
-    this.country,
-    this.expiryDate,
-    required this.identityCardNumber,
-    this.identityCardType,
-    this.issueDate,
-    required this.nameOnCard,
-    this.state,
-  });
+part 'identity_cards.freezed.dart';
+part 'identity_cards.g.dart';
 
-  @override
-  int get hashCode =>
-      id.hashCode ^
-      createdAt.hashCode ^
-      createdBy.hashCode ^
-      updatedAt.hashCode ^
-      updatedBy.hashCode ^
-      name.hashCode ^
-      note.hashCode ^
-      country.hashCode ^
-      expiryDate.hashCode ^
-      identityCardNumber.hashCode ^
-      identityCardType.hashCode ^
-      issueDate.hashCode ^
-      nameOnCard.hashCode ^
-      state.hashCode;
+@freezed
+class IdentityCard with _$IdentityCard {
+  const factory IdentityCard({
+    String? id,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    required String name,
+    String? note,
+    String? country,
+    String? expiryDate,
+    required String identityCardNumber,
+    String? identityCardType,
+    String? issueDate,
+    required String nameOnCard,
+    String? state,
+  }) = _IdentityCard;
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is IdentityCard &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          createdAt == other.createdAt &&
-          createdBy == other.createdBy &&
-          updatedAt == other.updatedAt &&
-          updatedBy == other.updatedBy &&
-          name == other.name &&
-          note == other.note &&
-          country == other.country &&
-          expiryDate == other.expiryDate &&
-          identityCardNumber == other.identityCardNumber &&
-          identityCardType == other.identityCardType &&
-          issueDate == other.issueDate &&
-          nameOnCard == other.nameOnCard &&
-          state == other.state;
+  factory IdentityCard.fromJson(Map<String, dynamic> json) =>
+      _$IdentityCardFromJson(json);
 }

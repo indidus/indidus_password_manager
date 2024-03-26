@@ -3,80 +3,34 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
-import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
 
-class FinancialCard {
-  final String? id;
-  final DateTime? createdAt;
-  final String? createdBy;
-  final DateTime? updatedAt;
-  final String? updatedBy;
-  final String cardHolderName;
-  final String cardNumber;
-  final String? cardProviderName;
-  final String? cardType;
-  final String? cvv;
-  final String? expiryDate;
-  final String? issueDate;
-  final String name;
-  final String? note;
-  final String? pin;
+import '../frb_generated.dart';
 
-  const FinancialCard({
-    this.id,
-    this.createdAt,
-    this.createdBy,
-    this.updatedAt,
-    this.updatedBy,
-    required this.cardHolderName,
-    required this.cardNumber,
-    this.cardProviderName,
-    this.cardType,
-    this.cvv,
-    this.expiryDate,
-    this.issueDate,
-    required this.name,
-    this.note,
-    this.pin,
-  });
+part 'financial_cards.freezed.dart';
+part 'financial_cards.g.dart';
 
-  @override
-  int get hashCode =>
-      id.hashCode ^
-      createdAt.hashCode ^
-      createdBy.hashCode ^
-      updatedAt.hashCode ^
-      updatedBy.hashCode ^
-      cardHolderName.hashCode ^
-      cardNumber.hashCode ^
-      cardProviderName.hashCode ^
-      cardType.hashCode ^
-      cvv.hashCode ^
-      expiryDate.hashCode ^
-      issueDate.hashCode ^
-      name.hashCode ^
-      note.hashCode ^
-      pin.hashCode;
+@freezed
+class FinancialCard with _$FinancialCard {
+  const factory FinancialCard({
+    String? id,
+    DateTime? createdAt,
+    String? createdBy,
+    DateTime? updatedAt,
+    String? updatedBy,
+    required String cardHolderName,
+    required String cardNumber,
+    String? cardProviderName,
+    String? cardType,
+    String? cvv,
+    String? expiryDate,
+    String? issueDate,
+    required String name,
+    String? note,
+    String? pin,
+  }) = _FinancialCard;
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is FinancialCard &&
-          runtimeType == other.runtimeType &&
-          id == other.id &&
-          createdAt == other.createdAt &&
-          createdBy == other.createdBy &&
-          updatedAt == other.updatedAt &&
-          updatedBy == other.updatedBy &&
-          cardHolderName == other.cardHolderName &&
-          cardNumber == other.cardNumber &&
-          cardProviderName == other.cardProviderName &&
-          cardType == other.cardType &&
-          cvv == other.cvv &&
-          expiryDate == other.expiryDate &&
-          issueDate == other.issueDate &&
-          name == other.name &&
-          note == other.note &&
-          pin == other.pin;
+  factory FinancialCard.fromJson(Map<String, dynamic> json) =>
+      _$FinancialCardFromJson(json);
 }
