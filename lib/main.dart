@@ -1,67 +1,55 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
+// import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:indidus_password_manager/auth/local_auth_observer.dart';
-import 'package:indidus_password_manager/init_const.dart';
-import 'package:indidus_password_manager/src/lib/storage.dart';
-import 'package:indidus_password_manager/src/rust/frb_generated.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:sqflite/sqflite.dart';
+import 'package:indidus_password_manager/responsive_app.dart';
+
+// import 'package:indidus_password_manager/init_const.dart';
+// import 'package:indidus_password_manager/src/lib/storage.dart';
+// import 'package:indidus_password_manager/src/rust/frb_generated.dart';
+// import 'package:package_info_plus/package_info_plus.dart';
+// import 'package:sqflite/sqflite.dart';
 
 import 'auth/firebase_auth/auth_util.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
-import 'backend/firebase/firebase_config.dart';
+// import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
-import 'src/rust/api/simple.dart';
+// import 'src/rust/api/simple.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
-  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  // PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-  appName = packageInfo.appName;
-  appVersion = packageInfo.version;
-  packageName = packageInfo.packageName;
-  buildNumber = packageInfo.buildNumber;
+  // appName = packageInfo.appName;
+  // appVersion = packageInfo.version;
+  // packageName = packageInfo.packageName;
+  // buildNumber = packageInfo.buildNumber;
 
-  // final observer = AppLifecycle();
-  // WidgetsBinding.instance.addObserver(observer);
+  // // final observer = AppLifecycle();
+  // // WidgetsBinding.instance.addObserver(observer);
 
-  usePathUrlStrategy();
-  await initFirebase();
-  await SecureStorage.init();
-  await RustLib.init();
+  // usePathUrlStrategy();
+  // await initFirebase();
+  // await SecureStorage.init();
+  // await RustLib.init();
 
-  final String databasesPath = await getDatabasesPath();
-  await init(dbPath: '$databasesPath/password.db');
+  // final String databasesPath = await getDatabasesPath();
+  // await init(dbPath: '$databasesPath/password.db');
 
-  if (!kIsWeb) {
-    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  }
+  // if (!kIsWeb) {
+  //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // }
 
-  runApp(const MyApp());
+  runApp(const RiverpodApp());
 }
 
 Future<void> Function()? asyncFuncVar;
-
-class MyResponsiveApp extends StatefulWidget {
-  const MyResponsiveApp({super.key});
-
-  @override
-  State<MyResponsiveApp> createState() => _MyResponsiveAppState();
-}
-
-class _MyResponsiveAppState extends State<MyResponsiveApp> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

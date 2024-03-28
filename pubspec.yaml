@@ -104,6 +104,8 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
   riverpod_generator: ^2.4.0
+  riverpod_lint: ^2.3.10
+  custom_lint: ^0.6.4
 
 
 flutter_launcher_icons:

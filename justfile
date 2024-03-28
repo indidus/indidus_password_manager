@@ -8,6 +8,7 @@ alias cu := cargo_unused
 
 alias i := install_tools
 alias uc := update_cargo
+alias b := build_runner
 
 # Get dependencies for flutter and rust
 dep:
@@ -20,6 +21,9 @@ splash:
 # Generated rust bindings for flutter
 frb:
   flutter_rust_bridge_codegen generate
+
+build_runner:
+  dart run build_runner watch --delete-conflicting-outputs
 
 # Install the tools required for the project
 install_tools:
