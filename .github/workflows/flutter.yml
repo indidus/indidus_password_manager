@@ -8,42 +8,27 @@ on:
 
 jobs:
   build:
-    runs-on: aws-t2-micro
+    runs-on: macOS-latest
 
     steps:
-      # - uses: actions/checkout@v4
-      # - uses: subosito/flutter-action@v2
-      #   with:
-      #     flutter-version: '3.19.1'
-      #     channel: 'stable'
-      # - run: flutter --version
-        
-      # - name: Insall essential
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt install build-essential -y
-      #     sudo apt install unzip
-      
-      # - uses: actions/checkout@v3
-      # - uses: actions-rs/toolchain@v1
-      #   with:
-      #     toolchain: stable
-      # - name: Install just
-      #   run: cargo install just
-  
-      # - name: Set up JDK 17
-      #   uses: actions/setup-java@v3
-      #   with:
-      #     java-version: '17'
-      #     distribution: 'temurin'
-      # - name: Setup Android SDK
-      #   uses: android-actions/setup-android@v3
-      
-      - name: Checkout
-        uses: actions/checkout@v4.1.1
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          ref: main
-      - name: Build appbundle
+          channel: stable
+          flutter-version: 3.19.0
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+      - name: Setup just
+        uses: extractions/setup-just@v2
+
+      - name: Build app bundle
         run: |
           git config --global url."https://ashim-kr-saha:${{secrets.GH_PAT}}@github.com".insteadOf "https://github.com"
           just abb
